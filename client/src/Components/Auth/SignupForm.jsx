@@ -59,6 +59,15 @@ const SignupForm = () => {
     },
     validationSchema: SignupSchema,
     onSubmit: (e) => {
+      toast(`⌚ Email is sending kindly wait...`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       const name = formik.values.firstName + " " + formik.values.lastName;
       const email = formik.values.email;
       const password = formik.values.password;
