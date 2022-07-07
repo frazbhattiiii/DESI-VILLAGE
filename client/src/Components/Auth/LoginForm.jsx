@@ -15,7 +15,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import {isAuth} from '../../utils/auth';
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import GreenButton from "../Buttons/GreenButton";
@@ -72,7 +72,9 @@ const LoginForm = () => {
             progress: undefined,
           });
           setTimeout(() => {
-           navigate(from);
+            isAuth() && isAuth().role==='admin'
+            ?navigate('/admin')
+            :navigate('/');
           },2000);
         })
         .catch((err) => {
@@ -177,7 +179,7 @@ const LoginForm = () => {
               <Link
                 component={RouterLink}
                 variant="subtitle2"
-                to="#"
+                to="/users/password/forget"
                 underline="hover"
               >
                 Forgot password?
