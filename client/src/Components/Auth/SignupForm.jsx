@@ -90,7 +90,15 @@ const SignupForm = () => {
             progress: undefined,
           });
           setTimeout(() => {
-          navigate("/", { replace: true });
+            toast(`📩 Check your inbox or spam and activate your account`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
           },3000);
         })
         .catch((err) => {

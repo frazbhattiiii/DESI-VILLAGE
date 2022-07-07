@@ -68,6 +68,9 @@ const ActivationPage = (props) => {
                 draggable: true,
                 progress: undefined,
               });
+              setTimeout(() => {
+                navigate("/login", { replace: true });
+                },3000);
           })
           .catch(err => {
             toast(`⚠️ ${err.response.data.message}`, {

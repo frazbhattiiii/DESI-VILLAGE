@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
-
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import ToastBox from '../Toast/ToastContainer';
 import {
   Box,
   Checkbox,
@@ -51,18 +53,50 @@ const LoginForm = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      console.log("submitting...");
-      setTimeout(() => {
-        console.log("submited!!");
-        navigate(from, { replace: true });
-      }, 2000);
-    },
+      const email = formik.values.email;
+      const password = formik.values.password;
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+          email,
+          password,
+        })
+        .then((res) => {
+          console.log(res);
+          toast(`🙌 Login Successfull`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTimeout(() => {
+           navigate(from);
+          },2000);
+        })
+        .catch((err) => {
+          toast(`⚠️ ${err.response.data.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          console.log(err);
+        });
+   
+      },
   });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
 
   return (
+    <>
+    <ToastBox />
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Box
@@ -162,6 +196,7 @@ const LoginForm = () => {
         </Box>
       </Form>
     </FormikProvider>
+    </>
   );
 };
 
