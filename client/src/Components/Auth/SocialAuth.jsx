@@ -13,7 +13,7 @@ const SocialAuth = () => {
             flex: 1,
           }}
         >
-          <Icon icon="eva:google-fill" color="#DF3E30" width={22} height={22} />
+          <Icon icon="eva:google-fill" color="#DF3E30" width={24} height={24} />
         </IconButton>
         <IconButton
           sx={{
@@ -26,25 +26,11 @@ const SocialAuth = () => {
           <Icon
             icon="eva:facebook-fill"
             color="#1877F2"
-            width={22}
-            height={22}
+            width={24}
+            height={24}
           />
         </IconButton>
-        <IconButton
-          sx={{
-            border: "2px solid #ccc",
-            borderRadius: "5px",
-            padding: "0.5675rem",
-            flex: 1,
-          }}
-        >
-          <Icon
-            icon="eva:twitter-fill"
-            color="#1C9CEA"
-            width={22}
-            height={22}
-          />
-        </IconButton>
+
       </Stack>
     </>
   );
