@@ -83,9 +83,10 @@ exports.activationController = (req, res) => {
     jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, (err, decoded) => {
       if (err) {
         console.log('Activation error');
-        return res.status(401).json({
-          errors: 'Expired link. Signup again'
+        res.status(401).json({
+          message: "Expired link. Please try again"
         });
+
       } else {
         const { name, email, encryptedPassword } = jwt.decode(token);
         

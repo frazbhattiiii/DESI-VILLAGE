@@ -70,7 +70,7 @@ const ActivationPage = (props) => {
               });
           })
           .catch(err => {
-            toast(`⚠️ ${err}`, {
+            toast(`⚠️ ${err.response.data.message}`, {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,

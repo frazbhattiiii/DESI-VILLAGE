@@ -16,6 +16,7 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import GreenButton from "../Buttons/GreenButton";
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -28,7 +29,7 @@ const animate = {
   },
 };
 
-const LoginForm = ({ setAuth }) => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -53,7 +54,6 @@ const LoginForm = ({ setAuth }) => {
       console.log("submitting...");
       setTimeout(() => {
         console.log("submited!!");
-        setAuth(true);
         navigate(from, { replace: true });
       }, 2000);
     },
@@ -149,16 +149,15 @@ const LoginForm = ({ setAuth }) => {
                 Forgot password?
               </Link>
             </Stack>
+            <GreenButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            text={isSubmitting?"loading...":"login"}>
 
-            <LoadingButton
-              fullWidth
-              size="large"
-              type="submit"
-              variant="contained"
-              loading={isSubmitting}
-            >
-              {isSubmitting ? "loading..." : "Login"}
-            </LoadingButton>
+            </GreenButton>
           </Box>
         </Box>
       </Form>

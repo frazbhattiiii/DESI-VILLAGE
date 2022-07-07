@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import Signup from './Pages/Signup';
+import Login from './Pages/Login';
 import Activation from './Pages/Activation';
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     </Route>
       <Route path="/signup" element={<Signup />}/>
       <Route path="/users/activate/:token" element={<Activation/>}/>
+      <Route path="/login" element={<Login/>}/>
     </Routes>
   </BrowserRouter>
   );
