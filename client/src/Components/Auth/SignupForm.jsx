@@ -10,6 +10,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
+import ToastBox from "../Toast/ToastContainer";
 import { toast, ToastContainer } from "react-toastify";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
@@ -93,7 +94,16 @@ const SignupForm = () => {
           },3000);
         })
         .catch((err) => {
-          toast.error(err.response.data.error);
+          console.log(err)
+          toast(`⚠️ ${err.response.data.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           console.log(err);
         });
     },
@@ -103,18 +113,7 @@ const SignupForm = () => {
 
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        theme='dark'
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <ToastBox />
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
           <Stack spacing={3}>
