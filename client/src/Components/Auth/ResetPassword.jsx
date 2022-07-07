@@ -14,8 +14,6 @@ const StyledButton = styled(Button)`
   background-color: #1ac073;
   color: #fff;
   padding: 6px 12px;
-  margin-left: auto;
-  margin-right: auto;
   max-width: 70%;
   &:hover {
     background-color: #1ac078;
@@ -143,10 +141,9 @@ const ResetPassword = () => {
                     {...getFieldProps("password")}
                     error={Boolean(touched.password && errors.password)}
                     helperText={touched.password && errors.password}
-                    sx={{
-                      width: "30rem",
-                      maxWidth: { xs: "50%", md: "40%", lg: "40%", xl: "40%" },
-                    }}
+                      sx={{
+                        width: "100%",
+                      }}
                   />
               <StyledButton
                 fullWidth

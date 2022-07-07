@@ -39,7 +39,6 @@ const ForgotPassword = () => {
     },
     validationSchema: ForgotSchema,
     onSubmit: (e) => {
-    
       // e.preventDefault();
       toast(`🥹 Little Patience Require...`, {
         position: "top-right",
@@ -51,43 +50,41 @@ const ForgotPassword = () => {
         progress: undefined,
       });
       const email = formik.values.email;
-        axios
-          .post(`${process.env.REACT_APP_API_URL}/auth/forgot/password`, {
-            email,
-          })
-          .then((res) => {
-            setFormData({
-              ...formData,
-              show: false,
-            });
-            toast(`${res.data.message}`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setTimeout(() => {
-              navigate("/login", { replace: true });
-            }, 3000);
-          })
-          .catch((err) => {
-            toast(`⚠️ ${err.response.data.message}`, {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/auth/forgot/password`, {
+          email,
+        })
+        .then((res) => {
+          setFormData({
+            ...formData,
+            show: false,
           });
-   
-    }
-    });
-
+          toast(`${res.data.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTimeout(() => {
+            navigate("/login", { replace: true });
+          }, 3000);
+        })
+        .catch((err) => {
+          toast(`⚠️ ${err.response.data.message}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
+    },
+  });
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
@@ -116,41 +113,39 @@ const ForgotPassword = () => {
               />
               <FormikProvider value={formik}>
                 <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <Stack
-              spacing={4}
-              direction="column"
-              alignItems="center"
-              sx={{
-                marginTop: "2rem",
-              }}
-            >
-                  <TextField
-                    fullWidth
-                    autoComplete="username"
-                    type="email"
-                    label="Email Address"
-                    {...getFieldProps("email")}
-                    error={Boolean(touched.email && errors.email)}
-                    helperText={touched.email && errors.email}
+                  <Stack
+                    spacing={4}
+                    direction="column"
+                    alignItems="center"
                     sx={{
-                      width:"100%",
+                      marginTop: "2rem",
                     }}
-                  />
-                  <StyledButton
-                fullWidth
-                size="large"
-                type="submit"
-                variant="contained"
-                loading={isSubmitting.toString()}
-                endIcon={<ForwardToInboxIcon />
-                }
-              >
-                Submit
-              </StyledButton>
-              </Stack>
+                  >
+                    <TextField
+                      fullWidth
+                      autoComplete="username"
+                      type="email"
+                      label="Email Address"
+                      {...getFieldProps("email")}
+                      error={Boolean(touched.email && errors.email)}
+                      helperText={touched.email && errors.email}
+                      sx={{
+                        width: "100%",
+                      }}
+                    />
+                    <StyledButton
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                      loading={isSubmitting.toString()}
+                      endIcon={<ForwardToInboxIcon />}
+                    >
+                      Submit
+                    </StyledButton>
+                  </Stack>
                 </Form>
               </FormikProvider>
-              
             </Stack>
           </Grid>
         </Grid>
