@@ -10,6 +10,8 @@ import Activation from './Pages/Activation';
 import Forgot from './Pages/Forgot';
 import Reset from './Pages/Reset';
 function App() {
+  console.log(process.env.REACT_APP_API_URL)
+  console.log(process.env.REACT_GOOGLE_CLIENT_ID)
   return (
 <BrowserRouter>
     <Routes>

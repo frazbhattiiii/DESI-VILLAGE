@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import { Stack, Button, IconButton } from "@mui/material";
 
 const SocialAuth = () => {
+    // console.log(process.env.REACT_GOOGLE_CLIENT_ID)
   return (
     <>
       <Stack direction="row" spacing={2}>
