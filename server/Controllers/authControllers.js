@@ -9,16 +9,41 @@ const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 
-const message = (token, subject_email) => {
+const message = (token, subject_email, url) => {
   return (
     `Dear User, \n\n` +
     `This Email is for ${subject_email}\n\n` +
-    `The Account activation link is: \n\n ` +
-    `${process.env.CLIENT_URL}/users/activate/${token}` +
+    `The link is attached: \n\n ` +
+    url +
     "\n\n This is a auto-generated email. Please do not reply to this email.\n\n" +
     "Regards\n" +
     "Desi Village Team\n\n"
   );
+};
+
+const sendMail = async (email, subject, message) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: `${process.env.EMAIL_ADDRESS}`,
+      pass: `${process.env.EMAIL_PASSWORD}`,
+    },
+  });
+  const mailOptions = {
+    from: `"Desi Village Team"<${process.env.EMAIL_ADDRESS}>`,
+    to: `${email}`,
+    subject: subject,
+    text: message,
+  };
+  try {
+    await transporter.sendMail(mailOptions);
+
+    return { message: `Email has been sent to ${email}` };
+  } catch (err) {
+    return {
+      message: "Email has not been sent due to some technical reason",
+    };
+  }
 };
 
 exports.registerController = async (req, res) => {
@@ -41,30 +66,21 @@ exports.registerController = async (req, res) => {
         expiresIn: "5m",
       }
     );
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: `${process.env.EMAIL_ADDRESS}`,
-        pass: `${process.env.EMAIL_PASSWORD}`,
-      },
-    });
-    const email_subject = "Desi Village Account Activation";
-    const email_message = message(token, email_subject);
 
-    const mailOptions = {
-      from: `"Desi Village Team"<${process.env.EMAIL_ADDRESS}>`,
-      to: `${email}`,
-      subject: email_subject,
-      text: email_message,
-    };
-    try {
-      await transporter.sendMail(mailOptions);
-      res.status(201).json({
-        message: `Email has been sent to ${email}`,
+    const email_subject = "Desi Village Account Activation";
+    const email_message = message(
+      token,
+      email_subject,
+      `${process.env.CLIENT_URL}/users/activate/${token}`
+    );
+    const email_response = await sendMail(email, email_subject, email_message);
+    if (email_response.message) {
+      res.status(200).json({
+        message: email_response.message,
       });
-    } catch (err) {
+    } else {
       res.status(400).json({
-        message: "Email has not been sent due to some technical reason",
+        message: email_response.message,
       });
     }
   }
@@ -109,22 +125,18 @@ exports.activationController = (req, res) => {
     });
   }
 };
-exports.loginController = async(req, res) => {
-  
+exports.loginController = async (req, res) => {
   const { email, password } = req.body;
-  
-    // check if user exist
-    const user = await User.findOne({ email });
-    if (!user) {
-      res.status(400).json({
-        message: "User does not exist",
-      });
-    } else {
-      const verifyPassword = await bcrypt.compare(
-        password,
-        user.password
-      );
-      if(verifyPassword){
+
+  // check if user exist
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(400).json({
+      message: "User does not exist",
+    });
+  } else {
+    const verifyPassword = await bcrypt.compare(password, user.password);
+    if (verifyPassword) {
       const token = jwt.sign(
         {
           _id: user._id,
@@ -145,11 +157,218 @@ exports.loginController = async(req, res) => {
           role,
         },
       });
-    }else{
+    } else {
       res.status(400).json({
         message: "Password is incorrect",
       });
     }
   }
+};
+exports.forgotPasswordController = async (req, res) => {
+  try{
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+   return res.status(400).json({
+      message: "User does not exist",
+    });
+  }
+  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "10m",
+  });
+
+   user.updateOne({ resetPasswordLink: token }, (err, success) => {
+    if (err) {
+      console.log("Error", errorHandler(err));
+      return res.status(400).json({
+        message: "Error",
+      });
+    }});
+    const email_subject = "Desi Village Forgot Password";
+    const url = `${process.env.CLIENT_URL}/users/password/reset/${token}`;
+    const email_message = message(token, email_subject, url);
+    const email_response = await sendMail(email, email_subject, email_message)
+        return res.json({
+      message: email_response.message,
+    });
+  }catch(err){
+    return res.status(400).json({
+      message: "Technical Error",
+    });
+  }
+};
+exports.resetPasswordController = async (req, res) => {
+  const { newPassword,resetPasswordLink } = req.body;
+  const encyptedPassword = await bcrypt.hash(newPassword, 10);
+  try{
+    if (resetPasswordLink) {
+      jwt.verify(resetPasswordLink, process.env.JWT_SECRET, function(
+        err,
+        decoded
+      ) {
+        if (err) {
+          return res.status(400).json({
+            message: 'Expired link. Try again'
+          });
+        }
+
+        User.findOne(
+          {
+            resetPasswordLink
+          },
+          (err, user) => {
+            if (err || !user) {
+              return res.status(400).json({
+                message: 'Something went wrong. Try later'
+              });
+            }
+
+            const updatedFields = {
+              password: encyptedPassword,
+              resetPasswordLink: ''
+            };
+
+            user = _.extend(user, updatedFields);
+
+            user.save((err, result) => {
+              if (err) {
+                return res.status(400).json({
+                  message: 'Error resetting user password'
+                });
+              }
+              res.json({
+                message: `Great! Now you can login with your new password`
+              });
+            });
+          }
+        );
+      });
+    }
+  }catch(err){
+    console.log(err)
+    return res.status(400).json({
+      message: "Technical Error",
+    });
+  }
   
 };
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT);
+// Google Login
+exports.googleLoginController = async(req, res) => {
+  const { idToken } = req.body;
+  if(idToken){
+  client
+      .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT })
+      .then(response => {
+        // console.log('GOOGLE LOGIN RESPONSE',response)
+        const { email_verified, name, email } = response.payload;
+        if (email_verified) {
+          User.findOne({ email }).exec(async (err, user) => {
+            if (user) {
+              const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {
+                expiresIn: '7d'
+              });
+              const {_id, email, name, role} = user;
+              return res.json({
+                token,
+                user: {_id, email, name, role}
+              });
+            } else {
+              let password = email + process.env.JWT_SECRET;
+              password = await bcrypt.hash(password, 10);
+              user = new User({name, email, password});
+              user.save((err, data) => {
+                if (err) {
+                  console.log('ERROR GOOGLE LOGIN ON USER SAVE', err);
+                  return res.status(400).json({
+                    error: 'User signup failed with google'
+                  });
+                }
+                const token = jwt.sign(
+                    {_id: data._id},
+                    process.env.JWT_SECRET,
+                    {expiresIn: '7d'}
+                );
+                const {_id, email, name, role} = data;
+                return res.json({
+                  token,
+                  user: {_id, email, name, role}
+                });
+              });
+            }
+          });
+        } else {
+          return res.status(400).json({
+            error: 'Google login failed. Try again'
+          });
+        }
+      });
+}
+  else{
+    return res.status(400).json({
+      message:"error happening please try again"
+    })
+
+  }
+
+
+};
+exports.facebookLoginController = async(req, res) => {
+  console.log('FACEBOOK LOGIN REQ BODY', req.body);
+  const { userID, accessToken } = req.body;
+
+  const url = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`;
+
+  return (
+      fetch(url, {
+        method: 'GET'
+      })
+          .then(response => response.json())
+          // .then(response => console.log(response))
+          .then(response => {
+            console.log(response)
+            const { email, name } = response;
+            console.log(email,name)
+            User.findOne({ email }).exec(async (err, user) => {
+              if (user) {
+                const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {
+                  expiresIn: '7d'
+                });
+                const {_id, email, name, role} = user;
+                return res.json({
+                  token,
+                  user: {_id, email, name, role}
+                });
+              } else {
+                let password = email + process.env.JWT_SECRET;
+                password = await bcrypt.hash(password, 10);
+                user = new User({name, email, password});
+                user.save((err, data) => {
+                  if (err) {
+                    console.log('ERROR FACEBOOK LOGIN ON USER SAVE', err);
+                    return res.status(400).json({
+                      error: 'User signup failed with facebook'
+                    });
+                  }
+                  const token = jwt.sign(
+                      {_id: data._id},
+                      process.env.JWT_SECRET,
+                      {expiresIn: '7d'}
+                  );
+                  const {_id, email, name, role} = data;
+                  return res.json({
+                    token,
+                    user: {_id, email, name, role}
+                  });
+                });
+              }
+            });
+          })
+          .catch(error => {
+            res.json({
+              error: 'Facebook login failed. Try later'
+            });
+          })
+  );
+};
+

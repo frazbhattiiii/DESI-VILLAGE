@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ToastBox from '../Toast/ToastContainer';
+import {authenticate} from "../../utils/auth";
 import {
   Box,
   Checkbox,
@@ -15,7 +16,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import {isAuth} from '../../utils/auth';
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import GreenButton from "../Buttons/GreenButton";
@@ -60,21 +61,24 @@ const LoginForm = () => {
           email,
           password,
         })
-        .then((res) => {
-          console.log(res);
-          toast(`🙌 Login Successfull`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+        .then((res=> {
+          authenticate(res,()=> {
+            toast(`🙌 Login Successfull`, {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setTimeout(() => {
+              isAuth() && isAuth().role === 'admin'
+                  ? navigate('/admin')
+                  : navigate('/');
+            }, 2000);
           });
-          setTimeout(() => {
-           navigate(from);
-          },2000);
-        })
+        }))
         .catch((err) => {
           toast(`⚠️ ${err.response.data.message}`, {
             position: "top-right",
@@ -177,7 +181,7 @@ const LoginForm = () => {
               <Link
                 component={RouterLink}
                 variant="subtitle2"
-                to="#"
+                to="/users/password/forget"
                 underline="hover"
               >
                 Forgot password?
