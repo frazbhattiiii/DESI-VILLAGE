@@ -1,9 +1,10 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink ,useNavigate} from "react-router-dom";
 import { Container, Typography, Link, Box, Divider } from "@mui/material";
 import styled from "@emotion/styled";
 import LoginForm from "../Components/Auth/LoginForm";
 import SocialAuth from '../Components/Auth/SocialAuth';
+import {isAuth} from "../utils/auth";
 import Logo from "../Components/Auth/Logo";
 import { motion } from "framer-motion";
 
@@ -47,7 +48,9 @@ const fadeInUp = {
 };
 
 const Login = ({ setAuth }) => {
+  let navigate = useNavigate();
   return (
+
     <RootStyle>
       <Container maxWidth="sm">
         <ContentStyle>
