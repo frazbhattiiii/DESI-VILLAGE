@@ -40,15 +40,7 @@ const ForgotPassword = () => {
     validationSchema: ForgotSchema,
     onSubmit: (e) => {
       // e.preventDefault();
-      toast(`🥹 Little Patience Require...`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast(`🥹 Little Patience Require...`);
       const email = formik.values.email;
       axios
         .post(`${process.env.REACT_APP_API_URL}/auth/forgot/password`, {
@@ -59,29 +51,13 @@ const ForgotPassword = () => {
             ...formData,
             show: false,
           });
-          toast(`${res.data.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast(`${res.data.message}`);
           setTimeout(() => {
             navigate("/login", { replace: true });
           }, 3000);
         })
         .catch((err) => {
-          toast(`⚠️ ${err.response.data.message}`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast(`⚠️ ${err.response.data.message}`);
         });
     },
   });
