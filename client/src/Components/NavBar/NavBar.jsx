@@ -14,7 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useState } from 'react';
 import { isAuth } from "../../utils/auth";
+import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const pages = [ 'Home', 'About', 'Menu', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
@@ -25,6 +27,7 @@ const NavBar = () => {
     const [ anchorElNav, setAnchorElNav ] = useState ( null )
     const [ anchorElUser, setAnchorElUser ] = useState ( null )
     let navigate = useNavigate ();
+    const {userInfo} = useSelector(state => state.user);
     const handleOpenNavMenu = ( event: React.MouseEvent<HTMLElement> ) => {
         setAnchorElNav ( event.currentTarget );
     };
@@ -47,7 +50,7 @@ const NavBar = () => {
         } }>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={ { display: { xs: 'none', md: 'flex' }, mr: 1 } }/>
+                    <LocalDiningIcon sx={ { display: { xs: 'none', md: 'flex',color:'red' }, mr: 1 } }/>
                     <Typography
                         variant="h6"
                         noWrap
@@ -58,12 +61,12 @@ const NavBar = () => {
                             display: { xs: 'none', md: 'flex' },
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
-                            color: 'inherit',
+                            letterSpacing: '.2rem',
+                            color:'yellow',
                             textDecoration: 'none',
                         } }
                     >
-                        LOGO
+                        DESI VILLAGE
                     </Typography>
 
                     <Box sx={ { flexGrow: 1, display: { xs: 'flex', md: 'none' } } }>
@@ -102,7 +105,7 @@ const NavBar = () => {
                             ) ) }
                         </Menu>
                     </Box>
-                    <AdbIcon sx={ { display: { xs: 'flex', md: 'none' }, mr: 1 } }/>
+                    <LocalDiningIcon sx={ { display: { xs: 'flex', md: 'none' }, mr: 1,color:'red' } }/>
                     <Typography
                         variant="h5"
                         noWrap
@@ -119,7 +122,7 @@ const NavBar = () => {
                             textDecoration: 'none',
                         } }
                     >
-                        LOGO
+                        DESI VILLAGE
                     </Typography>
                     <Box sx={ { flexGrow: 1, display: { xs: 'none', md: 'flex' } } }>
                         { pages.map ( ( page ) => (
@@ -139,7 +142,7 @@ const NavBar = () => {
                           <Tooltip title="Profile">
                               <IconButton onClick={ handleOpenUserMenu } sx={ { p: 0 } }>
 
-                                  <Avatar alt='' src="/static/images/avatar/2.jpg"/>
+                                  <Avatar alt={userInfo.user.name.toUpperCase()} src="/static/images/avatar/2.jpg"/>
 
                               </IconButton>
                           </Tooltip>
