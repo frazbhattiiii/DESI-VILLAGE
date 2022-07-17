@@ -17,8 +17,9 @@ import { isAuth } from "../../utils/auth";
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import CartIcon from "../Cart/CartIcon";
 
-const pages = [ 'Home', 'About', 'Menu', 'Contact' ];
+const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
 const settings = [ 'Profile', 'Dashboard', 'Logout' ];
 
@@ -28,6 +29,7 @@ const NavBar = () => {
     const [ anchorElUser, setAnchorElUser ] = useState ( null )
     let navigate = useNavigate ();
     const {userInfo} = useSelector(state => state.user);
+    let profileName='';
     const handleOpenNavMenu = ( event: React.MouseEvent<HTMLElement> ) => {
         setAnchorElNav ( event.currentTarget );
     };
@@ -44,6 +46,11 @@ const NavBar = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser ( null );
     };
+
+    if(localStorage.getItem('user'))
+    {
+         profileName = JSON.parse(localStorage.getItem('user')).name;
+    }
     return (
         <AppBar position="static" sx={ {
             backgroundColor: '#1AC073',
@@ -118,7 +125,7 @@ const NavBar = () => {
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
-                            color: 'inherit',
+                            color: 'yellow',
                             textDecoration: 'none',
                         } }
                     >
@@ -137,14 +144,17 @@ const NavBar = () => {
                             </Button>
                         ) ) }
                     </Box>
+                    <CartIcon/>
                     { isAuth () ?
                       <Box sx={ { flexGrow: 0 } }>
+
                           <Tooltip title="Profile">
                               <IconButton onClick={ handleOpenUserMenu } sx={ { p: 0 } }>
 
-                                  <Avatar alt={userInfo.user.name.toUpperCase()} src="/static/images/avatar/2.jpg"/>
+                                  <Avatar alt={profileName?profileName.toUpperCase():null} src="/static/images/avatar/2.jpg"/>
 
                               </IconButton>
+
                           </Tooltip>
 
                           <Menu

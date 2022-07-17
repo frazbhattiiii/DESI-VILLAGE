@@ -14,6 +14,8 @@ import Reset from './Pages/Reset';
 import Dashboard from "./Pages/Dashboard";
 import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
+import CartPage from "./Pages/CartPage";
+import SideBar from "./Components/SideBar/SideBar";
 
 function App () {
 
@@ -30,6 +32,8 @@ function App () {
                 <Route path="/users/password/forget" element={ <Forgot/> }/>
                 <Route path="/users/password/reset/:token" element={ <Reset/> }/>
                 <Route path='/logout' element={ <Logout/> }/>
+                <Route path='/cart' element={ <CartPage/> }/>
+                <Route path='/sidebar' element={ <SideBar open = {true}/> }/>
                 <Route path="*" element={ <NoPage/> }/>
             </Routes>
         </BrowserRouter>
