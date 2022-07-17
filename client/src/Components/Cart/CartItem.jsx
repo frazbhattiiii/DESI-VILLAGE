@@ -35,8 +35,12 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                     justifyContent='center'
                     alignContent='center'
                 >
-                    <Typography variant='h6'>Home Made Pizza</Typography>
-                    <Typography variant='description' fontSize='.75rem'>A Pizza which is cooked by the best one in the town</Typography>
+                    <Typography variant='h6' sx={{
+                        mx:3
+                    }}>Home Made Pizza</Typography>
+                    <Typography variant='description'  fontSize='.75rem' sx={{
+                        mx:2
+                    }}>A Pizza which is cooked by the best one in the town</Typography>
                 </Grid>
 
                 <Grid

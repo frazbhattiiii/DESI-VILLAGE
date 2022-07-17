@@ -11,15 +11,21 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useDispatch , useSelector } from "react-redux";
+import { openCart } from "../../features/cartSlice/cart";
 
 const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
     // const { counter, increment, decrement } = useCounter(initial);
+    const {open} = useSelector(state => state.cart);
+    const dispatch = useDispatch();
     const [counter, setCounter] = useState (0);
     const increment = () => {
         setCounter(counter + 1);
+        dispatch(openCart());
     }
     const decrement = () => {
         setCounter(counter-1)
+        dispatch(openCart());
     }
     const handleAddBtnClick = () => onAdd(counter);
 

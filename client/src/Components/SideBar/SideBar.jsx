@@ -1,16 +1,9 @@
 import * as React from 'react';
 import {useState}from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Cart from "../Cart/Cart";
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useContext , Fragment } from 'react';
+import { ClickAwayListener } from '@mui/base';
 import { Link } from 'react-router-dom';
 
 import CartItem from './Item';
@@ -33,17 +26,17 @@ export default function SideBar (props) {
                                                   } );
     const dispatch = useDispatch();
     const {open} = useSelector(state=>state.cart);
-    console.log(open)
     const toggleDrawer = ( anchor ,open ) => ( event ) => {
-        dispatch(closeCart());
-        console.log("some state"+ open)
+        dispatch(closeCart())
         if (
             event &&
             event.type === 'keydown' &&
             (
                 event.key === 'Tab' || event.key === 'Shift'
             )
+
         ) {
+            console.log("some state"+ open)
             return;
         }
 
@@ -53,8 +46,8 @@ export default function SideBar (props) {
         <Box
             sx={ { width : anchor === 'top' || anchor === 'bottom' ? 'auto' : 450 } }
             role="presentation"
-            onClick={ toggleDrawer ( anchor , false ) }
-            onKeyDown={ toggleDrawer ( anchor , false ) }
+            // onClick={ toggleDrawer ( anchor , false ) }
+            // onKeyDown={ toggleDrawer ( anchor , false ) }
         >
 
             <h1 style={ {
@@ -99,6 +92,7 @@ export default function SideBar (props) {
                         } }
 
                         startIcon={ <ShoppingCartCheckoutIcon/> }
+                        onClick={()=>dispatch(closeCart())}
                     >
                         Proceed to checkout
                     </Button>
@@ -114,8 +108,9 @@ export default function SideBar (props) {
     return (
         <div>
             {open?
-            <React.Fragment>
-                {/*<Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>*/ }
+            <>
+                {/*<Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>*/
+
                 <SwipeableDrawer
                     anchor='right'
                     open={ props.open }
@@ -123,8 +118,9 @@ export default function SideBar (props) {
                     onOpen={ toggleDrawer ( 'right' , true ) }
                 >
                     { list ( 'right' ) }
-                </SwipeableDrawer>
-            </React.Fragment>:null}
+                </SwipeableDrawer>}
+
+            </>:null}
 
         </div>
     );
