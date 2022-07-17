@@ -19,7 +19,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
         setCounter(counter + 1);
     }
     const decrement = () => {
-        setCounter(counter-1)
+        counter<1?setCounter(0):setCounter(counter - 1);
     }
     const handleAddBtnClick = () => onAdd(counter);
 
@@ -47,7 +47,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
                             type: 'number',
                             value: counter,
                             max: 10,
-                            min: 1,
+                            min: 0,
                             disabled: true,
                         }}
                     />

@@ -24,7 +24,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
         dispatch(openCart());
     }
     const decrement = () => {
-        setCounter(counter-1)
+        counter<1?setCounter(0):setCounter(counter - 1);
         dispatch(openCart());
     }
     const handleAddBtnClick = () => onAdd(counter);
