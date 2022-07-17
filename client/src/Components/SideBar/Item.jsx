@@ -34,9 +34,9 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                              // maxWidth: { xs: 350, md: 250 },
                          }}
                           src='../images/pizza.jpg'/>
-                    <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'1.5rem'}}}>Home Made Pizza</Typography>
+                    <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'3rem',sm:"2rem",xs:"2.5rem"}}}>Home Made Pizza</Typography>
                     <Typography variant='description' fontSize='.55rem' sx={{
-                        marginLeft: { md:'3rem',xl:'1.5rem' }
+                        marginLeft: { md:'3rem',xl:'3rem',sm:"2rem",xs:"2rem" }
                     }}>A Pizza which is cooked by the best one in the town</Typography>
                 </Grid>
 

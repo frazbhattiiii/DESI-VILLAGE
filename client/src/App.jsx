@@ -33,7 +33,6 @@ function App () {
                 <Route path="/users/password/reset/:token" element={ <Reset/> }/>
                 <Route path='/logout' element={ <Logout/> }/>
                 <Route path='/cart' element={ <CartPage/> }/>
-                <Route path='/sidebar' element={ <SideBar open = {true}/> }/>
                 <Route path="*" element={ <NoPage/> }/>
             </Routes>
         </BrowserRouter>
