@@ -24,12 +24,20 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                     justifyContent='center'
                     alignContent='center'
                 >
-                    <img src='../images/pizza.jpg' alt={id} height='90' width='130' style={{
-                        marginLeft:'1.5rem'
-                    }}/>
-
-                    <Typography variant='h7'  fontWeight='500' sx={{marginLeft:'1.5rem'}}>Home Made Pizza</Typography>
-                    <Typography variant='description' fontSize='.55rem' sx={{marginLeft:'1.5rem'}}>A Pizza which is cooked by the best one in the town</Typography>
+                    <Box  alt={id}
+                         component="img"
+                         sx={{
+                             height: 90,
+                             width: 130,
+                             marginLeft:{md: '4rem', xs: '4rem'},
+                             // maxHeight: { xs: 233, md: 167 },
+                             // maxWidth: { xs: 350, md: 250 },
+                         }}
+                          src='../images/pizza.jpg'/>
+                    <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'1.5rem'}}}>Home Made Pizza</Typography>
+                    <Typography variant='description' fontSize='.55rem' sx={{
+                        marginLeft: { md:'3rem',xl:'1.5rem' }
+                    }}>A Pizza which is cooked by the best one in the town</Typography>
                 </Grid>
 
                 <Grid
@@ -45,9 +53,11 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                     <Box>
                         <FormHelperText sx={{
                             fontSize:'.65rem',
-                            ml:2,
+                            ml:{md:4,xs:2}
                         }}>Item Price</FormHelperText>
-                        <Typography variant='inherit'>{'$0.0'}</Typography>
+                        <Typography variant='inherit' sx={{
+                            ml:{md:4,xs:2},
+                        }}>{'$0.0'}</Typography>
                     </Box>
                 </Grid>
 

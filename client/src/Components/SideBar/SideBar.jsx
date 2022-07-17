@@ -50,10 +50,15 @@ export default function SideBar (props) {
             // onKeyDown={ toggleDrawer ( anchor , false ) }
         >
 
-            <h1 style={ {
-                marginLeft : '2rem' ,
+            <Typography
+                variant='h4'
+                sx={ {
+                marginTop:'1rem',
+                marginLeft : {md:'6rem',xs:'8rem' },
+                    fontWeight:'600',
                 color : "#1ac073" ,
-            } }>Your Items</h1>
+
+            } }>Your Items</Typography>
             <hr style={ {
                 marginLeft : '2rem'
             } }/>
@@ -97,8 +102,6 @@ export default function SideBar (props) {
                         Proceed to checkout
                     </Button>
                 </Box>
-
-                <GoBackBtn/>
             </>
 
             <Divider/>
