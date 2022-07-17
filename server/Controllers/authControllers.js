@@ -48,6 +48,7 @@ const sendMail = async (email, subject, message) => {
 
 exports.registerController = async (req, res) => {
   const { name, email, password } = req.body;
+  console.log(name,email,password);
   const user = await User.findOne({ email });
   if (user) {
     res.status(400).json({
@@ -148,7 +149,7 @@ exports.loginController = async (req, res) => {
       );
       const { _id, name, email, role } = user;
 
-      return res.json({
+      return res.status(200).json({
         token,
         user: {
           _id,
