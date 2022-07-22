@@ -19,9 +19,11 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 const authRoutes = require('./routes/authRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 connectDB();
 
 app.use("/auth", authRoutes);
+// app.use("/payment", paymentRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });

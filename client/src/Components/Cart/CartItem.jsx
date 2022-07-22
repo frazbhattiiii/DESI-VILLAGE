@@ -23,7 +23,7 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                     justifyContent='center'
                     alignContent='center'
                 >
-                    <img src='../images/pizza.jpg' alt={id} height='150' width='200' />
+                    <img src='../../../public/images/pizza.jpg' alt={id} height='150' width='200' />
                 </Grid>
 
                 <Grid

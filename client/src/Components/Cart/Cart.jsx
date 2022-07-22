@@ -30,7 +30,6 @@ const StyledButton = styled(Button)`
 
 const Cart = () => {
     const [showPayment, setShowPayment] = useState (false );
-    console.log(showPayment)
     const redirectToPayment = () => {
         setShowPayment(true);
     }

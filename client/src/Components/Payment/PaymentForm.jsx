@@ -19,6 +19,7 @@ import { motion } from "framer-motion";
 import GreenButton from "../Buttons/GreenButton";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
+import { changeStep } from "../../features/paymentSlice/Payment";
 
 let easing = [ 0.6 , - 0.05 , 0.01 , 0.99 ];
 const animate = {
@@ -34,31 +35,13 @@ const animate = {
 const PaymentForm = () => {
     const navigate = useNavigate ();
     const [mode,setMode]=useState("");
-    // const [ showPassword , setShowPassword ] = useState ( false );
-    // const dispatch = useDispatch ();
-    // const {  error , register } = useSelector (
-    //     ( state ) => state.user
-    // );
-    // console.log(register)
-    // useEffect ( () => {
-    //     console.log(register)
-    //     // redirect user to login page if registration was successful
-    //     if ( register ) {
-    //         toast ( "Activation link sent to your email",{
-    //             autoClose : 2000 ,
-    //         } );
-    //     }
-    //     if ( error ) {
-    //         toast ( error ,{
-    //             autoClose : 2000 ,
-    //         });
-    //     }
-    //
-    // } , [ register , error ] )
+    const dispatch = useDispatch ();
+    const {step} = useSelector (state => state.payment);
+    const [steps,setSteps]=useState(0);
     const handleChange = ( event ) => {
         setMode(event.target.value);
     }
-    const SignupSchema = Yup.object ().shape ( {
+    const PaymentSchema = Yup.object ().shape ( {
                                                    firstName : Yup.string ()
                                                                   .min ( 2 , "Too Short!" )
                                                                   .max ( 50 , "Too Long!" )
@@ -91,7 +74,7 @@ const PaymentForm = () => {
                                        phone:"",
                                        payment:""
                                    } ,
-                                   validationSchema : SignupSchema ,
+                                   validationSchema : PaymentSchema ,
                                    onSubmit : ( e ) => {
 
                                        const name = formik.values.firstName + " " + formik.values.lastName;
@@ -107,6 +90,13 @@ const PaymentForm = () => {
                                         }
 
                                        const data = { name , email , address,phone,payment };
+                                        console.log(payment==='Cash')
+                                        if(payment==='Cash'){
+                                            dispatch(changeStep(2));
+                                            return;
+                                        }
+                                       dispatch(changeStep(1));
+                                        console.log(step);
                                        console.log(data)
                                        // dispatch ( registerUser ( data ) );
                                    } ,
@@ -191,13 +181,11 @@ const PaymentForm = () => {
                                 }}
                                 onChange={handleChange}
                                 { ... getFieldProps ( "payment" ) }
-                                error={ Boolean (  errors.payment ) }
-                                helperText={ errors.payment }
                             >
                                 <MenuItem value="" label='Mode of Payment'>
                                     <em>Mode of Payment</em>
                                 </MenuItem>
-                                <MenuItem value={'Cash'}>Cash</MenuItem>
+                                <MenuItem value={'Cash'}>Cash On Delivery</MenuItem>
                                 <MenuItem value={'Debit'}>Debit Card</MenuItem>
                                 <MenuItem value={'Credit'}>Credit Card</MenuItem>
                             </Select>

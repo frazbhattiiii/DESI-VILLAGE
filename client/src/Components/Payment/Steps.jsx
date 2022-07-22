@@ -10,10 +10,10 @@ const steps = [
     'Complete',
 ];
 
-export default function PaymentStep() {
+export default function PaymentStep({step}) {
     return (
         <Box sx={{ width: '100%' }}>
-            <Stepper activeStep={0} alternativeLabel
+            <Stepper activeStep={step} alternativeLabel
                 sx={{
                 '& .MuiStepLabel-root .Mui-completed': {
                 color: '#1ac073', // circle color (COMPLETED)

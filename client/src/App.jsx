@@ -15,7 +15,9 @@ import Dashboard from "./Pages/Dashboard";
 import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
-import SideBar from "./Components/SideBar/SideBar";
+import StripePayment from "./Components/Payment/StripePayment";
+import Item from "./Components/MenuItem/Item";
+
 
 function App () {
 
@@ -33,7 +35,9 @@ function App () {
                 <Route path="/users/password/reset/:token" element={ <Reset/> }/>
                 <Route path='/logout' element={ <Logout/> }/>
                 <Route path='/cart' element={ <CartPage/> }/>
+                <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
+                <Route path='/stripe' element={ <StripePayment/>}/>
             </Routes>
         </BrowserRouter>
     );

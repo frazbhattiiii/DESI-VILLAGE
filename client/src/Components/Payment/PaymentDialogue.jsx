@@ -9,10 +9,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import PaymentForm from "./PaymentForm";
 import { useNavigate } from "react-router-dom";
 import PaymentStep from "./Steps";
+import { useSelector } from "react-redux";
+import CardPaymentForm from "./CardPaymentForm";
 
 export default function PaymentDialogue() {
     const [open, setOpen] = React.useState(true);
     const navigate = useNavigate();
+    const {step} = useSelector(state => state.payment);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,14 +38,16 @@ export default function PaymentDialogue() {
                     textAlign:'center',
                     fontSize: '2.5rem',
                 }}>Payment</DialogTitle>
-                <PaymentStep/>
+                <PaymentStep step={step}/>
                 <DialogContent>
                     <DialogContentText sx={{
                         mb:2,
                     }}>
                         Fill the Form to pay for your order.
                     </DialogContentText>
-                    <PaymentForm />
+                    {step === 0 && <PaymentForm/>}
+                    {step===1 && <CardPaymentForm/>}
+                    {}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
