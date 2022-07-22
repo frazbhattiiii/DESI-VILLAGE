@@ -3,8 +3,11 @@ import { Grid , Box , Typography , Stack } from "@mui/material";
 import Typewriter from "typewriter-effect";
 import SearchBar from "../Buttons/SearchBar";
 import chef from './chefImage.png';
+import { getAllItems } from "../../features/cartSlice/cartActions";
+import { useDispatch } from "react-redux";
 function Home ( props ) {
-
+    const dispatch = useDispatch();
+    dispatch(getAllItems())
     return (
         <>
             <Grid container spacing={ 2 } sx={ {

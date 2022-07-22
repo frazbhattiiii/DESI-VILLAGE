@@ -6,8 +6,9 @@ import Card from '@mui/joy/Card';
 import StarIcon from '@mui/icons-material/Star';
 import {useNavigate} from "react-router-dom";
 export default function MenuCard(props) {
-    const {name,price,image,id,timeForDelivery,Rating} = props.item;
-    console.log(timeForDelivery)
+    // console.log(props.item)
+    const {_id,name,price,imageURL,id,timeForDelivery,rating} = props.item;
+    console.log(imageURL[0])
     const navigate = useNavigate();
     return (
         <Card variant="outlined" sx={{ minWidth: '250px' ,
@@ -16,7 +17,7 @@ export default function MenuCard(props) {
 
             <AspectRatio minHeight="120px" maxHeight="200px" >
                 <img
-                    src={image}
+                    src={`${imageURL[0]}`}
                     alt=""
                 />
             </AspectRatio>
@@ -27,7 +28,7 @@ export default function MenuCard(props) {
                     {name}
                 </Typography>
                 <Typography variant="h8" fontWeight="bold">
-                    ${price}.00
+                    ${price}
                 </Typography>
                 </Box>
                 <Box sx={{
@@ -36,7 +37,7 @@ export default function MenuCard(props) {
                     alignItems:'center',
                 }}>
 
-                <Typography variant="body2" >{Rating}
+                <Typography variant="body2" >{rating}
                 </Typography>
                     <StarIcon sx={{
                         color:'yellow'
@@ -57,7 +58,7 @@ export default function MenuCard(props) {
                     size="sm"
 
                     sx={{fontFamily:'poppins', ml: 'auto', fontWeight: 600 ,color:'black',backgroundColor:'pink'}}
-                    onClick={()=>navigate(`/item/detail/${id}`)}>
+                    onClick={()=>navigate(`/item/detail/${_id}`)}>
                 >
                     Explore
                 </Button>
