@@ -1,8 +1,7 @@
 import React from 'react';
 import { Typography,Box } from "@mui/material";
 
-function FurtherDetails ( props ) {
-    console.log(props.right)
+function FurtherDetails ( {right,left}) {
     return (
         <>
             <Box sx={{
@@ -14,11 +13,11 @@ function FurtherDetails ( props ) {
             }} >
 
                 <Typography variant='body2' color='yellowgreen' fontFamily='poppins'>
-                    {props.left}
+                    {left}
                 </Typography>
                 <Typography variant='body2' color='mediumvioletred' fontFamily='poppins'>
-                    {props.right===false?'No':props.right}
-                    {props.right===true?'Yes':''}
+                    {right===false?'No':right}
+                    {right===true?'Yes':''}
                 </Typography>
             </Box>
         </>

@@ -58,8 +58,6 @@ function ItemDetail ( props ) {
                 setSize ( event.target.value );
             }
         } )
-
-
     };
 
     const increment = () => {
@@ -74,7 +72,7 @@ function ItemDetail ( props ) {
         availability ,
         image ,
         name ,
-        price ,
+        price:pricing ,
         category ,
         delivery ,
         size : sizing ,

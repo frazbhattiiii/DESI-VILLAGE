@@ -78,12 +78,13 @@ export default function ItemFooter(props) {
                     <Typography color='palevioletred'>Reviews</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    {reviews.map((review, index) => (
+                    {reviews.length === 0 ? <Typography>No reviews yet</Typography>:
+                    reviews.map((review, index) => (
                         <>
                         <Reviews key={review.id} review={review} />
                         <Divider />
                         </>
-                    ))} {reviews.length === 0 && <Typography>No reviews yet</Typography>}
+                    ))}
 
                 </AccordionDetails>
             </Accordion>
