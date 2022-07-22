@@ -60,10 +60,21 @@ exports.addFoodItem = async (req, res) => {
 
 exports.getFoodItem = async (req, res) => {
     const { vendor_id } = req.params
-
-    const data = await FoodItem.find({ vendor_id})
-
-    res.status(200).json(data)
+    try {
+        const item = await FoodItem.find({ vendor_id})
+        res.status(200).json({
+            success: true,
+            messsage: "Items Data Fetched Succesfully",
+            item
+        })
+    }
+    catch(error) {
+        res.status(500).json({
+            success: false,
+            message: "An unexpected error occured while fetching the items",
+            error
+        })
+    }
 }
 
 exports.getAllVendorItems = async (req, res) => {
@@ -140,7 +151,7 @@ exports.updateFoodItem = async (req, res) => {
 
 exports.getAllItems = async (req, res) => {
     try {
-        const items = await FoodItem.find()
+        const items = await FoodItem.find().populate("vendor_id")
         res.status(200).json({
             success: true,
             message: "Items Fetched Successfully",
@@ -151,6 +162,26 @@ exports.getAllItems = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "An Unexpected Error Occured While Fetching Items",
+            error
+        })
+    }
+}
+
+exports.getCategoryItems = async (req, res) => {
+    const { category } = req.params
+    
+    try {
+        const items = await FoodItem.find({ category })
+        res.status(200).json({
+            success: true,
+            message: "Items Fetched Successfully",
+            items
+        })
+    }
+    catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "An unexpected error occured while fetching data.",
             error
         })
     }

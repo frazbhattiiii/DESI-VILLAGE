@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const VendorSchema = new mongoose.Schema({
     user_id: {
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'User'
     },
     name: {
         type: String,
