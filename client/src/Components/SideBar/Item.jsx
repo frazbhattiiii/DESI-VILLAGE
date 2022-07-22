@@ -5,18 +5,23 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
-import IncrementButton from "./IncrementButton";
+// import IncrementButton from "./IncrementButton";
+import {useSelector} from "react-redux";
 
-const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
+const CartItem = ({ id, title, removeItemFromCart }) => {
+
+    const { cartItems } = useSelector(state => state.cart);
+    if(!cartItems[0]) return null;
+    const {name,price,size,quantity,image,miniDescription} = cartItems[0];
     const imgPath = `/assets/img/${id}.jpg`;
     const handleRemoveItem = () => removeItemFromCart(id);
 
     return (
         <>
+            {quantity>0?
             <Grid container gap>
                 <Grid
                     item
-
                     xs={14}
                     md={2}
                     display='grid'
@@ -30,14 +35,12 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                              height: 90,
                              width: 130,
                              marginLeft:{md: '4rem', xs: '4rem'},
-                             // maxHeight: { xs: 233, md: 167 },
-                             // maxWidth: { xs: 350, md: 250 },
                          }}
-                          src='../images/pizza.jpg'/>
-                    <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'1.5rem'}}}>Home Made Pizza</Typography>
-                    <Typography variant='description' fontSize='.55rem' sx={{
-                        marginLeft: { md:'3rem',xl:'1.5rem' }
-                    }}>A Pizza which is cooked by the best one in the town</Typography>
+                          src={image}/>
+                    <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'3rem',sm:"2rem",xs:"2.5rem"}}}>{name}</Typography>
+                    <Typography variant='subtitle2' fontSize='.55rem' sx={{
+                        marginLeft: { md:'3rem',xl:'3rem',sm:"2rem",xs:"2rem" }
+                    }}>{size}</Typography>
                 </Grid>
 
                 <Grid
@@ -53,11 +56,11 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                     <Box>
                         <FormHelperText sx={{
                             fontSize:'.65rem',
-                            ml:{md:4,xs:2}
+                            ml:{md:8,xs:4}
                         }}>Item Price</FormHelperText>
                         <Typography variant='inherit' sx={{
-                            ml:{md:4,xs:2},
-                        }}>{'$0.0'}</Typography>
+                            ml:{md:8,xs:4},
+                        }}>{`$${price}`}</Typography>
                     </Box>
                 </Grid>
 
@@ -75,7 +78,7 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                         mx:2,
                         fontSize:'.65rem',
                     }}>Quantity </FormHelperText>
-                    <IncrementButton />
+
                     <Typography variant='inherit'>{quantity}</Typography>
                 </Grid>
 
@@ -91,7 +94,7 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                 >
                     <FormHelperText>Subtotal </FormHelperText>
                     <Typography variant='inherit'>
-                        {'$0.0'}
+                        ${(price) * (quantity)}.00
                     </Typography>
                 </Grid>
 
@@ -111,7 +114,7 @@ const CartItem = ({ id, title, price, quantity, removeItemFromCart }) => {
                         </IconButton>
                     </Tooltip>
                 </Grid>
-            </Grid>
+            </Grid>:null}
         </>
     );
 };

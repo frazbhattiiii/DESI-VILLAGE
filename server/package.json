@@ -31,5 +31,11 @@
     "nodemailer": "^6.7.6",
     "nodemon": "^2.0.18",
     "util": "^0.12.4"
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.7.6",
+    "nodemon": "^2.0.18",
+    "stripe": "^9.14.0",
+    "uuid": "^8.3.2"
   }
 }

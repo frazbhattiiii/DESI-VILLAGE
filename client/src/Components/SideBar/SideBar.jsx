@@ -5,18 +5,12 @@ import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { useContext , Fragment } from 'react';
 import { ClickAwayListener } from '@mui/base';
 import { Link } from 'react-router-dom';
-
 import CartItem from './Item';
-import EmptyCart from '../Cart/EmptyCart';
-
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-
-import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
-import GoBackBtn from '../Buttons/GoBackBtn';
 import { useDispatch , useSelector } from "react-redux";
 import { closeCart } from "../../features/cartSlice/cart";
 
@@ -25,7 +19,8 @@ export default function SideBar (props) {
                                                       right : true ,
                                                   } );
     const dispatch = useDispatch();
-    const {open} = useSelector(state=>state.cart);
+    const {open} = useSelector(state => state.cart);
+    const {quantity,itemPrice} = useSelector(state=>state.cartItem);
     const toggleDrawer = ( anchor ,open ) => ( event ) => {
         dispatch(closeCart())
         if (
@@ -42,12 +37,15 @@ export default function SideBar (props) {
 
         setState ( { ... state , [ anchor ] : open } );
     };
+
+    function calculateTotal () {
+        return parseInt(itemPrice) * parseInt(quantity);
+    }
+
     const list = ( anchor ) => (
         <Box
             sx={ { width : anchor === 'top' || anchor === 'bottom' ? 'auto' : 450 } }
             role="presentation"
-            // onClick={ toggleDrawer ( anchor , false ) }
-            // onKeyDown={ toggleDrawer ( anchor , false ) }
         >
 
             <Typography
@@ -82,7 +80,7 @@ export default function SideBar (props) {
                     } }
                     className='animate__animated animate__fadeInUp'
                 >
-                    Total: $0.00
+                    Total: ${calculateTotal()}.00
                     {/*Total: {'$' + totalCartPrice().toFixed(2)}*/ }
                 </Typography>
 
