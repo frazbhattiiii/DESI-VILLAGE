@@ -9,19 +9,21 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
-import Button from '@mui/material/Button';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { handleQuantity } from "../../features/cartSlice/cartItem";
 const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
-    // const { counter, increment, decrement } = useCounter(initial);
-    const [counter, setCounter] = useState (0);
+    const dispatch = useDispatch();
+    const { quantity } = useSelector(state => state.cartItem);
+    const [counter, setCounter] = useState (quantity);
     const increment = () => {
         setCounter(counter + 1);
+        dispatch(handleQuantity(counter + 1));
     }
     const decrement = () => {
         counter<1?setCounter(0):setCounter(counter - 1);
+        dispatch(handleQuantity(counter - 1));
     }
-    const handleAddBtnClick = () => onAdd(counter);
+    const handleAddBtnClick = () => {onAdd(counter)};
 
     return (
         <Box>
@@ -54,7 +56,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
                     <FormHelperText id='outlined-weight-helper-text' sx={{
                         marginLeft:'1.2rem'
                     }}>
-                        Availabe
+                        Available
                     </FormHelperText>
                 </FormControl>
                 <Stack direction={{ xs: 'row-reverse', sm: 'column' }}>

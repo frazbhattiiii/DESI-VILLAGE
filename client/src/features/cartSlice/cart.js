@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     open:false,
+    cartItems: [],
 }
 
 const cartSlice = createSlice ( {
@@ -14,11 +15,20 @@ const cartSlice = createSlice ( {
                                         } ,
                                         closeCart : ( state , action ) => {
                                             state.open = false
+                                        },
+                                        addToCart : ( state , action ) => {
+                                            //To check if the item already exists in the cart
+                                            const itemExists = state.cartItems.find( item => item.id === action.payload.id && item.sizeId === action.payload.sizeId )
+                                            if ( itemExists ) {
+                                                itemExists.quantity = action.payload.quantity
+                                            } else {
+                                                state.cartItems.push( action.payload )
+                                            }
                                         } ,
                                     } ,
                                     extraReducers : {
 
                                     } ,
                                 } )
-export const { openCart,closeCart } = cartSlice.actions;
+export const { openCart,closeCart,addToCart } = cartSlice.actions;
 export default cartSlice.reducer;

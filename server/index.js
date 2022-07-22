@@ -21,9 +21,13 @@ if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'));
 }
 
+
+
 const authRoutes = require('./routes/authRoutes');
 const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
+const cartRoutes = require('./routes/cartRoutes');
+
 connectDB();
 
 // Creating Streaming Bucket
@@ -55,6 +59,7 @@ app.get("/images/:filename", async (req, res) => {
         })
     }
 })
+app.use("/cart", cartRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
