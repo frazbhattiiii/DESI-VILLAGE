@@ -39,14 +39,21 @@ const foodItemSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true,
-            enum: ["Asian", "European", "Cafe", "Fast Food", "Desert", "Desi", "Others"]
+            enum: ["Cafe", "Fast Food", "Desert", "Desi", "Others"]
         },
+        timeForDelivery: { type: Number, required: true },
         rating: {
             type: Number,
             default: 0,
             min: 0,
             max: 5
         },
+        sizes: [{
+            id: { type: mongoose.Types.ObjectId, auto: true },
+            size: { type: String, lowercase: true, required: true },
+            price: { type: Number, required: true }
+        }],
+        reviews: [ { type: mongoose.Types.ObjectId, required: true, ref: "Review" } ],
         imageURL: {
             type: [String],
             required: true

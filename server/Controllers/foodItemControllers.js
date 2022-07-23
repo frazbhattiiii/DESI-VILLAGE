@@ -127,7 +127,6 @@ exports.updateFoodItem = async (req, res) => {
     Object.keys(newData).forEach(prop => {
         update[prop] = newData[prop]
     })
-    console.log(update)
     try {
         const response = await FoodItem.findOneAndUpdate(
             { 
@@ -151,7 +150,7 @@ exports.updateFoodItem = async (req, res) => {
 
 exports.getAllItems = async (req, res) => {
     try {
-        const items = await FoodItem.find().populate("vendor_id")
+        const items = await FoodItem.find().populate("vendor_id").populate("reviews", "comment rating name")
         res.status(200).json({
             success: true,
             message: "Items Fetched Successfully",
