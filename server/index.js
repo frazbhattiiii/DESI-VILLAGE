@@ -10,6 +10,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({
         origin: process.env.CLIENT_URL
@@ -19,9 +20,11 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 const authRoutes = require('./routes/authRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 connectDB();
 
 app.use("/auth", authRoutes);
+app.use('/cart', cartRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
