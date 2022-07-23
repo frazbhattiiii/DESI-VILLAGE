@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loginUser , registerUser , activateUser , googleLogin } from './userActions'
-import { removeLocalStorage } from "../../utils/auth";
+import { removeCookie , removeLocalStorage } from "../../utils/auth";
 
 const initialState = {
     loading : false ,
@@ -21,6 +21,7 @@ const userSlice = createSlice ( {
                                         logout : ( state ) => {
                                             removeLocalStorage ( 'user' )
                                             removeLocalStorage ( 'token' )
+                                            removeCookie('token')
                                             state.loading = false
                                             state.userInfo = null
                                             state.loggedIn = false

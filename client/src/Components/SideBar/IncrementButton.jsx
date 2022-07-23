@@ -9,23 +9,22 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
-import Button from '@mui/material/Button';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 import { useDispatch , useSelector } from "react-redux";
-import { openCart } from "../../features/cartSlice/cart";
+import { handleQuantity , openCart } from "../../features/cartSlice/cartItem";
 
 const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
     // const { counter, increment, decrement } = useCounter(initial);
-    const {open} = useSelector(state => state.cart);
+    const {quantity,size} = useSelector(state => state.cartItem);
     const dispatch = useDispatch();
-    const [counter, setCounter] = useState (0);
+    const [counter, setCounter] = useState (quantity);
+        dispatch(handleQuantity(counter));
     const increment = () => {
         setCounter(counter + 1);
-        dispatch(openCart());
     }
     const decrement = () => {
-        setCounter(counter-1)
-        dispatch(openCart());
+        counter<1?setCounter(0):setCounter(counter - 1);
+        // dispatch(openCart());
     }
     const handleAddBtnClick = () => onAdd(counter);
 
@@ -51,7 +50,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
                         inputProps={{
                             'aria-label': 'weight',
                             type: 'number',
-                            value: counter,
+                            value: quantity,
                             max: 10,
                             min: 1,
                             disabled: true,
@@ -63,7 +62,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
                     <FormHelperText id='outlined-weight-helper-text' sx={{
                         marginLeft:'.55rem'
                     }}>
-                        Availabe
+                        Size:  {size}
                     </FormHelperText>
                 </FormControl>
                 <Stack direction={{ xs: 'row-reverse', sm: 'column' }}>
@@ -75,7 +74,7 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
                         <AddIcon />
                     </IconButton>
                     <IconButton
-                        aria-label='removeButtom'
+                        aria-label='removeButton'
                         // disabled={counter < 1 || (stock < 1 && true)}
                         onClick={decrement}
                     >
