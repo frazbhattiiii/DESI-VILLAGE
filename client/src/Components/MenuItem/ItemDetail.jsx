@@ -260,7 +260,7 @@ if(item) {
                     </Grid>
                 </Grid>
                 <ImagesList images={ imageURL }/>
-                {/*<ItemFooter description={ description } reviews={ reviews } speciality={ speciality }/>*/ }
+                <ItemFooter description={ description } reviews={ reviews } speciality={ description }/>
             </>
         </>
     );

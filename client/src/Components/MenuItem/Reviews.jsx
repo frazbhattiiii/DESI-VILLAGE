@@ -21,7 +21,7 @@ function Reviews ( props ) {
             <IconButton sx={ { p: 0 } }>
                 <Avatar alt={review.name} src="/static/images/avatar/2.jpg"/>
             </IconButton>
-               <StarRating rating={review.rating}/>
+               <StarRating rating={review.rating.$numberDecimal}/>
             </Box>
             <Typography>
                 {review.comment}
