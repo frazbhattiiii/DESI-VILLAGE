@@ -22,7 +22,8 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
             <Grid container gap>
                 <Grid
                     item
-                    xs={14}
+                    xs={11}
+                    sm={2}
                     md={2}
                     display='grid'
                     textAlign='center'
@@ -36,7 +37,7 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
                              width: 130,
                              marginLeft:{md: '4rem', xs: '4rem'},
                          }}
-                          src={image}/>
+                          src={`${process.env.REACT_APP_URL}/image/${image}`}/>
                     <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'3rem',sm:"2rem",xs:"2.5rem"}}}>{name}</Typography>
                     <Typography variant='subtitle2' fontSize='.55rem' sx={{
                         marginLeft: { md:'3rem',xl:'3rem',sm:"2rem",xs:"2rem" }
@@ -45,8 +46,8 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
 
                 <Grid
                     item
-                    xs={14}
-                    sm={3}
+                    xs={11}
+                    sm={4.5}
                     md={4}
                     display='grid'
                     textAlign='center'
@@ -66,8 +67,8 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
 
                 <Grid
                     item
-                    xs={12}
-                    sm={3}
+                    xs={16}
+                    sm={1}
                     md={2}
                     display='grid'
                     textAlign='center'
@@ -85,7 +86,7 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
                 <Grid
                     item
                     xs={12}
-                    sm={3}
+                    sm={2}
                     md={2}
                     display='grid'
                     textAlign='center'
@@ -101,7 +102,7 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
                 <Grid
                     item
                     xs={12}
-                    sm={2}
+                    sm={1}
                     md={1}
                     display='grid'
                     textAlign='center'
