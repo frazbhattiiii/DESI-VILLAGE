@@ -94,7 +94,7 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
                 >
                     <FormHelperText>Subtotal </FormHelperText>
                     <Typography variant='inherit'>
-                        ${(price) * (quantity)}.00
+                        ${(price) * (quantity)}
                     </Typography>
                 </Grid>
 

@@ -54,8 +54,8 @@ if(item) {
 
     const handleChange = ( event ) => {
         sizes.find ( item => {
-            if ( item.name === event.target.value ) {
-                setSizeId ( item.id )
+            if ( item.size === event.target.value ) {
+                setSizeId ( item._id )
                 setPrice ( item.price );
                 setSize ( event.target.value );
             }
@@ -113,7 +113,7 @@ if(item) {
                         marginTop : '4rem' ,
                         marginBottom : '2rem' ,
                     } }>
-                        <img src={ imageURL[ 0 ] } alt='pizza image' width='400' height='300'/>
+                        <img src={ `${process.env.REACT_APP_API_URL}/images/${imageURL[0]}`} alt='pizza image' width='400' height='300'/>
 
                     </Grid>
                     <Grid item sx={ {
@@ -170,11 +170,11 @@ if(item) {
                                 <MenuItem value="">
                                     <em>None</em>
                                 </MenuItem>
-                                {/*{ sizes.map ( ( size ) => (*/ }
+                                { sizes?.map ( ( size ) =>
 
-                                {/*    <MenuItem key={ size.id } value={ size.name }>{ size.name }</MenuItem>*/ }
+                                 <MenuItem key={ size.id } value={ size.size }>{ size.size }</MenuItem>
 
-                                {/*) ) }*/ }
+                                 ) }
 
                             </Select>
                         </FormControl>

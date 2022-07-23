@@ -8,7 +8,6 @@ import {useNavigate} from "react-router-dom";
 export default function MenuCard(props) {
     // console.log(props.item)
     const {_id,name,price,imageURL,id,timeForDelivery,rating} = props.item;
-    console.log(imageURL[0])
     const navigate = useNavigate();
     return (
         <Card variant="outlined" sx={{ minWidth: '250px' ,
@@ -17,7 +16,7 @@ export default function MenuCard(props) {
 
             <AspectRatio minHeight="120px" maxHeight="200px" >
                 <img
-                    src={`${imageURL[0]}`}
+                    src={`${process.env.REACT_APP_API_URL}/images/${imageURL[0]}`}
                     alt=""
                 />
             </AspectRatio>
@@ -50,7 +49,7 @@ export default function MenuCard(props) {
                     <Typography  variant ='body2' fontSize="lg" fontWeight="lg" sx={{
                         marginTop:'.25rem',
                     }}>
-                        {timeForDelivery}-{timeForDelivery+15}min
+                        {timeForDelivery?timeForDelivery:'Not Available'} - {timeForDelivery?timeForDelivery+15+'min':''}
                     </Typography>
                 </div>
                 <Button
