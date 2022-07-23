@@ -4,7 +4,8 @@ const foodItemSchema = new mongoose.Schema(
     {
         vendor_id: {
             type: mongoose.Types.ObjectId,
-            required: true
+            required: true,
+            ref: "Vendor"
         },
         name: {
             type: String,
