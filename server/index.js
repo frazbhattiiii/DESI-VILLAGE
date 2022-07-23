@@ -13,6 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({
         origin: process.env.CLIENT_URL
@@ -24,6 +25,7 @@ if(process.env.NODE_ENV === 'development'){
 
 
 const authRoutes = require('./routes/authRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
 const reviewRoutes = require('./Routes/reviewsRoute')
