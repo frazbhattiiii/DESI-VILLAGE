@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { getAllItems } from "../cartSlice/cartActions";
 // import { cartAction } from './cartActions';
 
 const initialState = {
     open:false,
     cartItems: [],
+    menuItems:[],
 }
 
 const cartSlice = createSlice ( {
@@ -27,6 +29,21 @@ const cartSlice = createSlice ( {
                                         } ,
                                     } ,
                                     extraReducers : {
+                                        [ getAllItems.pending ] : ( state ) => {
+                                            state.loading = true
+                                            state.error = null
+                                        } ,
+                                        [ getAllItems.fulfilled ] : ( state , { payload } ) => {
+                                            state.loading = false
+                                            state.menuItems = payload
+                                            state.active = true
+
+                                        } ,
+                                        [ getAllItems.rejected ] : ( state , { payload } ) => {
+                                            state.loading = false
+                                            state.error = payload
+                                        } ,
+
 
                                     } ,
                                 } )

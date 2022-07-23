@@ -13,6 +13,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 if(process.env.NODE_ENV === 'development'){
     app.use(cors({
         origin: process.env.CLIENT_URL
@@ -24,9 +25,9 @@ if(process.env.NODE_ENV === 'development'){
 
 
 const authRoutes = require('./routes/authRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
-const cartRoutes = require('./routes/cartRoutes');
 const reviewRoutes = require('./Routes/reviewsRoute')
 
 connectDB();
@@ -61,7 +62,6 @@ app.get("/images/:filename", async (req, res) => {
         })
     }
 })
-app.use("/cart", cartRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
