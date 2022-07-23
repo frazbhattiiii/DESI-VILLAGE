@@ -27,6 +27,7 @@ const authRoutes = require('./routes/authRoutes');
 const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
 const cartRoutes = require('./routes/cartRoutes');
+const reviewRoutes = require('./Routes/reviewsRoute')
 
 connectDB();
 
@@ -44,6 +45,7 @@ conn.once("open", () => {
 app.use("/auth", authRoutes);
 app.use("/food", foodItemRoutes);
 app.use("/vendor", vendorRoutes);
+app.use("/review", reviewRoutes);
 // General Route for Getting Images
 // Stored in MonogoDB
 app.get("/images/:filename", async (req, res) => {
