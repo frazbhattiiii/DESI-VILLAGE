@@ -25,7 +25,7 @@ if(process.env.NODE_ENV === 'development'){
 
 
 const authRoutes = require('./routes/authRoutes');
-const cartRoutes = require('./routes/cartRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
 const reviewRoutes = require('./Routes/reviewsRoute')
@@ -47,6 +47,7 @@ app.use("/auth", authRoutes);
 app.use("/food", foodItemRoutes);
 app.use("/vendor", vendorRoutes);
 app.use("/review", reviewRoutes);
+app.use("/cart", orderRoutes);
 // General Route for Getting Images
 // Stored in MonogoDB
 app.get("/images/:filename", async (req, res) => {

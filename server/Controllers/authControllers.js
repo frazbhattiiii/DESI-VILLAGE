@@ -21,7 +21,7 @@ const message = (token, subject_email, url) => {
   );
 };
 
-const sendMail = async (email, subject, message) => {
+sendMail = async (email, subject, message) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -45,6 +45,8 @@ const sendMail = async (email, subject, message) => {
     };
   }
 };
+exports.sendMail = sendMail;
+
 
 exports.registerController = async (req, res) => {
   const { name, email, password } = req.body;
