@@ -15,7 +15,6 @@ import Dashboard from "./Pages/Dashboard";
 import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
-import StripePayment from "./Components/Payment/StripePayment";
 import Item from "./Components/MenuItem/Item";
 import Loader from "./Components/Loader/Loader";
 
@@ -39,7 +38,6 @@ function App () {
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
                 <Route path="/loading" element={ <Loader/> }/>
-                <Route path='/stripe' element={ <StripePayment/>}/>
             </Routes>
         </BrowserRouter>
     );
