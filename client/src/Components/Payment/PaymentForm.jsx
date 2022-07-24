@@ -9,7 +9,7 @@ import {
     Box ,
     TextField ,
     IconButton ,
-    InputAdornment , Select , InputLabel ,
+    InputAdornment , Select , InputLabel , FormControl ,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import ToastBox from "../Toast/ToastContainer";
@@ -19,7 +19,8 @@ import { motion } from "framer-motion";
 import GreenButton from "../Buttons/GreenButton";
 import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
-import { changeStep } from "../../features/paymentSlice/Payment";
+import { changeStep,addUserDetails } from "../../features/paymentSlice/Payment";
+import * as React from "react";
 
 let easing = [ 0.6 , - 0.05 , 0.01 , 0.99 ];
 const animate = {
@@ -37,7 +38,6 @@ const PaymentForm = () => {
     const [mode,setMode]=useState("");
     const dispatch = useDispatch ();
     const {step} = useSelector (state => state.payment);
-    const [steps,setSteps]=useState(0);
     const handleChange = ( event ) => {
         setMode(event.target.value);
     }
@@ -92,12 +92,14 @@ const PaymentForm = () => {
                                        const data = { name , email , address,phone,payment };
                                         console.log(payment==='Cash')
                                         if(payment==='Cash'){
+                                            //TODO : add order to DB
                                             dispatch(changeStep(2));
                                             return;
                                         }
                                        dispatch(changeStep(1));
                                         console.log(step);
                                        console.log(data)
+                                       dispatch(addUserDetails(data));
                                        // dispatch ( registerUser ( data ) );
                                    } ,
                                } );
@@ -154,7 +156,7 @@ const PaymentForm = () => {
                             <TextField
                                 fullWidth
                                 multiline
-                                autoComplete="Address"
+                                autoComplete="address"
                                 label="Address"
                                 { ... getFieldProps ( "address" ) }
                                 error={ Boolean ( touched.address && errors.address ) }

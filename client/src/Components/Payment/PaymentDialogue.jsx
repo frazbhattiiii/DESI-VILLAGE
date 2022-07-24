@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import PaymentStep from "./Steps";
 import { useSelector } from "react-redux";
 import CardPaymentForm from "./CardPaymentForm";
+import SuccessPayment from "./SuccessPayment";
 
 export default function PaymentDialogue() {
     const [open, setOpen] = React.useState(true);
@@ -21,10 +22,15 @@ export default function PaymentDialogue() {
         setOpen(true);
     };
 
-    const handleClose = (e) => {
-        e.preventDefault();
+    const handleClose = (step) => {
         setOpen(false);
-        window.location = "/cart";
+        console.log(step)
+        if(step === 2){
+            window.location='/';
+            localStorage.setItem('cart', JSON.stringify([]));
+            return;
+        }
+        window.location='/cart'
 
     };
 
@@ -43,14 +49,14 @@ export default function PaymentDialogue() {
                     <DialogContentText sx={{
                         mb:2,
                     }}>
-                        Fill the Form to pay for your order.
+                        {step===2?"":"Fill the Form to pay for your order"}
                     </DialogContentText>
                     {step === 0 && <PaymentForm/>}
                     {step===1 && <CardPaymentForm/>}
-                    {}
+                    {step===2 && <SuccessPayment/>}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={()=>handleClose(step)}>{step===2?'Ok':'Cancel'}</Button>
                 </DialogActions>
             </Dialog>
         </div>

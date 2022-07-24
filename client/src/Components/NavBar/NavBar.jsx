@@ -16,20 +16,22 @@ import { useState } from 'react';
 import { isAuth } from "../../utils/auth";
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import CartIcon from "../Cart/CartIcon";
+import { calculateTotal } from "../../features/cartSlice/cart";
 
 const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
 const settings = [ 'Profile', 'Dashboard', 'Logout' ];
 
-
 const NavBar = () => {
     const [ anchorElNav, setAnchorElNav ] = useState ( null )
     const [ anchorElUser, setAnchorElUser ] = useState ( null )
     let navigate = useNavigate ();
+    const dispatch = useDispatch();
     const {userInfo} = useSelector(state => state.user);
     let profileName='';
+    dispatch(calculateTotal());
     const handleOpenNavMenu = ( event: React.MouseEvent<HTMLElement> ) => {
         setAnchorElNav ( event.currentTarget );
     };

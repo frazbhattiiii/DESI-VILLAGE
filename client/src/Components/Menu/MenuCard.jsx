@@ -49,7 +49,7 @@ export default function MenuCard(props) {
                     <Typography  variant ='body2' fontSize="lg" fontWeight="lg" sx={{
                         marginTop:'.25rem',
                     }}>
-                        {timeForDelivery?timeForDelivery:'Not Available'} - {timeForDelivery?timeForDelivery+15+'min':''}
+                        {timeForDelivery?timeForDelivery:'No Specific Time'} - {timeForDelivery?timeForDelivery+15+'min':''}
                     </Typography>
                 </div>
                 <Button

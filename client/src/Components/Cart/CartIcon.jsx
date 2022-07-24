@@ -9,6 +9,7 @@ import Loader from "../Toast/loader";
 import Tooltip from "@mui/material/Tooltip";
 import SideBar from "../SideBar/SideBar";
 import { useDispatch , useSelector } from "react-redux";
+import { lengthOfCart } from "../../utils";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -21,7 +22,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function CartIcon() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    const {open} = useSelector(state => state.cart);
+    const {open,cartLength} = useSelector(state => state.cart);
     const redirectToCart = (page) => {
     dispatch(openCart())
     }
@@ -37,7 +38,7 @@ export default function CartIcon() {
         size='large'
         onClick={()=>redirectToCart('sidebar')}
         >
-            <StyledBadge badgeContent={4} color="error">
+            <StyledBadge badgeContent={cartLength} color="error">
                 <ShoppingCartIcon sx={{fontSize:'30'}}/>
             </StyledBadge>
         </IconButton>

@@ -1,5 +1,5 @@
 import { useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import EmptyCart from './EmptyCart';
 
@@ -15,6 +15,8 @@ import Payment from "../Payment/Payment";
 import { Stack , TextField } from "@mui/material";
 import GreenButton from "../Buttons/GreenButton";
 import { styled } from "@mui/system";
+import { useDispatch , useSelector } from "react-redux";
+import { calculateTotal } from "../../features/cartSlice/cart";
 
 const StyledButton = styled(Button)`
   background-color: #1AC073;
@@ -29,14 +31,18 @@ const StyledButton = styled(Button)`
 `;
 
 const Cart = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [showPayment, setShowPayment] = useState (false );
+    const {cartTotal,cartLength}=  useSelector(state => state.cart);
     const redirectToPayment = () => {
-        setShowPayment(true);
+        cartLength > 0 ? setShowPayment(true) : navigate('/');
     }
     return (
         <>
             {!showPayment?
              <>
+
             <h1 style={{
              marginLeft:'2rem',
                 color:"#1ac073",
@@ -46,6 +52,7 @@ const Cart = () => {
             }}/>
 
             <br />
+                 <GoBackBtn />
 
                     <Container className='animate__animated animate__fadeIn'>
                         {/*{cart.map((item) => (*/}
@@ -55,6 +62,7 @@ const Cart = () => {
                             </Fragment>
                         {/*))}*/}
                     </Container>
+
                 <Box
                     className='animate__animated animate__fadeInUp'
                     align='right'>
@@ -65,20 +73,20 @@ const Cart = () => {
                             fontWeight: 'bold',
                             mx:7
                         }}>
-                        SubTotal: $0.00
+                        SubTotal: {cartTotal.toFixed(2)}
 
                     </Typography>
                  <Typography align='right' sx={{
                      mx:7,
                  }} >
-                     Shipping Fee: $0.00
+                     Shipping Fee: {cartLength>0?8.00:0}
                  </Typography>
                     <Typography align='right' sx={{
                         mx:7,
                         fontWeight:600,
                         fontSize:'1rem'
                     }} >
-                        Total: $0.00
+                        Total: ${cartLength>0?(cartTotal+8).toFixed(2):0}
                     </Typography>
                 </Box>
                     <Box display='flex' gap justifyContent={'center'} my>
@@ -92,7 +100,7 @@ const Cart = () => {
                             }}
                             startIcon={<PointOfSaleIcon />}
                         >
-                            Proceed to Payment
+                            {cartLength>0?'Proceed to Payment':"Explore"}
                         </Button>
                     </Box>
                     <Stack direction="row" sx={{
@@ -111,7 +119,7 @@ const Cart = () => {
                             Get Discount
                         </Button>
                     </Stack>
-                    <GoBackBtn />
+
                 </>:<Payment />}
         </>
     );

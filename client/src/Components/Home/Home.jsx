@@ -3,11 +3,16 @@ import { Grid , Box , Typography , Stack } from "@mui/material";
 import Typewriter from "typewriter-effect";
 import SearchBar from "../Buttons/SearchBar";
 import chef from './chefImage.png';
-import { getAllItems } from "../../features/cartSlice/cartActions";
+import { getAllItems , getCart } from "../../features/cartSlice/cartActions";
 import { useDispatch } from "react-redux";
+import { calculateTotal } from "../../features/cartSlice/cart";
 function Home ( props ) {
     const dispatch = useDispatch();
-    dispatch(getAllItems())
+    dispatch(getAllItems());
+    if(!localStorage.getItem('cart')){
+        localStorage.setItem('cart',JSON.stringify([]));
+    }
+    dispatch(calculateTotal());
     return (
         <>
             <Grid container spacing={ 2 } sx={ {

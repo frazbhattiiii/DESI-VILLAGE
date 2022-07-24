@@ -44,12 +44,13 @@ conn.once("open", () => {
 });
 
 app.use("/auth", authRoutes);
+app.use('/cart', cartRoutes);
 app.use("/food", foodItemRoutes);
 app.use("/vendor", vendorRoutes);
 app.use("/review", reviewRoutes);
 app.use("/cart", orderRoutes);
 // General Route for Getting Images
-// Stored in MonogoDB
+// Stored in MonogoDB 
 app.get("/images/:filename", async (req, res) => {
     try {
         const { filename } = req.params

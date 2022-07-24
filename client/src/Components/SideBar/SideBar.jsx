@@ -1,10 +1,8 @@
 import * as React from 'react';
-import {useState}from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-import { useContext , Fragment } from 'react';
-import { ClickAwayListener } from '@mui/base';
-import { Link } from 'react-router-dom';
+import {Fragment } from 'react';
+import { Link , useNavigate } from 'react-router-dom';
 import CartItem from './Item';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -12,15 +10,19 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useDispatch , useSelector } from "react-redux";
-import { closeCart } from "../../features/cartSlice/cart";
+import { calculateTotal , closeCart } from "../../features/cartSlice/cart";
+import { lengthOfCart } from "../../utils";
+import { getCart } from "../../features/cartSlice/cartActions";
 
 export default function SideBar (props) {
     const [ state , setState ] = React.useState ( {
                                                       right : true ,
                                                   } );
     const dispatch = useDispatch();
-    const {open} = useSelector(state => state.cart);
+    const {open,cartTotal} = useSelector(state => state.cart);
     const {quantity,itemPrice} = useSelector(state=>state.cartItem);
+    const navigate = useNavigate();
+    const cartLength = lengthOfCart();
     const toggleDrawer = ( anchor ,open ) => ( event ) => {
         dispatch(closeCart())
         if (
@@ -38,9 +40,7 @@ export default function SideBar (props) {
         setState ( { ... state , [ anchor ] : open } );
     };
 
-    function calculateTotal () {
-        return parseInt(itemPrice) * parseInt(quantity);
-    }
+
 
     const list = ( anchor ) => (
         <Box
@@ -80,7 +80,7 @@ export default function SideBar (props) {
                     } }
                     className='animate__animated animate__fadeInUp'
                 >
-                    Total: ${calculateTotal()}.00
+                    Total: ${cartTotal.toFixed(2)}
                     {/*Total: {'$' + totalCartPrice().toFixed(2)}*/ }
                 </Typography>
 
@@ -89,15 +89,18 @@ export default function SideBar (props) {
                         variant='contained'
                         color='error'
                         component={ Link }
-                        to='/cart'
+                        to={cartLength > 0 ? '/cart' : '/'}
                         sx={ {
                             backgroundColor : "#1ac073" ,
                         } }
 
                         startIcon={ <ShoppingCartCheckoutIcon/> }
-                        onClick={()=>dispatch(closeCart())}
+                        onClick={()=>{
+                            dispatch(closeCart())
+                            dispatch(getCart())
+                        }}
                     >
-                        Proceed to checkout
+                        {cartLength>0?'Checkout':'Empty Cart'}
                     </Button>
                 </Box>
             </>

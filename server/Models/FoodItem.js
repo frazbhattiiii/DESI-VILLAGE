@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const arrayLimit = (val) => val.length <= 5
+
 const foodItemSchema = new mongoose.Schema(
     {
         vendor_id: {
@@ -27,6 +29,11 @@ const foodItemSchema = new mongoose.Schema(
             trim: true,
             required: true
         },
+        speciality: {
+            type: String,
+            required: true,
+            trim: true
+        },
         availability: {
             type: Boolean,
             default: true
@@ -49,14 +56,22 @@ const foodItemSchema = new mongoose.Schema(
             max: 5
         },
         sizes: [{
-            id: { type: mongoose.Types.ObjectId, auto: true },
             size: { type: String, lowercase: true, required: true },
-            price: { type: Number, required: true }
+            price: { type: Number, required: true },
+            units: { type: String, required: true, trim: true },
         }],
         reviews: [ { type: mongoose.Types.ObjectId, required: true, ref: "Review" } ],
         imageURL: {
             type: [String],
             required: true
+        },
+        tags: { type: [{
+                        type: String,
+                        lowercase: true, 
+                        trim: true, 
+                        required: true 
+                    }],
+                 validate: [arrayLimit, `{PATH} exceeds the limit of 5`]
         }
     },
     {

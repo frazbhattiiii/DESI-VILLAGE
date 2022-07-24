@@ -11,7 +11,7 @@ const ReviewSchema = new mongoose.Schema({
         trim: true
     },
     rating: {
-        type: mongoose.Types.Decimal128,
+        type: Number,
         default: 0,
         min: 0,
         max: 5
