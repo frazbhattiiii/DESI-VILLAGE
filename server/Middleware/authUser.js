@@ -8,15 +8,15 @@ const authUser = (req, res, next) => {
     const authHeader = req.header('authtoken');
     console.log(authHeader)
 
-    if (!authHeader) {
-        res.status(401).json({ msg: 'Not authenticated' });
-    }
-
     try {
+      if (!authHeader) {
+        return next();
+      }else{
         const data = jwt.verify(authHeader, jwt_secret);
         req.user = data;    //this will be available in the request object
         // console.log(req.user._id)
         next();
+      }
     } catch (error) {
         res.status(401).json({ msg: 'Some error occured' });
     }    
