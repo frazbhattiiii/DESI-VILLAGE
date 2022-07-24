@@ -27,6 +27,7 @@ export default function PaymentDialogue() {
         console.log(step)
         if(step === 2){
             window.location='/';
+            localStorage.setItem('cart', JSON.stringify([]));
             return;
         }
         window.location='/cart'
@@ -48,7 +49,7 @@ export default function PaymentDialogue() {
                     <DialogContentText sx={{
                         mb:2,
                     }}>
-                        Fill the Form to pay for your order.
+                        {step===2?"":"Fill the Form to pay for your order"}
                     </DialogContentText>
                     {step === 0 && <PaymentForm/>}
                     {step===1 && <CardPaymentForm/>}
