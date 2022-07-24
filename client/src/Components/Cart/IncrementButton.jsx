@@ -10,18 +10,23 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleQuantity } from "../../features/cartSlice/cartItem";
-const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
+import { handleIncrement , handleDecrement , calculateTotal } from "../../features/cartSlice/cart";
+
+const IncrementButton = ({ stock = 0, initial = 1, onAdd ,Quantity,itemId,itemSize}) => {
     const dispatch = useDispatch();
     const { quantity } = useSelector(state => state.cartItem);
-    const [counter, setCounter] = useState (quantity);
+    const [counter, setCounter] = useState (Quantity);
     const increment = () => {
         setCounter(counter + 1);
-        dispatch(handleQuantity(counter + 1));
+        dispatch(handleIncrement({itemId,itemSize}));
+        dispatch(calculateTotal());
+        // dispatch(handleQuantity(counter + 1));
     }
     const decrement = () => {
-        counter<1?setCounter(0):setCounter(counter - 1);
-        dispatch(handleQuantity(counter - 1));
+        counter<=1?setCounter(1):setCounter(counter - 1);
+        dispatch(handleDecrement({itemId,itemSize}));
+        dispatch(calculateTotal());
+        // dispatch(handleQuantity(counter - 1));
     }
     const handleAddBtnClick = () => {onAdd(counter)};
 
@@ -48,8 +53,8 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd }) => {
                             'aria-label': 'weight',
                             type: 'number',
                             value: counter,
-                            max: 10,
-                            min: 0,
+                            max: 20,
+                            min: 1,
                             disabled: true,
                         }}
                     />

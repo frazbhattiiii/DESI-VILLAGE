@@ -23,7 +23,6 @@ const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
 const settings = [ 'Profile', 'Dashboard', 'Logout' ];
 
-
 const NavBar = () => {
     const [ anchorElNav, setAnchorElNav ] = useState ( null )
     const [ anchorElUser, setAnchorElUser ] = useState ( null )

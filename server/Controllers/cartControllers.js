@@ -1,7 +1,9 @@
 const { findByIdAndUpdate } = require('../Models/Cart');
 const Cart = require('../Models/Cart');
 exports.addToCart = async (req, res) => {
-    const { itemId, itemName, itemPrice, itemQuantity, category, itemSize, vendorId } = req.body;
+    console.log(req.body)
+    const { itemId, itemName, itemPrice, itemQuantity, category, itemSize, vendorId,itemImage } = req.body;
+    console.log(itemImage)
     const user = req.user._id
     // check if user exist
     const item = await Cart.findOne({ itemId });
@@ -15,7 +17,8 @@ exports.addToCart = async (req, res) => {
             itemQuantity,
             category,
             itemSize,
-            vendorId
+            vendorId,
+            itemImage,
         });
 
         try {
@@ -23,13 +26,14 @@ exports.addToCart = async (req, res) => {
             res.status(200).send("Item Added")
         } catch (error) {
             console.log(error);
-            res.status(500)
+            res.status(402).send("Error")
         }
     }
     //else if item is already in cart then increase its quantity
     else {
-        res.send("Item already in cart, use increment, decrement or remove to update this item in cart")
-        res.status(500)
+        res.status(400).send({
+            message: "Item already in cart",})
+
     }
 };
 

@@ -6,7 +6,7 @@ const jwt_secret = process.env.JWT_SECRET;
 //if the user is logged in it will provide userID using his/her jwt token and then async function will be called
 const authUser = (req, res, next) => {
     const authHeader = req.header('authtoken');
-    // console.log(authHeader)
+    console.log(authHeader)
 
     if (!authHeader) {
         res.status(401).json({ msg: 'Not authenticated' });

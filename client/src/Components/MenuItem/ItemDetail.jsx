@@ -20,7 +20,10 @@ import Button from "@mui/material/Button";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ToastContainer from "../Toast/ToastContainer";
 import { toast } from "react-toastify";
-import { addToCart , openCart } from "../../features/cartSlice/cart";
+import { openCart,calculateTotal } from "../../features/cartSlice/cart";
+import { addToCart , getCart } from "../../features/cartSlice/cartActions";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 function ItemDetail ( props ) {
     const dispatch = useDispatch ();
@@ -28,7 +31,8 @@ function ItemDetail ( props ) {
     const [ pricing , setPrice ] = React.useState ();
     const [sizeId, setSizeId] = React.useState();
     const [ counter , setCounter ] = useState ( 0 );
-    const {menuItems} = useSelector ( state => state.cart );
+    const navigate = useNavigate();
+    const {menuItems,added,error,cartTotal} = useSelector ( state => state.cart );
     // const [item,setItem] = useState();
 
    const item =  menuItems.items?.find ( item => item._id === props.itemId )
@@ -69,17 +73,14 @@ if(item) {
         counter < 1 ? setCounter ( 0 ) : setCounter ( counter - 1 );
     }
     const product = {
-        _id ,
-        sizeId ,
-        availability ,
-        imageURL ,
-        name ,
-        price : pricing ,
+        itemId:_id ,
+        itemName:name ,
+        itemPrice : pricing ,
         category ,
-        delivery ,
-        size : sizing ,
-        hotel ,
-        quantity : counter ,
+        itemSize : sizing ,
+        itemQuantity : counter ,
+        vendorId:vendor_id._id,
+        itemImage:imageURL[0],
     };
     const addInCart = () => {
         if ( availability === false ) {
@@ -100,8 +101,12 @@ if(item) {
             } )
             return;
         }
-        dispatch ( openCart () );
-        dispatch ( addToCart ( product ) );
+        dispatch(addToCart(product));
+        dispatch(calculateTotal());
+            dispatch(openCart());
+        // navigate('/loading')
+        // dispatch(openCart());
+
     }
     return (
         <>
@@ -139,7 +144,8 @@ if(item) {
                         <Typography variant='subtitle2' sx={ {
                             color : '#8c8c8c' ,
                         } }>
-                            <StarRating rating={ rating }></StarRating> { rating } Rating
+                            <StarRating rating={ rating }></StarRating>
+                            {rating===0?'':`${rating} Rating`}
                         </Typography>
                         <Divider/>
                         <Typography variant='h6' color='green' fontFamily='poppins'>
@@ -260,7 +266,7 @@ if(item) {
                     </Grid>
                 </Grid>
                 <ImagesList images={ imageURL }/>
-                <ItemFooter description={ description } reviews={ reviews } speciality={ description }/>
+                <ItemFooter description={ description } reviews={ reviews } speciality={ speciality }/>
             </>
         </>
     );

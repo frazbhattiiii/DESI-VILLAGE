@@ -17,6 +17,7 @@ import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
 import StripePayment from "./Components/Payment/StripePayment";
 import Item from "./Components/MenuItem/Item";
+import Loader from "./Components/Loader/Loader";
 
 
 function App () {
@@ -37,6 +38,7 @@ function App () {
                 <Route path='/cart' element={ <CartPage/> }/>
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
+                <Route path="/loading" element={ <Loader/> }/>
                 <Route path='/stripe' element={ <StripePayment/>}/>
             </Routes>
         </BrowserRouter>
