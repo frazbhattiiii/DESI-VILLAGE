@@ -4,3 +4,6 @@ export const lengthOfCart = ()=>{
     }
     return 0;
 }
+export const placeOrder = ()=>{
+
+}
