@@ -7,12 +7,16 @@ exports.orderNow = async (req, res) => {
    data,
    userId,
   } = req.body;
-  console.log(req.body);
- console.log(cartItems, cartTotal, data, userId);
  const {name, email, address, payment, phone} = data;
+ // Extracting Vendor IDs from the cart items.
+ let vendorId = cartItems.map(item => item.vendorId)
+ // Removing Duplciates
+ vendorId = vendorId.filter((item, pos, self) => self.indexOf(item) == pos)
+ console.log(vendorId)
  let newOrder;
  if(userId===''){
       newOrder = new Order({
+                                  vendorId,
                                   cartItems,
                                   cartTotal,
                                   name,

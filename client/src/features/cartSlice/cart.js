@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { current } from '@reduxjs/toolkit';
 import { addToCart , getAllItems , getCart ,addOrder} from "../cartSlice/cartActions";
 // import { cartAction } from './cartActions';
 
@@ -7,8 +8,11 @@ const initialState = {
     added:false,
     error:false,
     change:false,
+    filter: '',
+    search: '',
     cartItems: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
-    menuItems:[],
+    menuItems:{},
+    filteredItems: [],
     orderStatus:false,
     cartLength:localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')).length:0,
     cartTotal: 0,
@@ -61,6 +65,36 @@ const cartSlice = createSlice ( {
                                                 state.cartLength=0
                                             }
                                         } ,
+                                        setFilteredItems: (state, action) => {
+                                            const { filter, search } = action.payload
+                                            state.filter = filter
+                                            state.search = search
+
+                                            if (Object.keys(current(state.menuItems)).length != 0)
+                                                state.filteredItems = current(state.menuItems).items.filter(
+                                                    item => item.category.toLowerCase().includes(state.filter.toLowerCase()) 
+                                                    && item.name.toLowerCase().includes(state.search.toLowerCase())
+                                                )
+                                        },
+                                        setTags: (state, action) => {
+                                            const { offers } = action.payload
+                                            let prevItems = current(state.menuItems).items
+                                            if (offers == 'discount') {
+                                                state.filteredItems = prevItems.filter(
+                                                    item => parseInt(item.discount) != 0
+                                                    )
+                                            } else if (offers == 'delivery') {
+                                                state.filteredItems = prevItems.filter(
+                                                    item => item.freeDelivery == true
+                                                    )
+                                            } else if (offers == 'popular') {
+                                                state.filteredItems = prevItems.filter(
+                                                    item => item.rating >= 3.0
+                                                    )
+                                            } else if (offers == 'all') {
+                                                state.filteredItems = prevItems
+                                            }
+                                        },
                                         setCartItems: ( state , action ) => {
                                             state.cartItems = action.payload
                                             state.cartLength = state.cartLength-1
@@ -136,5 +170,5 @@ const cartSlice = createSlice ( {
 
                                     } ,
                                 } )
-export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems } = cartSlice.actions;
+export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags } = cartSlice.actions;
 export default cartSlice.reducer;

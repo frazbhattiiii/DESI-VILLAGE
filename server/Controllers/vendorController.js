@@ -1,5 +1,6 @@
 const Vendor = require('../Models/Vendor')
 const User = require('../Models/User')
+const Order = require('../Models/Orders')
 
 exports.getVendor = async (req, res) => {
     const { vendor_id } = req.params
@@ -23,6 +24,92 @@ exports.getVendor = async (req, res) => {
         res.status(500).json({
             succcess: false,
             message: "An unexpected error occured while fetching vendor",
+            error
+        })
+    }
+}
+
+exports.getOrders = async (req, res) => {
+    const { vendor_id } = req.params
+    try {
+        const orders = await Order
+                                .find({
+                                     vendorId: vendor_id, 
+                                     vendorAccepted: false 
+                                    })
+                                .select("cartItems cartTotal name email address phone paymentMethod orderDelivered vendorAccepted vendorDelivered")
+
+        // Filtering corresponding items for vendor
+        const newOrders = orders.map(order => {
+            order.cartItems = order.cartItems.filter(item => item.vendorId == vendor_id)
+            return order
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Orders Fetched Successfully",
+            orders: newOrders
+        })
+    }
+    catch(error){
+        res.status(500).json({
+            success: false,
+            message: "An unexpected error occured while fetching the orders",
+            error
+        })
+    }
+}
+
+exports.validateOrder = async (req, res) => {
+    const { order_id } = req.params
+    const { status } = req.body
+
+    try {
+        const response = await Order.findOneAndUpdate(
+            { 
+                _id: order_id 
+            },
+            {
+                vendorAccepted: status
+            })
+
+        res.status(200).json({
+            success: true,
+            message: "Order Validated Successfully",
+            response
+        })
+    }
+    catch(error) {
+        res.status(500).json({
+            success: false,
+            message: "An unexpected error occured while validating orders",
+            error
+        })
+    }
+}
+
+exports.deliverOrder = async (req, res) => {
+    const { order_id } = req.params
+
+    try {
+        const response = await Order.findOneAndUpdate(
+            { 
+                _id: order_id 
+            },
+            {
+                vendorDelivered: true
+            })
+
+        res.status(200).json({
+            success: true,
+            message: "Order Delivered Successfully",
+            response
+        })
+    }
+    catch(error) {
+        res.status(500).json({
+            success: false,
+            message: "An unexpected error occured while delivering orders",
             error
         })
     }

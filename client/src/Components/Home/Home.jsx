@@ -20,7 +20,7 @@ function Home ( props ) {
                 height : '92.25vh'
             } }>
 
-                <Grid item xs={ 6 }>
+                <Grid item xs={ 12 } md={ 6 }>
                     <Stack direction={ 'column' } sx={ {
                         marginTop : {
                             sm : "15rem" ,
@@ -35,10 +35,10 @@ function Home ( props ) {
                     } }>
                         <Typography variant='h4' sx={ {
                             width : {
-                                xs : "80%" ,
-                                sm : "30%" ,
-                                md : "40%" ,
-                                lg : "50%" ,
+                                xs : "100%" ,
+                                sm : "80%" ,
+                                md : "60%" ,
+                                lg : "60%" ,
                                 xl : "60%" ,
                             } ,
                             marginTop : {
@@ -54,7 +54,7 @@ function Home ( props ) {
 
                             } ,
                             fontSize : {
-                                xs : "2.5rem" ,
+                                xs : "1.5rem" ,
                                 sm : "2.5rem" ,
                                 md : "2.2rem" ,
                                 lg : "2.2rem" ,
@@ -74,7 +74,7 @@ function Home ( props ) {
                                 }
                                 ,
                                 fontSize : {
-                                    xs : "3.5rem" ,
+                                    xs : "2.5rem" ,
                                     sm : "3.5rem" ,
                                     md : "2.5rem" ,
                                     lg : "3rem" ,
@@ -119,7 +119,7 @@ function Home ( props ) {
                         </Box>
                     </Stack>
                 </Grid>
-                <Grid item xs={ 6 } display={ { xs : "none" , lg : "block" , md : "block" } }>
+                <Grid item xs={ 6 } display={ { xs: "none", sm : "none" , lg : "block" , md : "block" } }>
                     <Box component='img' src={chef} alt='Chef Image' sx={ {
                         width : {
                             sm : '350px' ,
