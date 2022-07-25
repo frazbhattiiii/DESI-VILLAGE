@@ -10,30 +10,57 @@ exports.orderNow = async (req, res) => {
   console.log(req.body);
  console.log(cartItems, cartTotal, data, userId);
  const {name, email, address, payment, phone} = data;
-    const newOrder = new Order({
+ let newOrder;
+ if(userId===''){
+      newOrder = new Order({
                                   cartItems,
-                                    cartTotal,
-                                    name,
-                                    email,
-                                    address,
-                                    paymentMethod:payment,
-                                    phone,
-                                    userId,
-                               });
-    try {
-        await newOrder.save();
-        mailToVendor();
-        res.status(200).send({
-            message: "Order Placed Successfully",
-            orderId: newOrder._id,
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(400).send({
-            message: "Order Placing Failed",
-        });
-    }
+                                  cartTotal,
+                                  name,
+                                  email,
+                                  address,
+                                  paymentMethod:payment,
+                                  phone,
+                              });
+     try {
+         await newOrder.save();
+         mailToVendor();
+         res.status(200).send({
+                                  message: "Order Placed Successfully",
+                                  orderId: newOrder._id,
+                              });
+     } catch (error) {
+         console.log(error);
+         res.status(400).send({
+                                  message: "Order Placing Failed",
+                              });
+     }
+ }
+ else {
+     newOrder = new Order ( {
+                                cartItems ,
+                                cartTotal ,
+                                name ,
+                                email ,
+                                address ,
+                                paymentMethod : payment ,
+                                phone ,
+                                userId ,
+                            } );
+     try {
+         await newOrder.save ();
+         mailToVendor ();
+         res.status ( 200 ).send ( {
+                                       message : "Order Placed Successfully" ,
+                                       orderId : newOrder._id ,
+                                   } );
+     } catch ( error ) {
+         console.log ( error );
+         res.status ( 400 ).send ( {
+                                       message : "Order Placing Failed" ,
+                                   } );
+     }
 
+ }
 
 };
 

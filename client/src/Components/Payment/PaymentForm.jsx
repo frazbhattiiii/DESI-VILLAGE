@@ -107,13 +107,13 @@ const PaymentForm = () => {
                                         if(payment==='Cash' || userDetails.payment==='Cash'){
                                             if ( isAuth ) {
                                                 const user = localStorage.getItem ( 'user' );
-                                                const userId = JSON.parse ( user )._id ;
+                                                const userId = localStorage.getItem('user')?JSON.parse ( user )._id:'';
                                                 dispatch(addOrder({cartItems,cartTotal,data,userId}));
                                                 dispatch ( changeStep ( 2 ) );
                                                 alert('Your order is being placed...kindly wait');
                                             }
                                             else{
-                                                dispatch(addOrder({cartItems,cartTotal,data,userId}));
+                                                dispatch(addOrder({cartItems,cartTotal,data}));
                                                 dispatch ( changeStep ( 2 ) );
                                                 alert('Your order is being placed...kindly wait');
                                             }

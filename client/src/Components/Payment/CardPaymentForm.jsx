@@ -25,7 +25,8 @@ function CardPaymentForm ( props ) {
     const handleToken =(token)=>{
         console.log(token);
         const user = localStorage.getItem ( 'user' );
-        const userId = JSON.parse ( user )._id ;
+        console.log(localStorage.getItem('user'))
+        const userId = localStorage.getItem('user')?JSON.parse ( user )._id:'';
         const data = userDetails;
         dispatch(changePaymentStatus(true));
         toast("Payment Successful",{
