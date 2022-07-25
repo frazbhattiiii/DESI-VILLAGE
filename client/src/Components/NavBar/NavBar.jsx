@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch , useSelector } from "react-redux";
 import CartIcon from "../Cart/CartIcon";
 import { calculateTotal } from "../../features/cartSlice/cart";
+import { getCart } from "../../features/cartSlice/cartActions";
 
 const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
@@ -32,6 +33,7 @@ const NavBar = () => {
     const {userInfo} = useSelector(state => state.user);
     let profileName='';
     dispatch(calculateTotal());
+    dispatch(getCart());
     const handleOpenNavMenu = ( event: React.MouseEvent<HTMLElement> ) => {
         setAnchorElNav ( event.currentTarget );
     };

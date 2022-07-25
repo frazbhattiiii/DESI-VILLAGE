@@ -14,8 +14,9 @@ import { lengthOfCart } from "../../utils";
 const CartItem = ({ id, title, removeItemFromCart }) => {
     const dispatch = useDispatch();
     const [remove,setDelete] = useState(false);
-    const cartLength = lengthOfCart();
+    const cartLength = JSON.parse(localStorage.getItem('cart')).length;
     const allCartItems = localStorage.getItem('cart')
+    console.log(cartLength)
     const {cartTotal} = useSelector(state=>state.cart);
     const cartItems = JSON.parse(allCartItems);
     if(cartLength>0){

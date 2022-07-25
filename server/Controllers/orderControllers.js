@@ -2,58 +2,44 @@ const Order = require("../Models/Orders");
 const sendMail = require('./authControllers').sendMail;
 exports.orderNow = async (req, res) => {
   const {
-    itemId,
-    itemName,
-    itemPrice,
-    itemQuantity,
-    category,
-    itemSize,
-    paymentMethod,
-    orderDelivered,
-    vendorAccepted,
-    userName,
-    userEmail,
-    userPhone,
-    userAddress,
-    vendorId,
+   cartItems,
+   cartTotal,
+   data,
+   userId,
   } = req.body;
-  let user = null;
+  console.log(req.body);
+ console.log(cartItems, cartTotal, data, userId);
+ const {name, email, address, payment, phone} = data;
+    const newOrder = new Order({
+                                  cartItems,
+                                    cartTotal,
+                                    name,
+                                    email,
+                                    address,
+                                    paymentMethod:payment,
+                                    phone,
+                                    userId,
+                               });
+    try {
+        await newOrder.save();
+        mailToVendor();
+        res.status(200).send({
+            message: "Order Placed Successfully",
+            orderId: newOrder._id,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            message: "Order Placing Failed",
+        });
+    }
 
-  if (req.user) {
-    user = req.user._id;
-  }
 
-  const newOrder = new Order({
-    user,
-    itemId,
-    itemName,
-    itemPrice,
-    itemQuantity,
-    category,
-    itemSize,
-    paymentMethod,
-    orderDelivered,
-    vendorAccepted,
-    userName,
-    userEmail,
-    userPhone,
-    userAddress,
-    vendorId,
-  });
-
-  try {
-    await newOrder.save();
-    mailToVendor();
-    res.status(200).send("Order Placed Successfully!!!");
-  } catch (error) {
-    console.log(error);
-    res.status(500);
-  }
 };
 
 const mailToVendor = async (req, res) => {
     try {
-        const email = "jamshaidkhalid32@gmail.com";
+        const email = "fraxbhatti@gmail.com";
         const email_subject = "You got an order on Desi Village";
         // const url = here you will put the vendor page's url where vendour can see its orders
         const email_message =

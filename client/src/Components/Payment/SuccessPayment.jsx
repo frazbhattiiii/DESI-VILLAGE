@@ -1,8 +1,15 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 import orderConfirmation from './orderConfirmed.png';
+import { PlaceOrder } from "../../utils";
+import { useDispatch , useSelector } from "react-redux";
+import { isAuth } from "../../utils/auth";
+import { addOrder } from "../../features/cartSlice/cartActions";
 function SuccessPayment ( props ) {
+  const {error}= useSelector(state => state.cart);
+
     return (
-        <>
+                <>
+                    {!error?
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -20,7 +27,7 @@ function SuccessPayment ( props ) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>:<h2>Some Technical Error occurred while placing your order</h2>}
         </>
     );
 }

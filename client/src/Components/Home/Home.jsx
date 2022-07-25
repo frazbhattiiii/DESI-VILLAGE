@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { calculateTotal } from "../../features/cartSlice/cart";
 function Home ( props ) {
     const dispatch = useDispatch();
-    dispatch(getAllItems());
     if(!localStorage.getItem('cart')){
         localStorage.setItem('cart',JSON.stringify([]));
     }

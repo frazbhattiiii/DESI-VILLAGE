@@ -22,7 +22,7 @@ export default function SideBar (props) {
     const {open,cartTotal} = useSelector(state => state.cart);
     const {quantity,itemPrice} = useSelector(state=>state.cartItem);
     const navigate = useNavigate();
-    const cartLength = lengthOfCart();
+    const cartLength = JSON.parse(localStorage.getItem('cart')).length;
     const toggleDrawer = ( anchor ,open ) => ( event ) => {
         dispatch(closeCart())
         if (

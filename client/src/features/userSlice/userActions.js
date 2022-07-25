@@ -9,11 +9,6 @@ export const registerUser = createAsyncThunk (
 async ( { name , email , password } , { rejectWithValue } ) => {
     try {
 // configure header's Content-Type as JSON
-        const config = {
-            headers : {
-                'Content-Type' : 'application/json' ,
-            } ,
-        }
 // make request to backend
         const response = await axios.post ( `${ process.env.REACT_APP_API_URL }/auth/register` , {
             name ,

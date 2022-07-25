@@ -5,6 +5,7 @@ const initialState = {
     step:0,
     userDetails: {},
     paymentStatus: false,
+    orderStatus: false,
 }
 
 const paymentSlice = createSlice ( {
@@ -19,11 +20,14 @@ const paymentSlice = createSlice ( {
                                         },
                                         changePaymentStatus: ( state , action ) => {
                                             state.paymentStatus = action.payload
+                                        },
+                                        orderPlaced: ( state , action ) => {
+                                            state.orderStatus = true
                                         }
                                     } ,
                                     extraReducers : {
 
                                     } ,
                                 } )
-export const { changeStep,addUserDetails,changePaymentStatus} = paymentSlice.actions;
+export const { changeStep,addUserDetails,changePaymentStatus,orderPlaced} = paymentSlice.actions;
 export default paymentSlice.reducer;

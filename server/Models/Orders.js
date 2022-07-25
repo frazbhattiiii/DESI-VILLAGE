@@ -2,55 +2,39 @@ const mongoose = require('mongoose');
 // user schema
 const orderSchema = new mongoose.Schema(
     {
-        user: {
+        userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         default : null
         },
-
-        userName:{
+        cartItems:{
+            type: Array,
+            default: [],
+            required: true
+        },
+        cartTotal: {
+            type: Number,
+            default: 0,
+            required: true
+        },
+        name:{
             type: String,
             required: true,
         },
 
-        userEmail:{
+        email:{
             type: String,
             required: true,
         },
 
-        userAddress: {
+        address: {
             type: String,
             required: true,
         },
 
-        userPhone: {
+        phone: {
             type: Number,
             required: true,
-        },
-
-        itemId:{
-            type: mongoose.Schema.Types.ObjectId,
-            required:true,
-        },
-        itemName:{
-            type: String,
-            required:true,
-        },
-        itemPrice:{
-            type: Number,
-            required:true,
-        },
-        itemQuantity:{
-            type: Number,
-            required:true,
-        },
-        category:{
-            type: String,
-            required:true,
-        },
-        itemSize:{
-            type: String,
-            required:true,
         },
         paymentMethod:{
             type: String,
@@ -64,9 +48,9 @@ const orderSchema = new mongoose.Schema(
             type: Boolean,
             default:false,
         },
-        vendorId:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Vendor',
+        vendorDelivered:{
+            type: Boolean,
+            default:false,
         }
     },
     {
