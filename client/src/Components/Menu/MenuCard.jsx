@@ -11,8 +11,9 @@ export default function MenuCard(props) {
     const navigate = useNavigate();
     return (
         <Card variant="outlined" sx={{ minWidth: '250px' ,
-            borderColor:'#ccf0d5'
-        }}>
+            borderColor:'#ccf0d5',
+            cursor:'pointer',
+        }} onClick={()=>navigate(`/item/detail/${_id}`)}>
 
             <AspectRatio minHeight="120px" maxHeight="200px" >
                 <img
