@@ -15,6 +15,7 @@ import Dashboard from "./Pages/Dashboard";
 import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
+import Contact from "./Pages/Contact";
 import Item from "./Components/MenuItem/Item";
 import Loader from "./Components/Loader/Loader";
 
@@ -35,6 +36,7 @@ function App () {
                 <Route path="/users/password/reset/:token" element={ <Reset/> }/>
                 <Route path='/logout' element={ <Logout/> }/>
                 <Route path='/cart' element={ <CartPage/> }/>
+                <Route path='/contact' element={ <Contact/> }/>
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
                 <Route path="/loading" element={ <Loader/> }/>

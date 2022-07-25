@@ -56,6 +56,7 @@ import { useDispatch , useSelector } from "react-redux";
                 display:'flex',
                 justifyContent:"center",
                 alignItems:'center',
+                padding:'1rem 0'
             }}>
                 <Pagination onChange={(e, pagination) => dispatch(setCurrentPagination({ pagination }))} count={Math.ceil(totalItems / 6.0)} color='secondary'/>
             </Box>
