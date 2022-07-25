@@ -1,0 +1,71 @@
+{
+    "_id": {
+      "$oid": "62daac2209e30cf3f608411f"
+    },
+    "vendor_id": {
+      "$oid": "62d98c43af3a944e03b71032"
+    },
+    "name": "panini",
+    "price": 13.99,
+    "info": "The Vegan Panini",
+    "description": "A quick meal panini, drowned with cheese and filled with vegies",
+    "availability": true,
+    "delivery": true,
+    "category": "Cafe",
+    "rating": 4.5,
+    "imageURL": [
+      "1658498081265-image-download4.jpg",
+      "1658498081267-image-download2.jpg",
+      "1658498081268-image-download1.jpg",
+      "1658498081284-image-download.jpg"
+    ],
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1658498082818"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1658610311664"
+      }
+    },
+    "__v": 0,
+    "sizes": [
+      {
+        "size": "small",
+        "price": 13.99,
+        "units": "1pc",
+        "_id": {
+          "$oid": "62dc556593f2d5ba4120a97b"
+        }
+      },
+      {
+        "size": "medium",
+        "price": 15.45,
+        "units": "1pc",
+        "_id": {
+          "$oid": "62dc556593f2d5ba4120a97c"
+        }
+      },
+      {
+        "size": "large",
+        "price": 18.25,
+        "units": "1pc",
+        "_id": {
+          "$oid": "62dc556593f2d5ba4120a97d"
+        }
+      }
+    ],
+    "timeForDelivery": 30,
+    "reviews": [
+      {
+        "$oid": "62dbd0a3e28542ee46cb3220"
+      }
+    ],
+    "speciality": "Soft Panini Bread",
+    "tags": [
+      "fast food",
+      "cafe",
+      "desi"
+    ]
+  }
