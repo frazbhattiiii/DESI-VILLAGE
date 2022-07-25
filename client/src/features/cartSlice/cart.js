@@ -10,6 +10,8 @@ const initialState = {
     change:false,
     filter: '',
     search: '',
+    totalItems: 0,
+    currentPagination: 1,
     cartItems: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
     menuItems:{},
     filteredItems: [],
@@ -75,6 +77,8 @@ const cartSlice = createSlice ( {
                                                     item => item.category.toLowerCase().includes(state.filter.toLowerCase()) 
                                                     && item.name.toLowerCase().includes(state.search.toLowerCase())
                                                 )
+                                            state.totalItems = state.filteredItems.length
+                                            state.currentPagination = 1
                                         },
                                         setTags: (state, action) => {
                                             const { offers } = action.payload
@@ -94,6 +98,12 @@ const cartSlice = createSlice ( {
                                             } else if (offers == 'all') {
                                                 state.filteredItems = prevItems
                                             }
+                                            state.totalItems = state.filteredItems.length
+                                            state.currentPagination = 1
+                                        },
+                                        setCurrentPagination: (state, action) => {
+                                            const { pagination } = action.payload
+                                            state.currentPagination = pagination
                                         },
                                         setCartItems: ( state , action ) => {
                                             state.cartItems = action.payload
@@ -116,7 +126,7 @@ const cartSlice = createSlice ( {
                                             state.loading = false
                                             state.change = true
                                             state.menuItems = payload
-
+                                            state.totalItems = payload.items.length
 
                                         } ,
                                         [ getAllItems.rejected ] : ( state , { payload } ) => {
@@ -170,5 +180,5 @@ const cartSlice = createSlice ( {
 
                                     } ,
                                 } )
-export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags } = cartSlice.actions;
+export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags, setCurrentPagination } = cartSlice.actions;
 export default cartSlice.reducer;
