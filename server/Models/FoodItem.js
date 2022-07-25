@@ -42,6 +42,14 @@ const foodItemSchema = new mongoose.Schema(
             type: Boolean,
             default: true
         },
+        freeDelivery: {
+            type: Boolean,
+            default: false
+        },
+        discount: {
+            type: String,
+            default: '0'
+        },
         category: {
             type: String,
             required: true,

@@ -7,6 +7,11 @@ const orderSchema = new mongoose.Schema(
         ref: 'User',
         default : null
         },
+        vendorId: [{
+            type: mongoose.Types.ObjectId,
+            ref: "Vendor",
+            required: true
+        }],
         cartItems:{
             type: Array,
             default: [],
@@ -36,10 +41,12 @@ const orderSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+
         paymentMethod:{
             type: String,
             required:true,
         },
+
         orderDelivered:{
             type: Boolean,
             default:false,

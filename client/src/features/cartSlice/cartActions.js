@@ -4,21 +4,22 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { getCookie , setLocalStorage } from "../../utils/auth";
 
 export const getAllItems = createAsyncThunk (
-'items/getAll' ,
+    'items/getAll' ,
 
-async () => {
-    try {
-// make request to backend
-        const response = await axios
-            .get(    `${ process.env.REACT_APP_API_URL }/food/get-all-items`);
-        return response.data;
-    } catch ( error ) {
-// return custom error message from API if any
-return error.response.data.message;
+    async () => {
+        try {
+    // make request to backend
+            const response = await axios
+                .get(    `${ process.env.REACT_APP_API_URL }/food/get-all-items`);
+            return response.data;
+        } catch ( error ) {
+    // return custom error message from API if any
+    return error.response.data.message;
+        }
+
     }
-
-}
 )
+
 export const addToCart = createAsyncThunk (
 'cart/add' ,
 async ( { itemImage, itemId, itemName, itemPrice, itemQuantity, category, itemSize, vendorId } , { rejectWithValue } ) => {

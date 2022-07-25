@@ -2,6 +2,8 @@ import React from 'react';
 import { Box ,Grid, Button , ButtonGroup , Stack } from '@mui/material';
 import { styled } from "@mui/system";
 import FilterDropDown from "./FilterDropDown";
+import { useDispatch } from 'react-redux';
+import { setTags } from '../../features/cartSlice/cart'
 
 const StyledButton = styled(Button)`
   background-color: darkgreen;
@@ -21,6 +23,11 @@ const StyledButton = styled(Button)`
   }
 `;
 function ButtonStack ( props ) {
+    const dispatch = useDispatch()
+    const [offers, setOffers] = React.useState('')
+    React.useEffect(() => {
+      dispatch(setTags({ offers }))
+    }, [offers])
     return (
         <>
             {/*<Grid>*/}
@@ -42,11 +49,10 @@ function ButtonStack ( props ) {
                     xs:'3rem',
                 }
             }}>
-                <StyledButton>All</StyledButton>
-                <Button variant='outlined'>Offers</Button>
-                <Button variant='outlined'>Free Delivery</Button>
-                <Button variant='outlined'>New</Button>
-                <Button variant='outlined'>Popular</Button>
+                <StyledButton onClick={() => setOffers('all')}>All</StyledButton>
+                <Button onClick={() => setOffers('discount')} variant='outlined'>Offers</Button>
+                <Button onClick={() => setOffers('delivery')} variant='outlined'>Free Delivery</Button>
+                <Button onClick={() => setOffers('popular')} variant='outlined'>Popular</Button>
             </ButtonGroup>
             </Box>
             <Grid sx={{

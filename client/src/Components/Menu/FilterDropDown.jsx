@@ -3,13 +3,20 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilteredItems } from '../../features/cartSlice/cart'
 
 export default function FilterDropDown() {
+    const dispatch = useDispatch()
     const [filter, setFilter] = React.useState('');
-
+    const { search } = useSelector(state => state.cart)  
     const handleChange = (event) => {
         setFilter(event.target.value);
     };
+
+    React.useEffect(() => {
+        dispatch(setFilteredItems({ filter, search }))
+    }, [filter])
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -28,10 +35,10 @@ export default function FilterDropDown() {
                     <em>None</em>
                 </MenuItem>
                 <MenuItem value='Desi'>Desi Khabay</MenuItem>
-                <MenuItem value='fastFood'>Fast Food</MenuItem>
-                <MenuItem value='Asian'>Asian</MenuItem>
-                <MenuItem value='Chinese'>Chinese</MenuItem>
-                <MenuItem value='Italian'>Italian</MenuItem>
+                <MenuItem value='Fast Food'>Fast Food</MenuItem>
+                <MenuItem value='Cafe'>Cafe</MenuItem>
+                <MenuItem value='Desert'>Desert</MenuItem>
+                <MenuItem value='Others'>Others</MenuItem>
             </Select>
         </FormControl>
     );
