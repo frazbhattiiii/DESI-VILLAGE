@@ -21,6 +21,8 @@ import axios from "axios";
 import MenuItem from "@mui/material/MenuItem";
 import { changeStep,addUserDetails } from "../../features/paymentSlice/Payment";
 import * as React from "react";
+import { addOrder } from "../../features/cartSlice/cartActions";
+import { isAuth } from "../../utils/auth";
 
 let easing = [ 0.6 , - 0.05 , 0.01 , 0.99 ];
 const animate = {
@@ -36,8 +38,20 @@ const animate = {
 const PaymentForm = () => {
     const navigate = useNavigate ();
     const [mode,setMode]=useState("");
+    console.log("from payment form",);
+    const [render,setRender]=useState(false);
     const dispatch = useDispatch ();
-    const {step} = useSelector (state => state.payment);
+    const {step,userDetails} = useSelector (state => state.payment);
+    console.log(userDetails)
+    const {cartItems,cartTotal} = useSelector (state => state.cart);
+    const isEmpty =(userDetails)=>{
+        //To check if an object is empty or not
+        for(var key in userDetails) {
+            if(userDetails.hasOwnProperty(key))
+                return false;
+        }
+        return true;
+    }
     const handleChange = ( event ) => {
         setMode(event.target.value);
     }
@@ -76,30 +90,40 @@ const PaymentForm = () => {
                                    } ,
                                    validationSchema : PaymentSchema ,
                                    onSubmit : ( e ) => {
-
+                                       setRender(true);
                                        const name = formik.values.firstName + " " + formik.values.lastName;
                                        const email = formik.values.email;
                                        const address = formik.values.address;
                                        const phone = formik.values.phone;
                                         const payment = formik.values.payment;
-                                        if(payment===''){
+                                       const data = { name , email , address,phone,payment };
+                                       dispatch(addUserDetails(data));
+                                        if(payment==='' && userDetails.payment===''){
                                             toast("Payment Method is required",{
                                                 autoClose:2000
                                             })
                                             return;
                                         }
-
-                                       const data = { name , email , address,phone,payment };
-                                        console.log(payment==='Cash')
-                                        if(payment==='Cash'){
-                                            //TODO : add order to DB
-                                            dispatch(changeStep(2));
-                                            return;
+                                        if(payment==='Cash' || userDetails.payment==='Cash'){
+                                            if ( isAuth ) {
+                                                const user = localStorage.getItem ( 'user' );
+                                                const userId = JSON.parse ( user )._id ;
+                                                dispatch(addOrder({cartItems,cartTotal,data,userId}));
+                                                dispatch ( changeStep ( 2 ) );
+                                                alert('Your order is being placed...kindly wait');
+                                            }
+                                            else{
+                                                dispatch(addOrder({cartItems,cartTotal,data,userId}));
+                                                dispatch ( changeStep ( 2 ) );
+                                                alert('Your order is being placed...kindly wait');
+                                            }
                                         }
-                                       dispatch(changeStep(1));
-                                        console.log(step);
-                                       console.log(data)
-                                       dispatch(addUserDetails(data));
+                                        else if (payment==='Credit' || payment==='Debit') {
+                                            dispatch ( addUserDetails ( data ) );
+                                            dispatch ( changeStep ( 1 ) );
+                                            console.log ( data )
+                                        }
+
                                        // dispatch ( registerUser ( data ) );
                                    } ,
                                } );

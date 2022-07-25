@@ -1,11 +1,16 @@
-import React,{useState} from 'react';
+import React , { useEffect , useState } from 'react';
 import MenuCard from "./MenuCard";
 import {Grid,Box} from '@mui/material';
 import { getAllItems } from "../../features/cartSlice/cartActions";
 import { useDispatch , useSelector } from "react-redux";
  function MenuCardList ( props ) {
     const {menuItems} = useSelector ( state => state.cart );
+    const dispatch = useDispatch ();
 let foodItems = menuItems.items;
+     useEffect ( () => {
+         dispatch(getAllItems());
+     } , [  ] );
+
     return (
         <>{foodItems?
             <Box sx={ {

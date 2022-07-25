@@ -1,4 +1,4 @@
-const uniqueMessage = error => {
+  const uniqueMessage = error => {
     let output;
     try {
         let fieldName = error.message.split(".$")[1];

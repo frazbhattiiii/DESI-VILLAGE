@@ -5,11 +5,14 @@ import { Alert , Button , Snackbar } from "@mui/material";
 import { changePaymentStatus , changeStep } from "../../features/paymentSlice/Payment";
 import { toast } from "react-toastify";
 import ToastContainer from "../Toast/ToastContainer";
+import { isAuth } from "../../utils/auth";
+import { addOrder } from "../../features/cartSlice/cartActions";
 
 
 function CardPaymentForm ( props ) {
     const [open, setOpen] = React.useState(false);
-    const {cartTotal}= useSelector(state=>state.cart);
+    const {cartTotal,cartItems}= useSelector(state=>state.cart);
+    const {userDetails}= useSelector(state=>state.payment);
     const dispatch = useDispatch();
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -21,12 +24,26 @@ function CardPaymentForm ( props ) {
     };
     const handleToken =(token)=>{
         console.log(token);
+        const user = localStorage.getItem ( 'user' );
+        const userId = JSON.parse ( user )._id ;
+        const data = userDetails;
         dispatch(changePaymentStatus(true));
         toast("Payment Successful",{
             autoClose:3000,
         });
         setTimeout(()=>{
             dispatch(changeStep(2));
+            if ( isAuth ) {
+
+                dispatch(addOrder({cartItems,cartTotal,data,userId}));
+                dispatch ( changeStep ( 2 ) );
+                alert('Your order is being placed...kindly wait');
+            }
+            else{
+                dispatch(addOrder({cartItems,cartTotal,data,userId}));
+                dispatch ( changeStep ( 2 ) );
+                alert('Your order is being placed...kindly wait');
+            }
         },3000);
 
     }

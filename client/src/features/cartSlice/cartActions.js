@@ -39,10 +39,12 @@ async ( { itemImage, itemId, itemName, itemPrice, itemQuantity, category, itemSi
                                     itemImage , itemId , itemName , itemPrice , itemQuantity , category , itemSize ,
                                     vendorId
                                 } );
+                    console.log(cart)
                     localStorage.setItem ( 'cart' , JSON.stringify ( cart ) );
                 }
             }
             else{
+                console.log("here we go")
                 localStorage.setItem('cart', JSON.stringify([{itemImage, itemId, itemName, itemPrice, itemQuantity, category, itemSize, vendorId}]));
             }
     } catch ( error ) {
@@ -69,4 +71,23 @@ export const getCart = createAsyncThunk (
 
     }
 )
+export const addOrder = createAsyncThunk (
+    'cart/add/order' ,
+    async ( {cartItems,cartTotal,data,userId} , { rejectWithValue } ) => {
+        try {
+            console.log(cartItems,cartTotal,userId)
+            console.log(data)
+            const response = await axios
+                .post(    `${ process.env.REACT_APP_API_URL }/cart/order` , {cartItems,cartTotal,data,userId});
+            return response.data;
+        } catch ( error ) {
+// return custom error message from API if any
+            if ( error.response && error.response.data.message ) {
+                return rejectWithValue ( error.response.data.message )
+            } else {
+                return rejectWithValue ( error.message )
+            }
+        }
+
+    });
 

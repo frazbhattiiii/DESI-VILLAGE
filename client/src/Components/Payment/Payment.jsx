@@ -1,10 +1,11 @@
 import React from 'react';
 import PaymentDialogue from "./PaymentDialogue";
-import { useSelector } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
+import { isAuth } from "../../utils/auth";
+import { addOrder } from "../../features/cartSlice/cartActions";
+import { changeStep } from "../../features/paymentSlice/Payment";
 
 function Payment ( props ) {
-    const {change} = useSelector(state => state.cart);
-    console.log("From Payment")
     return (
         <>
         <PaymentDialogue />

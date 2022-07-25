@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { addToCart , getAllItems , getCart } from "../cartSlice/cartActions";
+import { addToCart , getAllItems , getCart ,addOrder} from "../cartSlice/cartActions";
 // import { cartAction } from './cartActions';
 
 const initialState = {
     open:false,
     added:false,
-    error:null,
+    error:false,
     change:false,
     cartItems: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
     menuItems:[],
+    orderStatus:false,
     cartLength:localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')).length:0,
     cartTotal: 0,
 }
@@ -89,6 +90,18 @@ const cartSlice = createSlice ( {
                                             state.error = payload
 
                                         } ,
+                                        [ getCart.pending ] : ( state ) => {
+                                            state.loadinng = true
+                                        } ,
+                                        [ getCart.fulfilled ] : ( state , { payload } ) => {
+
+                                            state.cartItems = payload
+                                            state.loading = false
+
+                                        } ,
+                                        [ getCart.rejected ] : ( state , { payload } ) => {
+                                            state.loading = false
+                                        } ,
                                         [ addToCart.pending ] : ( state ) => {
                                             state.loading = true
                                             state.added=false
@@ -108,17 +121,17 @@ const cartSlice = createSlice ( {
                                             state.error = payload
                                             state.change=false
                                         } ,
-                                        [ getCart.fulfilled ] : ( state , { payload } ) => {
-                                            state.cartItems = payload
-                                            state.change = true
+
+                                        [ addOrder.fulfilled ] : ( state , { payload } ) => {
+                                            state.orderStatus = true
+                                            state.error = false
                                         } ,
-                                        [getCart.pending] : ( state ) => {
-                                            state.loading = true
-                                            state.error = null
+                                        [addOrder.pending] : ( state ) => {
+                                           state.orderStatus = false
+                                            state.error = false
                                         } ,
-                                        [getCart.rejected] : ( state , { payload } ) => {
-                                            state.loading = false
-                                            state.error = payload
+                                        [addOrder.rejected] : ( state , { payload } ) => {
+                                            state.error = true
                                         } ,
 
                                     } ,
