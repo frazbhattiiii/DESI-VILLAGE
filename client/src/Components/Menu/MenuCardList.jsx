@@ -1,6 +1,6 @@
 import React , { useEffect , useState } from 'react';
 import MenuCard from "./MenuCard";
-import {Grid,Box} from '@mui/material';
+import { Grid , Box , Pagination } from '@mui/material';
 import { getAllItems } from "../../features/cartSlice/cartActions";
 import { useDispatch , useSelector } from "react-redux";
  function MenuCardList ( props ) {
@@ -13,6 +13,7 @@ import { useDispatch , useSelector } from "react-redux";
 
     return (
         <>{foodItems && filteredItems.length == 0?
+           <>
             <Box sx={ {
                 margin : '2rem 0 2rem 8rem' ,
 
@@ -37,14 +38,22 @@ import { useDispatch , useSelector } from "react-redux";
                     {filteredItems.map((item,index)=>{
                         return (
                             <Grid item key={index}>
-
                          <MenuCard item={item}/>
                       </Grid>)}
                     )}
 
 
                 </Grid>
-            </Box>}
+            </Box>
+               <Box sx={{
+                   display:'flex',
+                   justifyContent:"center",
+                   alignItems:'center',
+               }}>
+        <Pagination count={10} color='secondary'/>
+               </Box>}
+           </>:null
+        }
 
         </>
     );

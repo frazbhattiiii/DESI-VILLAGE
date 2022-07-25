@@ -123,8 +123,6 @@ const PaymentForm = () => {
                                             dispatch ( changeStep ( 1 ) );
                                             console.log ( data )
                                         }
-
-                                       // dispatch ( registerUser ( data ) );
                                    } ,
                                } );
 
