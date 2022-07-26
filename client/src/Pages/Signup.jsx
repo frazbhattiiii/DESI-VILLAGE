@@ -8,12 +8,14 @@ import Logo from "../Components/Auth/Logo";
 import { motion } from "framer-motion";
 import { isAuth } from "../utils/auth";
 import Dashboard from "./Dashboard";
+import NavBar from "../Components/NavBar/NavBar";
 
 //////////////////////////////////
 const RootStyle = styled ( "div" ) ( {
                                          background : "rgb(249, 250, 251)" ,
                                          height : "100vh" ,
                                          display : "grid" ,
+                                        marginTop:'2rem',
                                          placeItems : "center" ,
                                      } );
 
@@ -51,6 +53,7 @@ const fadeInUp = {
 const Signup = ( { setAuth } ) => {
     return (
         <>
+            <NavBar/>
             {
                 ! isAuth () ?
                 <RootStyle>
