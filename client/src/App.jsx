@@ -18,6 +18,7 @@ import CartPage from "./Pages/CartPage";
 import Contact from "./Pages/Contact";
 import Item from "./Components/MenuItem/Item";
 import Loader from "./Components/Loader/Loader";
+import About from "./Pages/About";
 
 
 function App () {
@@ -37,6 +38,7 @@ function App () {
                 <Route path='/logout' element={ <Logout/> }/>
                 <Route path='/cart' element={ <CartPage/> }/>
                 <Route path='/contact' element={ <Contact/> }/>
+                <Route path='/about' element={ <About/> }/>
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
                 <Route path="/loading" element={ <Loader/> }/>
