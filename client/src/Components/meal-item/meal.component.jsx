@@ -1,4 +1,4 @@
-import { ListTitle } from "../../routes/reports/reports.styles"
+import { ListTitle } from "../../Pages/vendor-routes/reports/reports.styles"
 import { MealContainer, ItemContainer, ItemImage, AvailabilityContainer } from "./meal.style"
 
 export const Meal = ({ meal }) => {

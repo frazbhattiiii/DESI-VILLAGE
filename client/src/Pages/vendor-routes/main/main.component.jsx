@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Drawer } from "../drawer/drawer.component"
+import { Drawer } from "../../../Components/drawer/drawer.component"
 import { MainContainer } from "./main.styles"
 import { Dashboard } from '../dashboard/dashboard.component'
 import { Reports } from '../reports/reports.component'

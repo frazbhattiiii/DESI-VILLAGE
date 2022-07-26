@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colorPrimary, colorTertiary, colorWhite } from "../../abstracts/variables";
-import { ListTitle, ListTitleContainer } from "../../routes/reports/reports.styles";
+import { ListTitle, ListTitleContainer } from "../../Pages/vendor-routes/reports/reports.styles";
 
 export const MealContainer = styled(ListTitleContainer)`
     background-color: ${colorWhite};

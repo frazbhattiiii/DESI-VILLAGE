@@ -1,7 +1,7 @@
-import { SearchButton } from "../../abstracts/buttons"
-import { PrimaryHeading } from "../../abstracts/headings"
-import { Search } from "../../abstracts/search"
-import { Meals } from "../../components/meals-list/meals.component"
+import { SearchButton } from "../../../abstracts/search"
+import { PrimaryHeading } from "../../../abstracts/headings"
+import { Search } from "../../../abstracts/search"
+import { Meals } from "../../../Components/meals-list/meals.component"
 import {
     ListHeader,
     ListTitleContainer,

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colorGrey } from "../../abstracts/variables";
+import { colorGrey } from "../../../abstracts/variables";
 
 export const ReportsContainer = styled.div`
     flex: 1;

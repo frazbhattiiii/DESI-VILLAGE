@@ -17,17 +17,15 @@ import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
 import Item from "./Components/MenuItem/Item";
 import Loader from "./Components/Loader/Loader";
-
+import {Main} from './Pages/vendor-routes/main/main.component'
 
 function App () {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={ <Dashboard/> }>
-
-                </Route>
-                <Route path="/home" element={ <Dashboard/> }/>
+                <Route path="/*" element={ <Main/> }/>
+                {/* <Route path="/home" element={ <Dashboard/> }/>
                 <Route path="/signup" element={ <Signup/> }/>
                 <Route path="/users/activate/:token" element={ <Activation/> }/>
                 <Route path="/login" element={ <Login/> }/>
@@ -37,7 +35,7 @@ function App () {
                 <Route path='/cart' element={ <CartPage/> }/>
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
-                <Route path="/loading" element={ <Loader/> }/>
+                <Route path="/loading" element={ <Loader/> }/> */}
             </Routes>
         </BrowserRouter>
     );
