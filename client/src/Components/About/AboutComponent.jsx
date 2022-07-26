@@ -36,7 +36,8 @@ function AboutComponent ( props ) {
     return (
         <>
         <Box sx={{
-            margin:'5rem 0 0 2rem'
+            margin:'5rem 1rem 0 2rem',
+            overflowX:'hidden',
         }}>
             <Box
                 component={motion.div}

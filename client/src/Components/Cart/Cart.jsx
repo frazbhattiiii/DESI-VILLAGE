@@ -105,6 +105,7 @@ const Cart = () => {
                     </Box>
                     <Stack direction="row" sx={{
                         mx:3,
+                        mb:'4rem',
                     }}>
                         <TextField label="Code" sx={{
                             width:'20%'
