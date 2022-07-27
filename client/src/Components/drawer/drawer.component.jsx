@@ -1,9 +1,42 @@
-import { DrawerContainer } from "./drawer.styles"
-
-export const Drawer = ()=>{
-    return(
-        <DrawerContainer>
-            Drawer
-        </DrawerContainer>
+import { Container, Links, Title, LinkContainer, Link, LinkIcon, DrawerFooter, LogOutImg } from "./drawer.styles"
+import { ReactComponent as Reports, } from './reports.svg'
+import { ReactComponent as Requests, } from './requests.svg'
+import { ReactComponent as Dashboard, } from './dashboard.svg'
+import { ReactComponent as Logout, } from './logout.svg'
+import { isAuth } from "../../utils/auth"
+import { SecondaryHeading, TertiaryHeading } from "../../abstracts/headings"
+export const Drawer = () => {
+    // const { user } = useSelector (
+    //     ( state ) => state.user
+    // );
+    // console.log(user)
+    let user = null
+    isAuth() ? user = localStorage.getItem("user") : user = null
+    return (
+        <Container>
+            <Title>TBayEat</Title>
+            <Links>
+                <LinkContainer to={`/vendor/`}>
+                    <LinkIcon><Dashboard /></LinkIcon>
+                    <Link>Dashboard</Link>
+                </LinkContainer>
+                <LinkContainer to={`/vendor/reports`}>
+                    <LinkIcon><Reports /></LinkIcon>
+                    <Link>Reports</Link>
+                </LinkContainer>
+                <LinkContainer to={`/vendor/requests`}>
+                    <LinkIcon><Requests /></LinkIcon>
+                    <Link>Requests</Link>
+                </LinkContainer>
+            </Links>
+            <DrawerFooter>
+                <SecondaryHeading>Moez Ahmad</SecondaryHeading>
+                <br />
+                <TertiaryHeading>Vendor</TertiaryHeading>
+                <LogOutImg>
+                    <Logout />
+                </LogOutImg>
+            </DrawerFooter>
+        </Container>
     )
 }

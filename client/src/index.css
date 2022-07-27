@@ -17,7 +17,7 @@ body {
 a:link,
 a:visited {
   text-decoration: none;
-  color: rgba(#000000,.5);
+  color: rgba(0,0,0,.5);
 }
 
 code {

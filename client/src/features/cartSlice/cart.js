@@ -32,7 +32,7 @@ const cartSlice = createSlice ( {
                                         },
                                         handleIncrement : ( state , action ) => {
 
-                                            state.cartItems.map( item => {
+                                            state.cartItems.foreach( item => {
                                                 if ( item.itemId === action.payload.itemId && item.itemSize === action.payload.itemSize ) {
                                                     item.itemQuantity += 1
                                                     localStorage.setItem('cart', JSON.stringify(state.cartItems))
@@ -42,7 +42,7 @@ const cartSlice = createSlice ( {
 
                                         } ,
                                         handleDecrement : ( state , action ) => {
-                                            state.cartItems.map( item => {
+                                            state.cartItems.foreach( item => {
                                                 if ( item.itemId === action.payload.itemId && item.itemSize === action.payload.itemSize ) {
                                                     if(item.itemQuantity<=1){
                                                         item.itemQuantity = 1
@@ -72,7 +72,7 @@ const cartSlice = createSlice ( {
                                             state.filter = filter
                                             state.search = search
 
-                                            if (Object.keys(current(state.menuItems)).length != 0)
+                                            if (Object.keys(current(state.menuItems)).length !== 0)
                                                 state.filteredItems = current(state.menuItems).items.filter(
                                                     item => item.category.toLowerCase().includes(state.filter.toLowerCase()) 
                                                     && item.name.toLowerCase().includes(state.search.toLowerCase())
@@ -83,19 +83,19 @@ const cartSlice = createSlice ( {
                                         setTags: (state, action) => {
                                             const { offers } = action.payload
                                             let prevItems = current(state.menuItems).items
-                                            if (offers == 'discount') {
+                                            if (offers === 'discount') {
                                                 state.filteredItems = prevItems.filter(
-                                                    item => parseInt(item.discount) != 0
+                                                    item => parseInt(item.discount) !== 0
                                                     )
-                                            } else if (offers == 'delivery') {
+                                            } else if (offers === 'delivery') {
                                                 state.filteredItems = prevItems.filter(
-                                                    item => item.freeDelivery == true
+                                                    item => item.freeDelivery === true
                                                     )
-                                            } else if (offers == 'popular') {
+                                            } else if (offers === 'popular') {
                                                 state.filteredItems = prevItems.filter(
                                                     item => item.rating >= 3.0
                                                     )
-                                            } else if (offers == 'all') {
+                                            } else if (offers === 'all') {
                                                 state.filteredItems = prevItems
                                             }
                                             state.totalItems = state.filteredItems.length

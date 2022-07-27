@@ -1,10 +1,18 @@
-import MEAL from '../../item-list.json'
 import { Meal } from '../meal-item/meal.component'
-export const Meals = ()=>{
-    return(
-        // [].map((meal)=>(
-        //     <div>meal</div>
-        // ))
-        <Meal meal={MEAL}/>
+import { MealsContainer } from './meals.styles'
+import CustomScroll from 'react-custom-scroll';
+export const Meals = ({ meals }) => {
+    return (
+
+
+
+        
+            meals.map((meal, id) => (
+                <Meal key={id} meal={meal} />
+            ))
+        
+
+
+
     )
 }

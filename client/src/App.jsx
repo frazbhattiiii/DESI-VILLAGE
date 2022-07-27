@@ -24,8 +24,8 @@ function App () {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/*" element={ <Main/> }/>
-                {/* <Route path="/home" element={ <Dashboard/> }/>
+                <Route path="/vendor/*" element={ <Main/> }/>
+                <Route path="/" element={ <Dashboard/> }/>
                 <Route path="/signup" element={ <Signup/> }/>
                 <Route path="/users/activate/:token" element={ <Activation/> }/>
                 <Route path="/login" element={ <Login/> }/>
@@ -35,7 +35,7 @@ function App () {
                 <Route path='/cart' element={ <CartPage/> }/>
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
-                <Route path="/loading" element={ <Loader/> }/> */}
+                <Route path="/loading" element={ <Loader/> }/>
             </Routes>
         </BrowserRouter>
     );
