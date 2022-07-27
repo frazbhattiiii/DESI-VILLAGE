@@ -7,6 +7,17 @@ import Slider from '../Components/Filters/Slider'
 
 const Menu = () => {
     const filterRef = React.useRef()
+    React.useLayoutEffect(() => {
+        const filterResizeToggler = () => {
+            if (window.innerWidth > 600)
+                filterRef.current.style.display = 'unset'
+
+        }
+        window.addEventListener('resize', filterResizeToggler)
+        return () => { 
+            window.removeEventListener('resize', filterResizeToggler)
+        }
+    }, [])
     const toggleMenuHandler = () => {
         if (filterRef.current.style.display == 'none')
             filterRef.current.style.display = 'unset'
