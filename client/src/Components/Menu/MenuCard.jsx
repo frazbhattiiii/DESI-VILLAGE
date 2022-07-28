@@ -59,7 +59,6 @@ export default function MenuCard(props) {
 
                     sx={{fontFamily:'poppins', ml: 'auto', fontWeight: 600 ,color:'black',backgroundColor:'pink'}}
                     onClick={()=>navigate(`/item/detail/${_id}`)}>
-                >
                     Explore
                 </Button>
             </Box>

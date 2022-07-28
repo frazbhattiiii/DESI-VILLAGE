@@ -17,6 +17,7 @@ import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
 import Item from "./Components/MenuItem/Item";
 import Loader from "./Components/Loader/Loader";
+import Profile from './Pages/Profile';
 
 
 function App () {
@@ -38,6 +39,7 @@ function App () {
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
                 <Route path="/loading" element={ <Loader/> }/>
+                <Route path="profile" element={<Profile/>}/>
             </Routes>
         </BrowserRouter>
     );
