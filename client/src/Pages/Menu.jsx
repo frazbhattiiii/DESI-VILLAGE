@@ -51,7 +51,8 @@ const Menu = () => {
                     display: {
                         xs: 'unset',
                         sm: 'none'
-                    }
+                    },
+                    cursor:'pointer',
                 }}>
                     <MenuIcon onClick={toggleMenuHandler} sx={{
                         color: 'gray',

@@ -32,6 +32,7 @@ const Category = () => {
             <FilterContainer key='All'>
                 <FilterTitle onClick={() => categoryFilterHandler('')} sx={{
                 fontStyle: 'normal',
+                    cursor:'pointer'
             }}>All</FilterTitle>
             </FilterContainer>
             {
