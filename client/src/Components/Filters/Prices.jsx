@@ -35,7 +35,7 @@ const Prices = () => {
                 }}
                 defaultValue={0}
                 min={0}
-                max={90}
+                max={50}
                 step={10} 
                 size="small"
                 onChange={(e, value) => setRange(value)}
