@@ -8,7 +8,7 @@ export const ReportsContainer = styled.div`
 export const MealsListContainer = styled.div`
     background-color: ${colorGrey};
     flex: 1 0 auto;
-    padding: 2rem 4rem 0 4rem;
+    padding: 2rem 4rem;
     overflow-x: auto;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -101,6 +101,7 @@ export const Tag = styled.span`
     border-radius: .3rem;
     font-size: 1.2rem;
     color: ${colorWhite};
+    margin-top: .5rem;
 `
 export const DetailItems = styled.div`
     display: flex;
