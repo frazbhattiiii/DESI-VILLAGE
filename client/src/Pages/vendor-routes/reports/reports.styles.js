@@ -7,7 +7,7 @@ export const ReportsContainer = styled.div`
 `
 export const MealsListContainer = styled.div`
     background-color: ${colorGrey};
-    flex: 1 1 70rem;
+    flex: 1 0 auto;
     padding: 2rem 4rem 0 4rem;
     overflow-x: auto;
     overflow-y: auto;
@@ -46,7 +46,7 @@ export const ListTitle = styled.span`
     font-weight: 600;
 `
 export const ReportsDetail = styled.div`
-    flex-basis: 30rem;
+    flex: 0 1 30rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,21 +88,41 @@ export const ItemImg = styled.img`
     object-fit: contain;
     object-position: center;
 `
+export const TagsContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+`
+export const Tag = styled.span`
+    padding: .5rem 1.5rem;
+    background-color: ${colorPrimary};
+    border-radius: .3rem;
+    font-size: 1.2rem;
+    color: ${colorWhite};
+`
 export const DetailItems = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     row-gap: .5rem;
+    width: 100%;
 `
 export const ItemContainer = styled.div`
     padding: 1rem 1.5rem;
     display: flex;
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 `
 export const ItemKey = styled.span`
+    font-size: 1.4rem;
+    font-weight: 500;
 `
 export const ItemValue = styled.span`
+    font-size: 1.2rem;
+    font-weight: 400;
 `
 export const FooterContainer = styled.div`
     margin-top: auto;

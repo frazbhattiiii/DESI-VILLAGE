@@ -9,18 +9,20 @@ import {
     MealsListContainer,
     ReportsContainer,
     ReportsDetail,
-    Paginate,
     ItemImg,
     DetailItems,
     ItemContainer,
     ItemKey,
     ItemValue,
-    FooterContainer
+    FooterContainer,
+    Tag,
+    TagsContainer
 } from "./reports.styles"
 import { useContext } from "react"
 import { FoodContext } from "../../../contexts/food-context"
 import { useState } from "react"
 import { EditButton } from "../../../abstracts/buttons"
+import { Fragment } from "react"
 export const Reports = () => {
     const { meals, selectedMeal } = useContext(FoodContext)
     const [search, setSearch] = useState('')
@@ -28,7 +30,7 @@ export const Reports = () => {
     const filteredMeals = meals.filter(meal => {
         return meal.name.toLowerCase().includes(search.toLowerCase())
     })
-    const { imageURL, name, description } = selectedMeal
+    const { imageURL, name, description, tags, sizes } = selectedMeal
 
     return (
         <ReportsContainer>
@@ -45,16 +47,6 @@ export const Reports = () => {
                     <ListTitle>Status</ListTitle>
                 </ListTitleContainer>
                 <Meals meals={filteredMeals} />
-                {/* <Paginate
-                    previousLabel={"Previous"}
-                    nextLabel={"Next"}
-                    breakLabel={"..."}
-                    pageCount={10}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
-                    onPageChange={(page) => console.log(page.selected)}
-                    activeClassName={"active"}
-                /> */}
             </MealsListContainer>
             {Object.keys(selectedMeal).length ?
                 (
@@ -62,8 +54,18 @@ export const Reports = () => {
                         <ItemImg src={`http://localhost:4020/images/${imageURL[0]}`} />
                         <SecondaryHeading>{name.toUpperCase()}</SecondaryHeading>
                         <TertiaryHeading>{description}</TertiaryHeading>
+                        <TagsContainer>
+                            {tags.map((tag) => <Tag>{tag.toUpperCase()}</Tag>)}
+                        </TagsContainer>
                         <DetailItems>
-                            <ItemContainer>
+                            <SecondaryHeading>Categories</SecondaryHeading>
+                            {sizes.map(size => (
+                                <ItemContainer>
+                                    <ItemKey>{`${size.size.toUpperCase()}`}</ItemKey>
+                                    <ItemValue>{`${size.price} $`}</ItemValue>
+                                </ItemContainer>
+                            ))}
+                            {/* <ItemContainer>
                                 <ItemKey>Email</ItemKey>
                                 <ItemValue>Email</ItemValue>
                             </ItemContainer>
@@ -86,7 +88,7 @@ export const Reports = () => {
                             <ItemContainer>
                                 <ItemKey>Email</ItemKey>
                                 <ItemValue>Email</ItemValue>
-                            </ItemContainer>
+                            </ItemContainer> */}
                         </DetailItems>
                         <FooterContainer>
                             <EditButton>Edit</EditButton>
