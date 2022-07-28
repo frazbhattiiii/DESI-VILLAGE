@@ -1,7 +1,5 @@
 import axios from 'axios';
-import cookie from 'js-cookie'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getCookie , setLocalStorage } from "../../utils/auth";
 
 export const getAllItems = createAsyncThunk (
     'items/getAll' ,

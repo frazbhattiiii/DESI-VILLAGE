@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authenticate , setCookie , setLocalStorage } from "../../utils/auth";
+import {  setCookie , setLocalStorage } from "../../utils/auth";
 
 export const registerUser = createAsyncThunk (
 // action type string
@@ -35,11 +35,11 @@ export const activateUser = createAsyncThunk (
 async ( { token } , { rejectWithValue } ) => {
     try {
 // configure header's Content-Type as JSON
-        const config = {
-            headers : {
-                'Content-Type' : 'application/json' ,
-            } ,
-        }
+        // const config = {
+        //     headers : {
+        //         'Content-Type' : 'application/json' ,
+        //     } ,
+        // }
 // make request to backend
         const response = await axios
             .post ( `${ process.env.REACT_APP_API_URL }/auth/activation` , {
@@ -66,11 +66,11 @@ async ( {
         } , { rejectWithValue } ) => {
     try {
 // configure header's Content-Type as JSON
-        const config = {
-            headers : {
-                'Content-Type' : 'application/json' ,
-            } ,
-        }
+        // const config = {
+        //     headers : {
+        //         'Content-Type' : 'application/json' ,
+        //     } ,
+        // }
 // make request to backend
         const response = await axios
             .post ( `${ process.env.REACT_APP_API_URL }/auth/login` , {
@@ -100,11 +100,11 @@ export const googleLogin = createAsyncThunk (
 async ( { idToken } , { rejectWithValue } ) => {
     try {
 // configure header's Content-Type as JSON
-        const config = {
-            headers : {
-                'Content-Type' : 'application/json' ,
-            } ,
-        }
+        // const config = {
+        //     headers : {
+        //         'Content-Type' : 'application/json' ,
+        //     } ,
+        // }
 // make request to backend
         const response = await axios ( {
                                            method : 'POST' ,
