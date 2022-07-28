@@ -12,18 +12,18 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  Checkbox
+  Checkbox,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import GreenButton from "../Buttons/GreenButton";
-import { Button } from '@mui/material';
-import {styled} from '@mui/system';
-import EditIcon from '@mui/icons-material/Edit';
-import KeyIcon from '@mui/icons-material/Key';
+import { Button } from "@mui/material";
+import { styled } from "@mui/system";
+import EditIcon from "@mui/icons-material/Edit";
+import KeyIcon from "@mui/icons-material/Key";
 
-const StyledButton = styled(Button)
+const StyledButton = styled(Button);
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -88,13 +88,22 @@ export default function ProfileForm() {
         }}
       >
         Personal Infromation
-      <IconButton aria-label="edit" onClick={()=>{noEdit ? setNoEdit(false) : setNoEdit(true)}}>
-        <EditIcon/>
-      </IconButton>
-
-      <IconButton aria-label="edit" onClick={()=>{noEditPassword ? setNoEditPassword(false) : setNoEditPassword(true)}}>
-        <KeyIcon/>
-      </IconButton>
+        <IconButton
+          aria-label="edit"
+          onClick={() => {
+            noEdit ? setNoEdit(false) : setNoEdit(true);
+          }}
+        >
+          <EditIcon />
+        </IconButton>
+        <IconButton
+          aria-label="edit"
+          onClick={() => {
+            noEditPassword ? setNoEditPassword(false) : setNoEditPassword(true);
+          }}
+        >
+          <KeyIcon />
+        </IconButton>
       </Typography>
 
       <FormikProvider value={formik}>
@@ -145,7 +154,6 @@ export default function ProfileForm() {
 
             <Stack
               spacing={3}
-              
               component={motion.div}
               initial={{ opacity: 0, y: 40 }}
               animate={animate}
@@ -162,7 +170,7 @@ export default function ProfileForm() {
               />
 
               <TextField
-              disabled={noEditPassword}
+                disabled={noEditPassword}
                 type={showPassword ? "text" : "password"}
                 label="Current Password"
                 {...getFieldProps("password")}
@@ -187,7 +195,7 @@ export default function ProfileForm() {
               />
 
               <TextField
-              disabled={noEditPassword}
+                disabled={noEditPassword}
                 type={showNPassword ? "text" : "password"}
                 label="New Password"
                 {...getFieldProps("npassword")}
@@ -221,7 +229,9 @@ export default function ProfileForm() {
               spacing={2}
             >
               <TextField
-              disabled={noEdit}
+                disabled={noEdit}
+                multiline
+                rows={4}
                 label="Address"
                 fullWidth
                 {...getFieldProps("contact")}
@@ -230,12 +240,12 @@ export default function ProfileForm() {
               />
             </Stack>
             <Box
-                            component={ motion.div }
-                            initial={ { opacity : 0 , y : 20 } }
-                            animate={ animate }
-                        >
-                            <GreenButton loading={ isSubmitting } text="Update Profile"/>
-                        </Box>
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              animate={animate}
+            >
+              <GreenButton loading={isSubmitting} text="Update Profile" />
+            </Box>
           </Stack>
         </Form>
       </FormikProvider>
