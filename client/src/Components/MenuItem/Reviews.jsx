@@ -10,6 +10,7 @@ import StarRating from "../Rating/StarRating";
 
 function Reviews ( props ) {
     const review = props.review;
+    console.log(review)
     return (
         <>
             <Box sx={{
@@ -21,7 +22,7 @@ function Reviews ( props ) {
             <IconButton sx={ { p: 0 } }>
                 <Avatar alt={review.name} src="/static/images/avatar/2.jpg"/>
             </IconButton>
-               <StarRating rating={review.rating.$numberDecimal}/>
+               <StarRating rating={review.rating}/>
             </Box>
             <Typography>
                 {review.comment}
