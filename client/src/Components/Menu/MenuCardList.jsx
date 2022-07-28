@@ -29,9 +29,8 @@ import { useDispatch , useSelector } from "react-redux";
                 <Grid justifyContent="center" container spacing={ 4 }>
                     {foodItems.slice((currentPagination - 1) * 6, currentPagination * 6).map((item,index)=>{
                         return (
-                            <Grid item key={index}>
-
-                         <MenuCard item={item}/>
+                            <Grid item key={index} xs={12} sm={6} lg={4} xl={3}>
+                            <MenuCard item={item}/>
                       </Grid>)}
                     )}
                 </Grid>
