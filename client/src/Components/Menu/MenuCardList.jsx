@@ -23,14 +23,14 @@ import { useDispatch , useSelector } from "react-redux";
         <>{
             foodItems && filter == '' && search == '' && filteredItems.length == 0?
             <Box sx={ {
-                minHeight: '100vh',
-                width: '100%'
+                minHeight: '80vh'
             } }>
                 <Grid justifyContent="center" container spacing={ 4 }>
                     {foodItems.slice((currentPagination - 1) * 6, currentPagination * 6).map((item,index)=>{
                         return (
-                            <Grid item key={index} xs={12} sm={6} lg={4} xl={3}>
-                            <MenuCard item={item}/>
+                            <Grid xs={12} sm={6} lg={4} xl={3} item key={index}>
+
+                         <MenuCard item={item}/>
                       </Grid>)}
                     )}
                 </Grid>
@@ -38,10 +38,10 @@ import { useDispatch , useSelector } from "react-redux";
             <Box sx={ {
                 minHeight: '80vh'
             } }>
-                <Grid container spacing={ 4 } sx={{ minHeight: '80vh' }}>
+                <Grid justifyContent="center" container spacing={ 4 } sx={{ minHeight: '80vh' }}>
                     {filteredItems.slice((currentPagination - 1) * 6, currentPagination * 6).map((item,index)=>{
                         return (
-                            <Grid item key={index}>
+                            <Grid xs={12} sm={6} lg={4} xl={3} item key={index}>
 
                          <MenuCard item={item}/>
                       </Grid>)}

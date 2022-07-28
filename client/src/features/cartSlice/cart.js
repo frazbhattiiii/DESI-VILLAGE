@@ -11,6 +11,8 @@ const initialState = {
     filter: '',
     search: '',
     totalItems: 0,
+    categoriesCount: {
+    },
     currentPagination: 1,
     cartItems: localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [],
     menuItems:{},
@@ -80,6 +82,18 @@ const cartSlice = createSlice ( {
                                             state.totalItems = state.filteredItems.length
                                             state.currentPagination = 1
                                         },
+                                        setCategories: (state, action) => {
+                                            let categoriesCount = {}
+                                            if (Object.keys(current(state.menuItems)).length != 0) 
+                                                state.menuItems.items.map(
+                                                    item => {
+                                                        if(categoriesCount[item.category])
+                                                            categoriesCount[item.category]++
+                                                        else categoriesCount[item.category]=1
+                                                    }
+                                                )
+                                            state.categoriesCount = categoriesCount        
+                                        },
                                         setTags: (state, action) => {
                                             const { offers } = action.payload
                                             let prevItems = current(state.menuItems).items
@@ -100,6 +114,11 @@ const cartSlice = createSlice ( {
                                             }
                                             state.totalItems = state.filteredItems.length
                                             state.currentPagination = 1
+                                        },
+                                        resetFilters: (state, action) => {
+                                            state.filter = ''
+                                            state.search = ''
+                                            state.filteredItems = []
                                         },
                                         setCurrentPagination: (state, action) => {
                                             const { pagination } = action.payload
@@ -180,5 +199,5 @@ const cartSlice = createSlice ( {
 
                                     } ,
                                 } )
-export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags, setCurrentPagination } = cartSlice.actions;
+export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags, setCurrentPagination, resetFilters, setCategories } = cartSlice.actions;
 export default cartSlice.reducer;
