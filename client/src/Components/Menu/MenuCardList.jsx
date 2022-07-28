@@ -23,10 +23,10 @@ import { useDispatch , useSelector } from "react-redux";
         <>{
             foodItems && filter == '' && search == '' && filteredItems.length == 0?
             <Box sx={ {
-                margin : '2rem 0 2rem 8rem' ,
-
+                minHeight: '100vh',
+                width: '100%'
             } }>
-                <Grid container spacing={ 4 }>
+                <Grid justifyContent="center" container spacing={ 4 }>
                     {foodItems.slice((currentPagination - 1) * 6, currentPagination * 6).map((item,index)=>{
                         return (
                             <Grid item key={index}>
@@ -37,8 +37,7 @@ import { useDispatch , useSelector } from "react-redux";
                 </Grid>
             </Box>:
             <Box sx={ {
-                margin : '2rem 0 2rem 8rem',
-
+                minHeight: '80vh'
             } }>
                 <Grid container spacing={ 4 } sx={{ minHeight: '80vh' }}>
                     {filteredItems.slice((currentPagination - 1) * 6, currentPagination * 6).map((item,index)=>{
@@ -56,6 +55,7 @@ import { useDispatch , useSelector } from "react-redux";
                 display:'flex',
                 justifyContent:"center",
                 alignItems:'center',
+                padding:'1rem 0'
             }}>
                 <Pagination onChange={(e, pagination) => dispatch(setCurrentPagination({ pagination }))} count={Math.ceil(totalItems / 6.0)} color='secondary'/>
             </Box>

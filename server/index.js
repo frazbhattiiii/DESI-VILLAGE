@@ -29,6 +29,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
 const reviewRoutes = require('./Routes/reviewsRoute')
+const emailRoutes = require('./Routes/emailRoutes');
 
 connectDB();
 
@@ -44,7 +45,7 @@ conn.once("open", () => {
 });
 
 app.use("/auth", authRoutes);
-// app.use('/cart', cartRoutes);
+app.use('/email', emailRoutes);
 app.use("/food", foodItemRoutes);
 app.use("/vendor", vendorRoutes);
 app.use("/review", reviewRoutes);
