@@ -1,11 +1,18 @@
 import React from 'react'
 import { Paper, Box, Typography } from '@mui/material'
 import { styled } from '@mui/system'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { setFilteredItems } from '../../features/cartSlice/cart'
 
 const Category = () => {
+    const dispatch = useDispatch()
+    const { categoriesCount, search } = useSelector(state => state.cart)
     const FilterTitle = styled(Typography)({
         fontWeight: "bold",
-        fontSize: '15px'
+        fontSize: '15px',
+        fontStyle: 'italic',
+        cursor: 'pointer'
     })
     const FilterContainer = styled(Box)({
         display: 'flex',
@@ -14,29 +21,30 @@ const Category = () => {
         alignItems: 'center',
         marginTop: '15px'
     })
+    const categoryFilterHandler = (category) => {
+        console.log(category)
+        dispatch(setFilteredItems({ filter: category, search: '' }))
+    }
 
   return (
     <Paper sx={{ padding: '20px', backgroundColor: '#F6F7F8' }} >
         <Box>
-            <FilterTitle sx={{
-                marginBottom: '20px'
-            }}>Filters</FilterTitle>
-            <FilterContainer>
-                <FilterTitle>Name</FilterTitle>
-                <Typography>0</Typography>
+            <FilterContainer key='All'>
+                <FilterTitle onClick={() => categoryFilterHandler('')} sx={{
+                fontStyle: 'normal',
+                    cursor:'pointer'
+            }}>All</FilterTitle>
             </FilterContainer>
-            <FilterContainer>
-                <FilterTitle>Name</FilterTitle>
-                <Typography>0</Typography>
-            </FilterContainer>
-            <FilterContainer>
-                <FilterTitle>Name</FilterTitle>
-                <Typography>0</Typography>
-            </FilterContainer>
-            <FilterContainer>
-                <FilterTitle>Name</FilterTitle>
-                <Typography>0</Typography>
-            </FilterContainer>
+            {
+                Object.keys(categoriesCount).map(
+                    category => (
+                        <FilterContainer key={category}>
+                            <FilterTitle onClick={() => categoryFilterHandler(category)}>{category}</FilterTitle>
+                            <Typography>{categoriesCount[category]}</Typography>
+                        </FilterContainer>
+                    )
+                )
+            }
         </Box>
     </Paper>
   )
