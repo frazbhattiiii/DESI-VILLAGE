@@ -92,6 +92,7 @@ export default function SideBar (props) {
                         to={cartLength > 0 ? '/cart' : '/'}
                         sx={ {
                             backgroundColor : "#1ac073" ,
+                            color:"white",
                         } }
 
                         startIcon={ <ShoppingCartCheckoutIcon/> }

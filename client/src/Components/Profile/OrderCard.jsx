@@ -13,6 +13,7 @@ function OrderCard() {
           height: "90px",
           borderColor: "#ccf0d5",
           display: "flex",
+            flexWrap: "wrap",
         }}
       >
         <Grid sx={{ display: "flex" }}>

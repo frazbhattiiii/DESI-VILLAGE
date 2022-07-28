@@ -1,9 +1,11 @@
 import React from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { styled } from '@mui/system'
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  const FooterButton = styled(Button)({
+  const navigate = useNavigate();
+    const FooterButton = styled(Button)({
     backgroundColor: '#1AC073',
     '&:hover': {
       backgroundColor: '#1ACC00'
@@ -36,7 +38,7 @@ const Footer = () => {
                   <br/>
                   and start your career right away.
               </Typography>
-              <FooterButton variant='contained'>Become a Seller</FooterButton>
+              <FooterButton variant='contained' onClick={()=>navigate('/vendor')}>Become a Seller</FooterButton>
           </Box>
           <Box sx={{
             marginTop: {

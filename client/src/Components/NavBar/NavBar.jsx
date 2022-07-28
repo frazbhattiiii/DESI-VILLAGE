@@ -23,7 +23,7 @@ import { getCart } from "../../features/cartSlice/cartActions";
 
 const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
-const settings = [ 'Profile', 'Dashboard', 'Logout' ];
+const settings = [ 'Profile', 'Orders', 'Logout' ];
 
 const NavBar = () => {
     const [ anchorElNav, setAnchorElNav ] = useState ( null )
