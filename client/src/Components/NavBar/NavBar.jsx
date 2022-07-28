@@ -46,8 +46,10 @@ const NavBar = () => {
     }
     const handleCloseNavMenu = ( page ) => {
         setAnchorElNav ( null );
+        navigate ( `/${ page }` );
     };
     const handleCloseUserMenu = () => {
+        console.log('nav2')
         setAnchorElUser ( null );
     };
 
@@ -110,7 +112,7 @@ const NavBar = () => {
                             } }
                         >
                             { pages.map ( ( page ) => (
-                                <MenuItem key={ page } onClick={ handleCloseNavMenu }>
+                                <MenuItem key={ page } onClick={()=> handleCloseNavMenu(page.toLowerCase()) }>
                                     <Typography textAlign="center">{ page }</Typography>
                                 </MenuItem>
                             ) ) }

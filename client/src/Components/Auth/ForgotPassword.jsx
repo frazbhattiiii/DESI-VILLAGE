@@ -68,7 +68,7 @@ const ForgotPassword = () => {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <ToastBox />
-        {/* {isAuth() ? backToSignUP() : null} */}
+
         <Grid>
           <Grid item xs={8}>
             <Stack

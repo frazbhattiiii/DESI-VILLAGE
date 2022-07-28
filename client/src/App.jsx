@@ -15,20 +15,20 @@ import Dashboard from "./Pages/Dashboard";
 import Logout from "./Pages/Logout";
 import NoPage from "./Pages/NoPage";
 import CartPage from "./Pages/CartPage";
+import Contact from "./Pages/Contact";
 import Item from "./Components/MenuItem/Item";
 import Loader from "./Components/Loader/Loader";
 import Profile from './Pages/Profile';
-
-
+import {Main} from './Pages/vendor-routes/main/main.component'
+import About from "./Pages/About";
+import Menu from './Pages/Menu';
 function App () {
 
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={ <Dashboard/> }>
-
-                </Route>
-                <Route path="/home" element={ <Dashboard/> }/>
+                <Route path="/vendor/*" element={ <Main/> }/>
+                <Route path="/" element={ <Dashboard/> }/>
                 <Route path="/signup" element={ <Signup/> }/>
                 <Route path="/users/activate/:token" element={ <Activation/> }/>
                 <Route path="/login" element={ <Login/> }/>
@@ -36,6 +36,9 @@ function App () {
                 <Route path="/users/password/reset/:token" element={ <Reset/> }/>
                 <Route path='/logout' element={ <Logout/> }/>
                 <Route path='/cart' element={ <CartPage/> }/>
+                <Route path='/contact' element={ <Contact/> }/>
+                <Route path='/about' element={ <About/> }/>
+                <Route path='/menu' element={ <Menu/> }/>
                 <Route path = 'item/detail/:id' element = {<Item/>}/>
                 <Route path="*" element={ <NoPage/> }/>
                 <Route path="/loading" element={ <Loader/> }/>

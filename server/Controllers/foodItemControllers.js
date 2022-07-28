@@ -11,6 +11,8 @@ exports.addFoodItem = async (req, res) => {
         speciality,
         availability,
         delivery,
+        freeDelivery,
+        discount,
         category,
         sizes,
         timeForDelivery,
@@ -44,6 +46,8 @@ exports.addFoodItem = async (req, res) => {
             info,
             description,
             speciality,
+            freeDelivery,
+            discount,
             availability,
             delivery,
             imageURL,
@@ -53,6 +57,7 @@ exports.addFoodItem = async (req, res) => {
         })
         item.save((err, data) => {
             if (err) {
+                console.log(err)
                 console.log("Error Saving Food Item ", errorHandler(err))
                 res.status(400).json({
                     message: `Error Saving Food Item ${errorHandler(err)}`
