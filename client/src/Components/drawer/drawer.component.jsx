@@ -9,9 +9,8 @@ export const Drawer = () => {
     // const { user } = useSelector (
     //     ( state ) => state.user
     // );
-    // console.log(user)
     let user = null
-    isAuth() ? user = localStorage.getItem("user") : user = null
+    isAuth() ? user = JSON.parse(localStorage.getItem("user")) : user = null
     return (
         <Container>
             <Title>TBayEat</Title>
@@ -30,9 +29,9 @@ export const Drawer = () => {
                 </LinkContainer>
             </Links>
             <DrawerFooter>
-                <SecondaryHeading>Moez Ahmad</SecondaryHeading>
+                <SecondaryHeading>{user.name}</SecondaryHeading>
                 <br />
-                <TertiaryHeading>Vendor</TertiaryHeading>
+                <TertiaryHeading>{user.role}</TertiaryHeading>
                 <LogOutImg>
                     <Logout />
                 </LogOutImg>

@@ -18,10 +18,11 @@ export const Title = styled.div`
         color: #1AC073;
 `
 export const LinkIcon = styled.div`
-    width: 15%;
+    width: 20%;
     height: 100%;
     svg{
         width: 100%;
+        height: 100%;
     }
 `
 export const Links = styled.nav`
@@ -64,6 +65,7 @@ export const LinkContainer = styled(NavLink)`
 
 export const Link = styled.span`
     flex: 1;
+    width: 10rem;
     padding-left: 1.3rem;
     font-size: 1.5rem;
 `
@@ -73,9 +75,12 @@ export const DrawerFooter = styled.div`
 `
 export const LogOutImg = styled.div`
     width: 20%;
+    height: 30%;
+    margin-left: 1rem;
     cursor: pointer;
     display: inline-block;
     svg{
         width: 100%;
+        height: 100%;
     }
 `

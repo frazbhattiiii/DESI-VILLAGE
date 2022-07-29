@@ -48,7 +48,7 @@ function App () {
                 <Route path="/loading" element={ <Loader/> }/>
                 <Route path='/profile' element ={<Profile/>}/>
                 <Route path='/orders' element ={<Profile/>}/>
-                <Route path='/vendor' element={<Main/>}/>
+                <Route path='/vendor/*' element={<Main/>}/>
             </Routes>
         </BrowserRouter>
     );
