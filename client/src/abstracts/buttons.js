@@ -28,3 +28,14 @@ export const EditButton = styled.button`
   padding: .5rem 0;
   width: 100%;
 `
+export const UploadButton = styled.button`
+  border: none;
+  cursor: pointer;
+  background: ${colorPrimary};
+  border-radius:.4rem;
+  color: ${colorWhite};
+  font-size: 1.4rem;
+  line-height: 2rem;
+  padding: .5rem 1.5rem;
+  width: fit-content;
+`

@@ -12,7 +12,8 @@ export const NameFormikComponent = ({ defaultFields, handleFormFiedlds }) => {
         name: yup.string("Enter your Name").required("Name is Required"),
         price: yup.string("Enter Price").required("Price is Required"),
         info: yup.string("Enter Info").required("Info is Required"),
-        description: yup.string("Enter Description").required("Description is Required")
+        description: yup.string("Enter Description").required("Description is Required"),
+        speciality: yup.string("Enter Speciality").required("Speciality is Required")
     })
     const formik = useFormik({
         initialValues: defaultFields,
@@ -57,6 +58,29 @@ export const NameFormikComponent = ({ defaultFields, handleFormFiedlds }) => {
                 onChange={formik.handleChange}
                 error={formik.touched.description && Boolean(formik.errors.description)}
                 helperText={formik.touched.description && formik.errors.description} />
+            <SecondaryHeading>Speciality</SecondaryHeading>
+            <TextField
+                fullWidth
+                id="speciality"
+                name="speciality"
+                label="Speciality"
+                variant="outlined"
+                value={formik.values.speciality}
+                onChange={formik.handleChange}
+                error={formik.touched.speciality && Boolean(formik.errors.speciality)}
+                helperText={formik.touched.speciality && formik.errors.speciality} />
+            <SecondaryHeading>Time of Delivery</SecondaryHeading>
+            <TextField
+                fullWidth
+                id="delivery"
+                name="timeForDelivery"
+                label="Delivery Time"
+                variant="outlined"
+                type={`number`}
+                value={formik.values.timeForDelivery}
+                onChange={formik.handleChange}
+                error={formik.touched.timeForDelivery && Boolean(formik.errors.timeForDelivery)}
+                helperText={formik.touched.timeForDelivery && formik.errors.timeForDelivery} />
             <SecondaryHeading>Price</SecondaryHeading>
             <TextField
                 fullWidth
