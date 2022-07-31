@@ -1,41 +1,41 @@
-import styled from 'styled-components';
-import { colorPrimary, colorSecondary, colorWhite } from './variables';
+import styled from "styled-components";
+import { colorPrimary, colorSecondary, colorWhite } from "./variables";
 
 export const BaseButton = styled.button`
-  padding: 1.5rem 2rem;
+  padding: 0.93rem 1.25rem;
   border: none;
   cursor: pointer;
   text-align: center;
-`
+`;
 export const SearchButton = styled.button`
   border: none;
   cursor: pointer;
-  background: #F3BA00;
-  border-radius: 0px .4rem .4rem 0px;
-  color: #FFFFFF;
-  font-size: 1.2rem;
-  line-height: 2rem;
-  padding: .5rem 1.5rem;
-`
+  background: #f3ba00;
+  border-radius: 0px 0.25rem 0.25rem 0px;
+  color: #ffffff;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  padding: 0.3rem 0.93rem;
+`;
 export const EditButton = styled.button`
   border: none;
   cursor: pointer;
   background-color: ${colorPrimary};
-  border-radius:.4rem;
+  border-radius: 0.25rem;
   color: ${colorWhite};
-  font-size: 1.2rem;
-  line-height: 2rem;
-  padding: .5rem 0;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  padding: 0.3rem 0;
   width: 100%;
-`
+`;
 export const UploadButton = styled.button`
   border: none;
   cursor: pointer;
   background: ${colorPrimary};
-  border-radius:.4rem;
+  border-radius: 0.25rem;
   color: ${colorWhite};
-  font-size: 1.4rem;
-  line-height: 2rem;
-  padding: .5rem 1.5rem;
+  font-size: 0.87rem;
+  line-height: 1.25rem;
+  padding: 0.3rem 0.93rem;
   width: fit-content;
-`
+`;
