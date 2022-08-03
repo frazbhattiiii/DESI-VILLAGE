@@ -30,6 +30,7 @@ const foodItemRoutes = require('./Routes/foodItemRoutes')
 const vendorRoutes = require('./Routes/vendorRoutes')
 const reviewRoutes = require('./Routes/reviewsRoute')
 const emailRoutes = require('./Routes/emailRoutes');
+const profileRoutes = require('./Routes/profileRoutes');
 
 connectDB();
 
@@ -50,6 +51,7 @@ app.use("/food", foodItemRoutes);
 app.use("/vendor", vendorRoutes);
 app.use("/review", reviewRoutes);
 app.use("/cart", orderRoutes);
+app.use("/profile", profileRoutes);
 // General Route for Getting Images
 // Stored in MonogoDB 
 app.get("/images/:filename", async (req, res) => {

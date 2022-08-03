@@ -24,11 +24,11 @@ function OrderHistory() {
       <Card
         variant="outlined"
         sx={{ maxWidth: {
-          xs: '300px',
-          sm: '400px',
-          md: '500px',
-          lg: '650px',
-          xl: '700px',
+          xs: '53rem',
+          sm: '54rem',
+          md: '55rem',
+          lg: '56rem',
+          xl: '57rem',
         }, borderColor: "#ccf0d5", cursor: "pointer" }}
       >
         <Grid sx={{ display: "flex", justifyContent: "center", gap: 5.0, flexWrap: "wrap" }}>

@@ -9,8 +9,8 @@ function OrderCard() {
       <Card
         variant="outlined"
         sx={{
-          maxWidth: "250px",
-          height: "90px",
+          maxWidth: "20rem",
+          height: "8rem",
           borderColor: "#ccf0d5",
           display: "flex",
             flexWrap: "wrap",

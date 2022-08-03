@@ -127,3 +127,32 @@ async ( { idToken } , { rejectWithValue } ) => {
 
 }
 )
+
+
+//updating the profile of user
+export const updateProfile = createAsyncThunk (
+    // action type string
+    'user/updateProfile' ,
+    // callback function
+    async ( { userId, name, contact, address, password, newPassword} , { rejectWithValue } ) => {
+        try {
+
+    // configure header's Content-Type as JSON
+    // make request to backend
+            console.log(userId, name, contact, address, password, newPassword)
+            const response = await axios.post ( `${ process.env.REACT_APP_API_URL }/profile/user` , {
+                userId:userId, newName:name, newContact:contact, newAddress:address, password:password, newPassword:newPassword
+            } )
+            return response.data;
+    
+        } catch ( error ) {
+    // return custom error message from API if any
+            if ( error.response && error.response.data.message ) {
+                return rejectWithValue ( error.response.data.message )
+            } else {
+                return rejectWithValue ( error.message )
+            }
+        }
+    
+    }
+    )

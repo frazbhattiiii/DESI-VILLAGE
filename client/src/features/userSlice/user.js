@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loginUser , registerUser , activateUser , googleLogin } from './userActions'
+import { loginUser , registerUser , activateUser , googleLogin, updateProfile } from './userActions'
 import { removeCookie , removeLocalStorage } from "../../utils/auth";
 
 const initialState = {
@@ -89,6 +89,21 @@ const userSlice = createSlice ( {
 
                                         } ,
                                         [ activateUser.rejected ] : ( state , { payload } ) => {
+                                            state.loading = false
+                                            state.error = payload
+                                        } ,
+
+                                        //updating user profile
+                                        [ updateProfile.pending ] : ( state ) => {
+                                            state.loading = true
+                                            state.error = null
+                                        } ,
+                                        [ updateProfile.fulfilled ] : ( state , { payload } ) => {
+                                            state.loading = false
+                                            state.active = true
+
+                                        } ,
+                                        [ updateProfile.rejected ] : ( state , { payload } ) => {
                                             state.loading = false
                                             state.error = payload
                                         } ,

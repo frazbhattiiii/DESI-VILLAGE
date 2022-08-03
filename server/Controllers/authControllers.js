@@ -149,7 +149,7 @@ exports.loginController = async (req, res) => {
           expiresIn: "7d",
         }
       );
-      const { _id, name, email, role } = user;
+      const { _id, name, email, role, contact, address } = user;
 
       return res.status(200).json({
         token,
@@ -158,6 +158,8 @@ exports.loginController = async (req, res) => {
           name,
           email,
           role,
+          contact,
+          address
         },
       });
     } else {
