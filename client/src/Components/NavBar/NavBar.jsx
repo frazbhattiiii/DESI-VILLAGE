@@ -26,7 +26,7 @@ const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
 const settings = [ 'Profile', 'Orders', 'Logout' ];
 const user = localStorage.getItem('user')
-const userId = JSON.parse ( user )._id
+const userId = JSON.parse ( user )?JSON.parse(user)._id:null;
 
 const NavBar = () => {
     const [ anchorElNav, setAnchorElNav ] = useState ( null )

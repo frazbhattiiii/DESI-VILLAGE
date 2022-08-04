@@ -5,7 +5,7 @@ import Card from "@mui/joy/Card";
 
 function OrderCard(props) {
   let cartItems = props.cartItems;
-  // console.log(cartItems[0].itemName);
+  console.log(cartItems);
   return (
     <>
     {cartItems.map((item, index) => (
@@ -23,7 +23,7 @@ function OrderCard(props) {
           <Grid>
             <Box
               component="img"
-              src="./images/pizza.png"
+              src={`${process.env.REACT_APP_API_URL}/images/${item.itemImage}`}
               alt="Chef Image"
               sx={{
                 width: "5rem",
@@ -52,7 +52,7 @@ function OrderCard(props) {
                 top: "0px",
               }}
             >
-              Beef patties, iceberg lettuce, tomato, mozzarella
+              {item.itemSize}
             </Typography>
 
             <Typography

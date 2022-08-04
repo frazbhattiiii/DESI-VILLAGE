@@ -13,7 +13,7 @@ const Footer = () => {
   })
   return (
     <Box sx={{
-      padding: '40px 0',
+      padding: '4rem 0',
       display: 'flex',
       justifyContent: 'center'
     }}>
@@ -27,13 +27,13 @@ const Footer = () => {
         }}>
           <Box>
               <Typography sx={{
-                fontSize: '30px',
+                fontSize: '2rem',
                 fontStyle: 'italic',
                 fontWeight: 'bolds'
               }}>Do you want to become a seller?</Typography>
               <Typography sx={{
                 fontStyle: 'italic',
-                margin: '20px 0'
+                margin: '2rem 0'
               }}>Click this button to become a seller
                   <br/>
                   and start your career right away.
@@ -42,7 +42,7 @@ const Footer = () => {
           </Box>
           <Box sx={{
             marginTop: {
-              xs: '20px',
+              xs: '2rem',
               md: '0'
             }
           }}>

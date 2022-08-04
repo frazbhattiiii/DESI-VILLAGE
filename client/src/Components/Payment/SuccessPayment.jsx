@@ -1,11 +1,9 @@
 import React , { useEffect } from 'react';
 import orderConfirmation from './orderConfirmed.png';
-import { PlaceOrder } from "../../utils";
 import { useDispatch , useSelector } from "react-redux";
-import { isAuth } from "../../utils/auth";
-import { addOrder } from "../../features/cartSlice/cartActions";
 function SuccessPayment ( props ) {
   const {error}= useSelector(state => state.cart);
+    localStorage.setItem('cart', JSON.stringify([]));
 
     return (
                 <>
@@ -20,7 +18,7 @@ function SuccessPayment ( props ) {
                                         <h3 className="text-center">Thank you for your order!</h3>
                                         <img src={orderConfirmation} alt="orderConfirmation" className="img-fluid" width='350'/>
                                         <p className="text-center">You will receive shortly an email for confirmation</p>
-                                        <p className="text-center">You can also check your order status on the <a href="/orders">Orders</a> page.</p>
+                                        <p className="text-center">You can also check your order status on the <a href="/profile">Orders</a> page.</p>
                                     </div>
                                 </div>
                             </div>

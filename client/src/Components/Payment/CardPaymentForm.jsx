@@ -34,17 +34,8 @@ function CardPaymentForm ( props ) {
         });
         setTimeout(()=>{
             dispatch(changeStep(2));
-            if ( isAuth ) {
-
                 dispatch(addOrder({cartItems,cartTotal,data,userId}));
-                dispatch ( changeStep ( 2 ) );
                 alert('Your order is being placed...kindly wait');
-            }
-            else{
-                dispatch(addOrder({cartItems,cartTotal,data,userId}));
-                dispatch ( changeStep ( 2 ) );
-                alert('Your order is being placed...kindly wait');
-            }
         },3000);
 
     }
