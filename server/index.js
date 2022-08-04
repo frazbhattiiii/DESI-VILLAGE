@@ -51,7 +51,7 @@ app.use("/food", foodItemRoutes);
 app.use("/vendor", vendorRoutes);
 app.use("/review", reviewRoutes);
 app.use("/cart", orderRoutes);
-app.use("/profile", profileRoutes);
+app.use("/user", profileRoutes);
 // General Route for Getting Images
 // Stored in MonogoDB 
 app.get("/images/:filename", async (req, res) => {

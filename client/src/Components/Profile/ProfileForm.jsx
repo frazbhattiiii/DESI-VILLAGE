@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../../features/userSlice/userActions";
 import { useFormik, Form, FormikProvider } from "formik";
 import { useNavigate } from "react-router-dom";
+import ToastBox from '../Toast/ToastContainer';
+import { toast } from 'react-toastify';
 import {
   Stack,
   Box,
@@ -48,6 +50,7 @@ export default function ProfileForm() {
 
   const [noEdit, setNoEdit] = useState(true);
   const [noEditPassword, setNoEditPassword] = useState(true);
+  const [noEditButton, setNoEditButton] = useState(true);
 
   const ProfileSchema = Yup.object().shape({
     name: Yup.string()
@@ -94,6 +97,12 @@ export default function ProfileForm() {
       const newPassword = formik.values.npassword;
       const data = { userId, name, contact, address, password, newPassword };
       dispatch(updateProfile(data))
+      toast('Profiel Updated Successfully',{
+        autoClose: 2000,
+      })
+      setNoEditButton(true);
+      setNoEdit(true);
+      setNoEditPassword(true);
     },
   });
 
@@ -103,13 +112,15 @@ export default function ProfileForm() {
     if(noEdit){
       setNoEdit(false);
       setNoEditPassword(true);
+      setNoEditButton(false);
     }    
   }
 
   const editPassword = () => {
-    if(!noEdit) {
+    if(noEditPassword) {
       setNoEdit(true);
       setNoEditPassword(false);
+      setNoEditButton(false);
     }
   }
 
@@ -117,6 +128,7 @@ export default function ProfileForm() {
 
   return (
     <>
+    <ToastBox/>
       <Typography
         variant="h5"
         align="center"
@@ -281,7 +293,7 @@ export default function ProfileForm() {
               initial={{ opacity: 0, y: 20 }}
               animate={animate}
             >
-              <GreenButton loading={isSubmitting} text="Update Profile" />
+              <GreenButton disabled={noEditButton} loading={isSubmitting} text="Update Profile" />
             </Box>
           </Stack>
         </Form>

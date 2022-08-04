@@ -140,7 +140,7 @@ export const updateProfile = createAsyncThunk (
     // configure header's Content-Type as JSON
     // make request to backend
             console.log(userId, name, contact, address, password, newPassword)
-            const response = await axios.post ( `${ process.env.REACT_APP_API_URL }/profile/user` , {
+            const response = await axios.post ( `${ process.env.REACT_APP_API_URL }/user/profile` , {
                 userId:userId, newName:name, newContact:contact, newAddress:address, password:password, newPassword:newPassword
             } )
             return response.data;
