@@ -3,9 +3,12 @@ import Box from "@mui/joy/Box";
 import { Typography, Grid } from "@mui/material";
 import Card from "@mui/joy/Card";
 
-function OrderCard() {
+function OrderCard(props) {
+  let cartItems = props.cartItems;
+  // console.log(cartItems[0].itemName);
   return (
     <>
+    {cartItems.map((item, index) => (
       <Card
         variant="outlined"
         sx={{
@@ -37,7 +40,7 @@ function OrderCard() {
               fontSize="md"
               sx={{ marginLeft: "0.5rem" }}
             >
-              Pizza
+              {item.itemName}
             </Typography>
 
             <Typography
@@ -58,7 +61,7 @@ function OrderCard() {
               fontSize="md"
               sx={{ marginLeft: "0.5rem" }}
             >
-              $10
+              ${item.itemPrice}
               <Typography
                 variant="p"
                 sx={{
@@ -69,12 +72,13 @@ function OrderCard() {
                   float: 'right'
                 }}
               >
-                Quantity: 2
+                Quantity: {item.itemQuantity}
               </Typography>
             </Typography>
           </Grid>
         </Grid>
       </Card>
+      ))}
     </>
   );
 }

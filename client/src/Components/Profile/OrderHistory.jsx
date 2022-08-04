@@ -1,15 +1,12 @@
 import React from "react";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
-import { Button, Typography, Grid, Divider } from "@mui/material";
+import { Button, Typography, Grid } from "@mui/material";
 import Card from "@mui/joy/Card";
-import StarIcon from "@mui/icons-material/Star";
 import OrderCard from "./OrderCard";
-import {history} from '../../features/historySlice/history'
-import { useDispatch , useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 function OrderHistory() {
-  // const {totalItems}=  useSelector(state => state.totalItems);
-  // console.log(totalItems)
+  const { totalItems } = useSelector((state) => state.order);
   return (
     <>
       <Typography
@@ -24,50 +21,100 @@ function OrderHistory() {
       >
         Order History
       </Typography>
+      {totalItems.map((item, index) => (
+        <Card
+          variant="outlined"
+          sx={{
+            maxWidth: {
+              xs: "53rem",
+              sm: "54rem",
+              md: "55rem",
+              lg: "56rem",
+              xl: "57rem",
+            },
+            borderColor: "#ccf0d5",
+            cursor: "pointer",
+            marginBottom: "1rem",
+          }}
+        >
+          {/* <Grid sx={{
+              display: "flex",
+              
+              justifyContent: "left",
+              gap: 30.0,
+            }}>
+          <Typography
+              variant="h7"
+              sx={{
+                fontWeight: "bold",
+                fontFamily: "Arial",
+                color: "#1ac073",
+                float: "left",
+              }}
+            >
+              Order#: 1
+            </Typography>
 
-      <Card
-        variant="outlined"
-        sx={{ maxWidth: {
-          xs: '53rem',
-          sm: '54rem',
-          md: '55rem',
-          lg: '56rem',
-          xl: '57rem',
-        }, borderColor: "#ccf0d5", cursor: "pointer" }}
-      >
-        <Grid sx={{ display: "flex", justifyContent: "center", gap: 5.0, flexWrap: "wrap" }}>
-          <OrderCard />
+          <Typography
+              variant="h7"
+              sx={{
+                fontWeight: "bold",
+                fontFamily: "Arial",
+                color: "#808080",
+                float: "left",
+              }}
+            >
+              Date: {item.createdAt}
+            </Typography>
+          </Grid> */}
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 5.0,
+              flexWrap: "wrap",
+            }}
+          >
+            <OrderCard cartItems={item.cartItems} />
           </Grid>
-        <Grid sx={{display: 'flex', marginTop: '0.5rem', justifyContent:'right'}}>
-        
-        <Typography
-        variant="h7"
-        align="center"
-        sx={{
-          fontWeight: "bold",
-          mx: 5,
-          fontFamily: "Arial",
-          color: "black",
-          float: 'right'
-        }}
-      >
-        $40
-      </Typography>
-      <Typography
-        variant="h7"
-        align="center"
-        sx={{
-          fontWeight: "bold",
-          mx: 5,
-          fontFamily: "Arial",
-          color: "#1ac073",
-          float: 'right'
-        }}
-      >
-        Completed
-      </Typography>
-      </Grid>
-      </Card>
+          <Grid
+            sx={{
+              display: "flex",
+              marginTop: "0.5rem",
+              justifyContent: "right",
+            }}
+          >
+
+
+            <Typography
+              variant="h7"
+              align="center"
+              sx={{
+                fontWeight: "bold",
+                mx: 5,
+                fontFamily: "Arial",
+                color: "black",
+                float: "right",
+              }}
+            >
+              ${item.cartTotal}
+            </Typography>
+            <Typography
+              variant="h7"
+              align="center"
+              sx={{
+                fontWeight: "bold",
+                mx: 5,
+                fontFamily: "Arial",
+                color: "#1ac073",
+                float: "right",
+              }}
+            >
+              {item.orderDelivered ? "Delivered" : "Pending"}
+            </Typography>
+          </Grid>
+        </Card>
+      ))}
     </>
   );
 }

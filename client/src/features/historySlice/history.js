@@ -9,7 +9,7 @@ const initialState = {
   loggedIn: true,
   loggedOut: false,
   error: null,
-  totalItems: 0,
+  totalItems: '',
   items: null,
 };
 
@@ -29,8 +29,7 @@ const historySlice = createSlice({
     } ,
     [ orderHistory.fulfilled ] : ( state , { payload } ) => {
         state.loading = false
-        state.items = payload
-        state.totalItems = payload.items.length
+        state.totalItems = payload
 
     } ,
     [ orderHistory.rejected ] : ( state , { payload } ) => {

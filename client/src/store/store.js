@@ -4,6 +4,7 @@ import cartReducer from '../features/cartSlice/cart';
 import cartItemReducer from '../features/cartSlice/cartItem'
 import paymentReducer from '../features/paymentSlice/Payment'
 import commonReducer from '../features/commonSlice';
+import orderReducer from '../features/historySlice/history';
 const store = configureStore({
     reducer: {
         user: userReducer,
@@ -11,6 +12,7 @@ const store = configureStore({
         cartItem:cartItemReducer,
         payment:paymentReducer,
         common:commonReducer,
+        order: orderReducer,
     }
 })
 export default store
