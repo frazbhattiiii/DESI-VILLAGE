@@ -51,8 +51,8 @@ export default function ProfileTabs() {
 
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box>
+    <Box sx={{ width: "100%",  }}>
+      <Box sx={{display: 'flex', justifyContent: 'center'}}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -60,17 +60,30 @@ export default function ProfileTabs() {
           TabIndicatorProps={{
             title: "indicator",
             //hidden: true,
-            sx: { backgroundColor: "gold", height: 4 } //width: "25% !important"
+            sx: { backgroundColor: "gold", height: 4,  } //width: "25% !important"
           }}
           sx={{
             "& button": { borderRadius: 2},
             "& button:hover": { backgroundColor: "gold", color: "white" },
             "& button:focus": { backgroundColor: "#1ac073", color: "white" },
-            "& button:active": { backgroundColor: "green", color: "white" }
+            "& button:active": { backgroundColor: "green", color: "white" },
+            
           }}
         >
-          <Tab sx={{ width: "100%" }} icon={<DeliveryDiningIcon />} label="Orders" {...a11yProps(0)} />
-          <Tab sx={{ width: "100%" }} icon={<PermIdentityIcon />} label="Profile" {...a11yProps(1)} />
+          <Tab  sx={{ width: {
+          xs: '10rem',
+          sm: '20rem',
+          md: '30rem',
+          lg: '400rem',
+          xl: '500rem',
+        } }}  icon={<DeliveryDiningIcon />} label="Orders" {...a11yProps(0)} />
+          <Tab  sx={{ width: {
+          xs: '10rem',
+          sm: '20rem',
+          md: '30rem',
+          lg: '40rem',
+          xl: '50rem',
+        } }}  icon={<PermIdentityIcon />} label="Profile" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel  value={value} index={0}>

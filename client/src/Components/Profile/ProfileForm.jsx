@@ -3,9 +3,11 @@ import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../features/userSlice/userActions";
+import { updateProfile } from "../../features/userSlice/userActions";
 import { useFormik, Form, FormikProvider } from "formik";
 import { useNavigate } from "react-router-dom";
+import ToastBox from '../Toast/ToastContainer';
+import { toast } from 'react-toastify';
 import {
   Stack,
   Box,
@@ -23,6 +25,7 @@ import { styled } from "@mui/system";
 import EditIcon from "@mui/icons-material/Edit";
 import KeyIcon from "@mui/icons-material/Key";
 
+
 const StyledButton = styled(Button);
 
 let easing = [0.6, -0.05, 0.01, 0.99];
@@ -36,6 +39,8 @@ const animate = {
   },
 };
 
+
+
 export default function ProfileForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -45,38 +50,85 @@ export default function ProfileForm() {
 
   const [noEdit, setNoEdit] = useState(true);
   const [noEditPassword, setNoEditPassword] = useState(true);
+  const [noEditButton, setNoEditButton] = useState(true);
 
   const ProfileSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("First name required"),
+      .required("Name required"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
     password: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Password is required"),
   });
+
+  let userEmail = ''
+  let userName = ''
+  let userAddress = ''
+  let userContact = ''
+  let userId = ''
+  if(localStorage.getItem('user'))
+  {
+       userEmail = JSON.parse(localStorage.getItem('user')).email;
+       userName = JSON.parse(localStorage.getItem('user')).name;
+       userAddress = JSON.parse(localStorage.getItem('user')).address;
+       userContact = JSON.parse(localStorage.getItem('user')).contact;
+       userId = JSON.parse(localStorage.getItem('user'))._id;
+  }
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
+      name: userName,
+      email: userEmail,
       password: "",
       npassword: "",
+      contact: userContact,
+      address: userAddress,
     },
     validationSchema: ProfileSchema,
     onSubmit: (e) => {
-      //  toast ( `⌚ Email is sending kindly wait...` );
+      const name = formik.values.name;
+      const contact = formik.values.contact;
+      const address = formik.values.address;
+      const password = formik.values.password;
+      const newPassword = formik.values.npassword;
+      const data = { userId, name, contact, address, password, newPassword };
+      dispatch(updateProfile(data))
+      toast('Profiel Updated Successfully',{
+        autoClose: 2000,
+      })
+      setNoEditButton(true);
+      setNoEdit(true);
+      setNoEditPassword(true);
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
+  const editProfile = () => {
+    if(noEdit){
+      setNoEdit(false);
+      setNoEditPassword(true);
+      setNoEditButton(false);
+    }    
+  }
+
+  const editPassword = () => {
+    if(noEditPassword) {
+      setNoEdit(true);
+      setNoEditPassword(false);
+      setNoEditButton(false);
+    }
+  }
+
+
+
   return (
     <>
+    <ToastBox/>
       <Typography
         variant="h5"
         align="center"
@@ -90,17 +142,13 @@ export default function ProfileForm() {
         Personal Infromation
         <IconButton
           aria-label="edit"
-          onClick={() => {
-            noEdit ? setNoEdit(false) : setNoEdit(true);
-          }}
+          onClick={editProfile}
         >
           <EditIcon />
         </IconButton>
         <IconButton
           aria-label="edit"
-          onClick={() => {
-            noEditPassword ? setNoEditPassword(false) : setNoEditPassword(true);
-          }}
+          onClick={editPassword}
         >
           <KeyIcon />
         </IconButton>
@@ -129,8 +177,8 @@ export default function ProfileForm() {
                 fullWidth
                 disabled={noEdit}
                 {...getFieldProps("name")}
-                error={Boolean(touched.firstName && errors.firstName)}
-                helperText={touched.firstName && errors.firstName}
+                error={Boolean(touched.name && errors.name)}
+                helperText={touched.name && errors.name}
               />
             </Stack>
 
@@ -146,9 +194,10 @@ export default function ProfileForm() {
                 label="Contact"
                 disabled={noEdit}
                 fullWidth
+                isNumericString
                 {...getFieldProps("contact")}
-                error={Boolean(touched.firstName && errors.firstName)}
-                helperText={touched.firstName && errors.firstName}
+                error={Boolean(touched.contact && errors.contact)}
+                helperText={touched.contact && errors.contact}
               />
             </Stack>
 
@@ -168,7 +217,7 @@ export default function ProfileForm() {
                 error={Boolean(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
               />
-
+                
               <TextField
                 disabled={noEditPassword}
                 type={showPassword ? "text" : "password"}
@@ -234,9 +283,9 @@ export default function ProfileForm() {
                 rows={4}
                 label="Address"
                 fullWidth
-                {...getFieldProps("contact")}
-                error={Boolean(touched.firstName && errors.firstName)}
-                helperText={touched.firstName && errors.firstName}
+                {...getFieldProps("address")}
+                error={Boolean(touched.address && errors.address)}
+                helperText={touched.address && errors.address}
               />
             </Stack>
             <Box
@@ -244,7 +293,7 @@ export default function ProfileForm() {
               initial={{ opacity: 0, y: 20 }}
               animate={animate}
             >
-              <GreenButton loading={isSubmitting} text="Update Profile" />
+              <GreenButton disabled={noEditButton} loading={isSubmitting} text={noEditPassword ? "Update Profile" : "Update Password"} />
             </Box>
           </Stack>
         </Form>

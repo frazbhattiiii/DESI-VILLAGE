@@ -20,10 +20,13 @@ import { useDispatch , useSelector } from "react-redux";
 import CartIcon from "../Cart/CartIcon";
 import { calculateTotal } from "../../features/cartSlice/cart";
 import { getCart } from "../../features/cartSlice/cartActions";
+import { orderHistory } from "../../features/historySlice/userActions";
 
 const pages = [ 'Home','Menu', 'About', 'Contact' ];
 const noLogin = [ 'Login', 'Signup' ];
 const settings = [ 'Profile', 'Orders', 'Logout' ];
+const user = localStorage.getItem('user')
+const userId = JSON.parse ( user )._id
 
 const NavBar = () => {
     const [ anchorElNav, setAnchorElNav ] = useState ( null )
@@ -32,8 +35,10 @@ const NavBar = () => {
     const dispatch = useDispatch();
     const {userInfo} = useSelector(state => state.user);
     let profileName='';
+    
     dispatch(calculateTotal());
     dispatch(getCart());
+    dispatch(orderHistory({userId}))
     const handleOpenNavMenu = ( event: React.MouseEvent<HTMLElement> ) => {
         setAnchorElNav ( event.currentTarget );
     };
@@ -41,10 +46,13 @@ const NavBar = () => {
         setAnchorElUser ( event.currentTarget );
     };
     const redirectTo = ( page ) => {
+        console.log("redirect")
         setAnchorElNav ( null );
         navigate ( `/${ page }` );
+        
     }
     const handleCloseNavMenu = ( page ) => {
+        console.log("close")
         setAnchorElNav ( null );
         navigate ( `/${ page }` );
     };

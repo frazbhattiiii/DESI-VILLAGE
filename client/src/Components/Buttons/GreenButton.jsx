@@ -15,13 +15,15 @@ const StyledButton = styled(Button)`
   }
 `;
 const GreenButton = (props) => {
-    console.log(props.loading)
+    // console.log(props.loading)
+    // console.log("Disabled: " , props.disabled)
   return (
     <StyledButton 
     fullWidth
     size="large"
     type="submit"
     variant="contained"
+    disabled={props.disabled}
     loading={props.loading.toString()}>
     {props.text}
     </StyledButton>
