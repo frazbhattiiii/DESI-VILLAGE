@@ -5,7 +5,11 @@ import { Button, Typography, Grid, Divider } from "@mui/material";
 import Card from "@mui/joy/Card";
 import StarIcon from "@mui/icons-material/Star";
 import OrderCard from "./OrderCard";
+import {history} from '../../features/historySlice/history'
+import { useDispatch , useSelector } from "react-redux";
 function OrderHistory() {
+  // const {totalItems}=  useSelector(state => state.totalItems);
+  // console.log(totalItems)
   return (
     <>
       <Typography
@@ -32,9 +36,6 @@ function OrderHistory() {
         }, borderColor: "#ccf0d5", cursor: "pointer" }}
       >
         <Grid sx={{ display: "flex", justifyContent: "center", gap: 5.0, flexWrap: "wrap" }}>
-          <OrderCard />
-          <OrderCard />
-          <OrderCard />
           <OrderCard />
           </Grid>
         <Grid sx={{display: 'flex', marginTop: '0.5rem', justifyContent:'right'}}>

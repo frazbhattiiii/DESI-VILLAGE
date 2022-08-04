@@ -293,7 +293,7 @@ export default function ProfileForm() {
               initial={{ opacity: 0, y: 20 }}
               animate={animate}
             >
-              <GreenButton disabled={noEditButton} loading={isSubmitting} text="Update Profile" />
+              <GreenButton disabled={noEditButton} loading={isSubmitting} text={noEditPassword ? "Update Profile" : "Update Password"} />
             </Box>
           </Stack>
         </Form>
