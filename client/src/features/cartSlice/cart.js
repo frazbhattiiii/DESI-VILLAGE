@@ -115,6 +115,15 @@ const cartSlice = createSlice ( {
                                             state.totalItems = state.filteredItems.length
                                             state.currentPagination = 1
                                         },
+                                        setPriceFilter : (state, action) => {
+                                            const { priceRange } = action.payload
+                                            const [min, max] = priceRange
+                                            let prevItems = current(state.menuItems).items
+                                            state.filteredItems = prevItems.filter(
+                                                item => item.price >= min && item.price <= max
+                                            )
+                                            state.totalItems = state.filteredItems.length
+                                        },
                                         resetFilters: (state, action) => {
                                             state.filter = ''
                                             state.search = ''
@@ -199,5 +208,5 @@ const cartSlice = createSlice ( {
 
                                     } ,
                                 } )
-export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags, setCurrentPagination, resetFilters, setCategories } = cartSlice.actions;
+export const { openCart,closeCart,calculateTotal,handleIncrement,handleDecrement,setCartItems, setFilteredItems, setTags, setCurrentPagination, resetFilters, setCategories, setPriceFilter } = cartSlice.actions;
 export default cartSlice.reducer;

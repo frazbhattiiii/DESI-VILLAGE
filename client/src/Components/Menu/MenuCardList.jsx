@@ -14,15 +14,21 @@ import { useDispatch , useSelector } from "react-redux";
         currentPagination
     } = useSelector ( state => state.cart );
     const dispatch = useDispatch ();
+    const menuRef = React.useRef()
     let foodItems = menuItems.items;
      useEffect ( () => {
          dispatch(getAllItems());
      } , [  ] );
 
+     useEffect(() => {
+        if (search != '')
+            menuRef.current.scrollIntoView({ behavior: 'smooth' })
+     }, [search])
+
      return (
         <>{
             foodItems && filter == '' && search == '' && filteredItems.length == 0?
-            <Box sx={ {
+            <Box ref={menuRef} sx={ {
                 minHeight: '80vh'
             } }>
                 <Grid justifyContent="center" container spacing={ 4 }>
@@ -35,7 +41,7 @@ import { useDispatch , useSelector } from "react-redux";
                     )}
                 </Grid>
             </Box>:
-            <Box sx={ {
+            <Box ref={menuRef} sx={ {
                 minHeight: '80vh'
             } }>
                 <Grid justifyContent="center" container spacing={ 4 } sx={{ minHeight: '80vh' }}>

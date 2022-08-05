@@ -13,7 +13,7 @@ const Filters = () => {
   return (
     <Box>
         <Category/>
-        {/* <Prices /> */}
+        <Prices />
     </Box>
   )
 }
