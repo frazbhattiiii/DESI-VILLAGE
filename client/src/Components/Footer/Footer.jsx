@@ -44,9 +44,22 @@ const Footer = () => {
             marginTop: {
               xs: '2rem',
               md: '0'
+            },
+            width: {
+              xs: '350px',
+              md: '450px'
+            },
+            height: {
+              xs: '300px',
+              md: '400px'
             }
           }}>
-              <img src="/images/footer.png" alt="" />
+              <img style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center'
+              }} src="/images/footer.png" alt="" />
           </Box>
       </Box>
     </Box>

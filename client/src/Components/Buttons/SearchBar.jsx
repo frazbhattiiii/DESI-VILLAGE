@@ -11,9 +11,10 @@ function SearchBar ( props ) {
     const dispatch = useDispatch()
     const [search, setSearch] = React.useState('')
     const { filter } = useSelector(state => state.cart)  
-    React.useEffect(() => {
+    const searchHandler = () => {
         dispatch(setFilteredItems({ search, filter }))
-    }, [search])
+        setSearch('')
+    }
     return (
         <>
             <TextField value={search} onChange={(e) => setSearch(e.target.value)} id="outlined-basic"  variant="filled" fullWidth  size = 'medium' InputProps={{
@@ -30,6 +31,7 @@ function SearchBar ( props ) {
                                 backgroundColor:"#1ac073",
                             }}
                             startIcon={<SearchIcon />}
+                            onClick={searchHandler}
                         >
                             Search
                         </Button>
