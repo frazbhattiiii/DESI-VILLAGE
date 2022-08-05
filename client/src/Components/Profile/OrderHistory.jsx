@@ -1,6 +1,4 @@
 import React from "react";
-import AspectRatio from "@mui/joy/AspectRatio";
-import Box from "@mui/joy/Box";
 import { Button , Typography , Grid } from "@mui/material";
 import Card from "@mui/joy/Card";
 import OrderCard from "./OrderCard";
