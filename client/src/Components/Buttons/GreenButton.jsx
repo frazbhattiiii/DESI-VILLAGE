@@ -17,7 +17,6 @@ const StyledButton = styled(Button)`
 const GreenButton = (props) => {
   return (
     <StyledButton 
-    fullWidth
     size="large"
     type="submit"
     variant="contained"
