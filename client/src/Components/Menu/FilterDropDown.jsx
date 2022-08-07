@@ -9,7 +9,7 @@ import { setFilteredItems } from '../../features/cartSlice/cart'
 export default function FilterDropDown() {
     const dispatch = useDispatch()
     const [filter, setFilter] = React.useState('');
-    const { search } = useSelector(state => state.cart)  
+    const { search } = useSelector(state => state.cart)
     const handleChange = (event) => {
         setFilter(event.target.value);
     };
@@ -28,7 +28,7 @@ export default function FilterDropDown() {
                 label="Age"
                 onChange={handleChange}
                 sx={{
-                    width:'10rem',
+                    width: '10rem',
                 }}
             >
                 <MenuItem value="">

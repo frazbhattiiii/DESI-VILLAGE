@@ -23,7 +23,6 @@ const commonSlice = createSlice ( {
                                             state.error = null
                                         } ,
                                         [ sendEmail.fulfilled ] : ( state , { payload } ) => {
-                                            console.log(payload)
                                             state.success = payload.message
                                         } ,
                                         [ sendEmail.rejected ] : ( state , { payload } ) => {

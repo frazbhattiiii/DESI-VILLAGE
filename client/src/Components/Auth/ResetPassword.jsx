@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import { Grid , Box , Button , Stack , TextField } from "@mui/material";
 import axios from "axios";
-import jwt from "jwt-decode";
 import { toast } from "react-toastify";
 import ToastBox from "../Toast/ToastContainer";
 import { useNavigate } from "react-router-dom";
@@ -31,13 +30,10 @@ const ResetPassword = () => {
                                                       show : true ,
                                                   } );
     let { token } = useParams ();
-    console.log ( token );
     let navigate = useNavigate ();
-    let { name } = jwt ( token );
-    const { show } = formData;
     useEffect ( () => {
         if ( token ) {
-            setFormData ( { ... formData , token } );
+            setFormData ( { ...formData , token } );
         }
     } , [] );
     const ResetSchema = Yup.object ().shape ( {
@@ -53,7 +49,6 @@ const ResetPassword = () => {
                                        // e.preventDefault();
                                        toast ( `🥹 Little Patience Require...`);
                                        const password = formik.values.password;
-                                       console.log ( password )
                                        axios
                                            .put ( `${ process.env.REACT_APP_API_URL }/auth/reset/password` , {
                                                newPassword : password ,
@@ -61,7 +56,7 @@ const ResetPassword = () => {
                                            } )
                                            .then ( ( res ) => {
                                                setFormData ( {
-                                                                 ... formData ,
+                                                                 ...formData ,
                                                                  password : "" ,
                                                                  show : false ,
                                                              } );
@@ -77,13 +72,12 @@ const ResetPassword = () => {
                                    }
                                } );
 
-    const { errors , touched , values , isSubmitting , handleSubmit , getFieldProps } =
+    const { errors , touched , isSubmitting , handleSubmit , getFieldProps } =
         formik;
     return (
         <>
             <Box sx={ { flexGrow : 1 } }>
                 <ToastBox/>
-                {/* {isAuth() ? backToSignUP() : null} */ }
                 <Grid>
                     <Grid item xs={ 8 }>
                         <Stack

@@ -1,6 +1,6 @@
 import { Form, FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/system";
 import ForwardToInboxIcon from "@mui/icons-material/ForwardToInbox";
 import { Grid, Box, Button, Stack, TextField } from "@mui/material";
@@ -26,7 +26,6 @@ const ForgotPassword = () => {
     show: true,
   });
   let navigate = useNavigate();
-  const { show } = formData;
 
   const ForgotSchema = Yup.object().shape({
     email: Yup.string()
@@ -39,7 +38,6 @@ const ForgotPassword = () => {
     },
     validationSchema: ForgotSchema,
     onSubmit: (e) => {
-      // e.preventDefault();
       toast(`🥹 Little Patience Require...`);
       const email = formik.values.email;
       axios
@@ -62,7 +60,7 @@ const ForgotPassword = () => {
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
+  const { errors, touched , isSubmitting, handleSubmit, getFieldProps } =
     formik;
   return (
     <>

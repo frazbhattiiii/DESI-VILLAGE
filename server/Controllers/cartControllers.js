@@ -1,9 +1,6 @@
-const { findByIdAndUpdate } = require('../Models/Cart');
 const Cart = require('../Models/Cart');
 exports.addToCart = async (req, res) => {
-    console.log(req.body)
     const { itemId, itemName, itemPrice, itemQuantity, category, itemSize, vendorId,itemImage } = req.body;
-    console.log(itemImage)
     const user = req.user._id
     // check if user exist
     const item = await Cart.findOne({ itemId });
@@ -25,7 +22,6 @@ exports.addToCart = async (req, res) => {
             await newItem.save()
             res.status(200).send("Item Added")
         } catch (error) {
-            console.log(error);
             res.status(402).send("Error")
         }
     }
@@ -43,7 +39,6 @@ exports.loadCart = async (req, res) => {
         const item = await Cart.find({ user });
         res.status(200).send(item)
     } catch (error) {
-        console.log(error)
         res.status(500)
     }
 }
@@ -55,7 +50,6 @@ exports.removeFromCart = async (req, res) => {
         await Cart.findByIdAndDelete(cartItemId);
         res.status(200).send("Item removed")
     } catch (error) {
-        console.log(error)
         res.status(500)
     }
 }
@@ -65,8 +59,6 @@ exports.increment = async (req, res) => {
     const { cartItemId } = req.body;
     const cartItem = await Cart.findOne({ cartItemId });
     const newQuantity = cartItem.itemQuantity += 1;
-    console.log(newQuantity)
-    console.log(cartItemId)
 
     try {
         await Cart.findByIdAndUpdate(cartItemId, { itemQuantity: newQuantity }, { useFindAndModify: false })
@@ -75,7 +67,6 @@ exports.increment = async (req, res) => {
     }
     catch (error) {
         res.status(500).send({ message: "Error in updating" })
-        console.log(error)
     }
 }
 
@@ -94,7 +85,6 @@ exports.decrement = async (req, res) => {
         }
         catch (error) {
             res.status(500).send({ message: "Error in updating" })
-            console.log(error)
         }
     }
     else{

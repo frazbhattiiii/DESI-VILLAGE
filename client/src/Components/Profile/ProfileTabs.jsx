@@ -59,8 +59,7 @@ export default function ProfileTabs() {
           aria-label="indicator example"
           TabIndicatorProps={{
             title: "indicator",
-            //hidden: true,
-            sx: { backgroundColor: "gold", height: 4,  } //width: "25% !important"
+            sx: { backgroundColor: "gold", height: 4,  } 
           }}
           sx={{
             "& button": { borderRadius: 2},

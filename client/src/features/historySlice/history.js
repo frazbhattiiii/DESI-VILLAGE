@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   orderHistory
 } from "./userActions";
-import { removeCookie, removeLocalStorage } from "../../utils/auth";
 
 const initialState = {
   loading: false,

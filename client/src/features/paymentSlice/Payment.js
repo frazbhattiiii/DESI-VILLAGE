@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-// import { cartAction } from './cartActions';
 
 const initialState = {
     step:0,

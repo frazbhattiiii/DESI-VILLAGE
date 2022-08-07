@@ -1,11 +1,13 @@
 import React from "react";
-import { Button , Typography , Grid } from "@mui/material";
+import { Typography , Grid } from "@mui/material";
 import Card from "@mui/joy/Card";
 import OrderCard from "./OrderCard";
 import { useSelector } from "react-redux";
+import EmptyCart from "../SideBar/emptyCart"
 
 function OrderHistory () {
     const { totalItems } = useSelector ( ( state ) => state.order );
+    if(totalItems.length !== 0) { 
     return (
         <>
             { totalItems.length > 0 ? (
@@ -85,9 +87,14 @@ function OrderHistory () {
                             </Grid>
                         </Card>
                     ) ) }
-                </> ): null }
+                </> ): null } 
         </>
     );
+
+}
+else{
+    return <><EmptyCart text='Place an order now and your orders will show here! Happy Eating 🍔'/></>
+}
 }
 
 export default OrderHistory;

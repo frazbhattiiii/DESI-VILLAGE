@@ -1,150 +1,72 @@
 const Order = require("../Models/Orders");
-const sendMail = require('./authControllers').sendMail;
+const sendMail = require("./authControllers").sendMail;
 exports.orderNow = async (req, res) => {
-  const {
-   cartItems,
-   cartTotal,
-   data,
-   userId,
-  } = req.body;
- const {name, email, address, payment, phone} = data;
- // Extracting Vendor IDs from the cart items.
- let vendorId = cartItems.map(item => item.vendorId)
- // Removing Duplciates
- vendorId = vendorId.filter((item, pos, self) => self.indexOf(item) == pos)
- console.log(vendorId)
- let newOrder;
- if(userId===''){
-      newOrder = new Order({
-                                  vendorId,
-                                  cartItems,
-                                  cartTotal,
-                                  name,
-                                  email,
-                                  address,
-                                  paymentMethod:payment,
-                                  phone,
-                              });
-     try {
-         await newOrder.save();
-         mailToVendor();
-         res.status(200).send({
-                                  message: "Order Placed Successfully",
-                                  orderId: newOrder._id,
-                              });
-     } catch (error) {
-         console.log(error);
-         res.status(400).send({
-                                  message: "Order Placing Failed",
-                              });
-     }
- }
- else {
-     newOrder = new Order ( {
-                                cartItems ,
-                                cartTotal ,
-                                name ,
-                                email ,
-                                address ,
-                                paymentMethod : payment ,
-                                phone ,
-                                userId ,
-                            } );
-     try {
-         await newOrder.save ();
-         mailToVendor ();
-         res.status ( 200 ).send ( {
-                                       message : "Order Placed Successfully" ,
-                                       orderId : newOrder._id ,
-                                   } );
-     } catch ( error ) {
-         console.log ( error );
-         res.status ( 400 ).send ( {
-                                       message : "Order Placing Failed" ,
-                                   } );
-     }
-
- }
-
+  const { cartItems, cartTotal, data, userId } = req.body;
+  const { name, email, address, payment, phone } = data;
+  // Extracting Vendor IDs from the cart items.
+  let vendorId = cartItems.map((item) => item.vendorId);
+  // Removing Duplciates
+  vendorId = vendorId.filter((item, pos, self) => self.indexOf(item) == pos);
+  let newOrder;
+  if (userId === "") {
+    newOrder = new Order({
+      vendorId,
+      cartItems,
+      cartTotal,
+      name,
+      email,
+      address,
+      paymentMethod: payment,
+      phone,
+    });
+    try {
+      await newOrder.save();
+      mailToVendor();
+      res.status(200).send({
+        message: "Order Placed Successfully",
+        orderId: newOrder._id,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: "Order Placing Failed",
+      });
+    }
+  } else {
+    newOrder = new Order({
+      cartItems,
+      cartTotal,
+      name,
+      email,
+      address,
+      paymentMethod: payment,
+      phone,
+      userId,
+    });
+    try {
+      await newOrder.save();
+      mailToVendor();
+      res.status(200).send({
+        message: "Order Placed Successfully",
+        orderId: newOrder._id,
+      });
+    } catch (error) {
+      res.status(400).send({
+        message: "Order Placing Failed",
+      });
+    }
+  }
 };
 
 const mailToVendor = async (req, res) => {
-    try {
-        const email = "fraxbhatti@gmail.com";
-        const email_subject = "You got an order on Desi Village";
-        // const url = here you will put the vendor page's url where vendour can see its orders
-        const email_message =
-        "You got an order on Desi Village. Please visit the vendor's page to see the order details.";
-        const email_response = await sendMail(email, email_subject, email_message);
-        return;
-    }
-    catch(error) {
-        console.log(error)
-        return;
-    }
+  try {
+    const email = "fraxbhatti@gmail.com";
+    const email_subject = "You got an order on Desi Village";
+    // const url = here you will put the vendor page's url where vendour can see its orders
+    const email_message =
+      "You got an order on Desi Village. Please visit the vendor's page to see the order details.";
+    const email_response = await sendMail(email, email_subject, email_message);
+    return;
+  } catch (error) {
+    return;
   }
-
-// exports.loadCart = async (req, res) => {
-//     const user = req.user._id
-//     try {
-//         const item = await Cart.find({ user });
-//         res.status(200).send(item)
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500)
-//     }
-// }
-
-// exports.removeFromCart = async (req, res) => {
-//     //this is the _id that is generated by mongoose when adding an item to the cart
-//     const { cartItemId } = req.body;
-//     try {
-//         await Cart.findByIdAndDelete(cartItemId);
-//         res.status(200).send("Item removed")
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500)
-//     }
-// }
-
-// exports.increment = async (req, res) => {
-//     //this is the _id that is generated by mongoose when adding an item to the cart
-//     const { cartItemId } = req.body;
-//     const cartItem = await Cart.findOne({ cartItemId });
-//     const newQuantity = cartItem.itemQuantity += 1;
-//     console.log(newQuantity)
-//     console.log(cartItemId)
-
-//     try {
-//         await Cart.findByIdAndUpdate(cartItemId, { itemQuantity: newQuantity }, { useFindAndModify: false })
-//         res.status(200).send("item incremented successfully")
-
-//     }
-//     catch (error) {
-//         res.status(500).send({ message: "Error in updating" })
-//         console.log(error)
-//     }
-// }
-
-// exports.decrement = async (req, res) => {
-//     //this is the _id that is generated by mongoose when adding an item to the cart
-//     const { cartItemId } = req.body;
-//     const cartItem = await Cart.findOne({ cartItemId });
-//     const newQuantity = cartItem.itemQuantity -= 1;
-//     if (cartItem.itemQuantity > 0) {
-
-//         try {
-//             await Cart.findByIdAndUpdate(cartItemId, { itemQuantity: newQuantity }, { useFindAndModify: false })
-//             res.status(200).send("item decremented successfully")
-
-//         }
-//         catch (error) {
-//             res.status(500).send({ message: "Error in updating" })
-//             console.log(error)
-//         }
-//     }
-//     else{
-//         //item's quantity should not be 0, this logic will be implemented at frontend
-//         res.send("item's quantity should not be 0")
-//     }
-// }
+};

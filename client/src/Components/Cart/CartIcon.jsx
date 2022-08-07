@@ -3,13 +3,10 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {useNavigate} from "react-router-dom";
 import { openCart } from "../../features/cartSlice/cart";
-import Loader from "../Toast/loader";
 import Tooltip from "@mui/material/Tooltip";
 import SideBar from "../SideBar/SideBar";
 import { useDispatch , useSelector } from "react-redux";
-import { lengthOfCart } from "../../utils";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -20,7 +17,6 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 export default function CartIcon() {
-    let navigate = useNavigate();
     const dispatch = useDispatch();
     const {open,cartLength} = useSelector(state => state.cart);
     const redirectToCart = (page) => {

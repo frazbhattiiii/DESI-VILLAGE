@@ -1,5 +1,4 @@
 import cookie from 'js-cookie'
-// import { GoogleLogout } from 'react-google-login';
 
 // Set in Cookie
 export const setCookie = ( key , value ) => {
@@ -43,9 +42,7 @@ export const removeLocalStorage = key => {
 };
 // Auth enticate user by passing data to cookie and localstorage during signin
 export const authenticate = ( response , next ) => {
-    console.log ( 'AUTHENTICATE HELPER ON SIGNIN RESPONSE' , response );
     setCookie ( 'token' , response.data.token );
-    console.log ( response.data.user );
     setLocalStorage ( 'user' , response.data.user );
     next ();
 };
@@ -71,7 +68,6 @@ export const signout = next => {
 };
 
 export const updateUser = ( response , next ) => {
-    console.log ( 'UPDATE USER IN LOCALSTORAGE HELPERS' , response );
     if ( typeof window !== 'undefined' ) {
         let auth = JSON.parse ( localStorage.getItem ( 'user' ) );
         auth = response.data;

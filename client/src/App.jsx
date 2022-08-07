@@ -8,8 +8,6 @@ import Signup from './Pages/Signup';
 import Login from './Pages/Login';
 import Activation from './Pages/Activation';
 import Forgot from './Pages/Forgot';
-import { useEffect } from "react";
-import { isAuth } from "./utils/auth";
 import Reset from './Pages/Reset';
 import Dashboard from "./Pages/Dashboard";
 import Logout from "./Pages/Logout";

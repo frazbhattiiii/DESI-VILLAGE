@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { isAuth } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../Components/NavBar/NavBar";
 import ProfileTabs from "../Components/Profile/ProfileTabs";
-import { Grid, Box, Typography, Stack } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 
 function Profile() {
   let loggedIn = true;

@@ -2,22 +2,11 @@ import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import FormHelperText from '@mui/material/FormHelperText';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
-import {useSelector,useDispatch} from "react-redux";
-import { getCart } from "../../features/cartSlice/cartActions";
-import { useState } from "react";
 import EmptyCart from "./emptyCart";
-import { lengthOfCart } from "../../utils";
 
 const CartItem = ({ id, title, removeItemFromCart }) => {
-    const dispatch = useDispatch();
-    const [remove,setDelete] = useState(false);
     const cartLength = JSON.parse(localStorage.getItem('cart')).length;
     const allCartItems = localStorage.getItem('cart')
-    console.log(cartLength)
-    const {cartTotal} = useSelector(state=>state.cart);
     const cartItems = JSON.parse(allCartItems);
     if(cartLength>0){
     return (
@@ -109,8 +98,7 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
         </>
     );}
     else{
-        // dispatch(getCart());
-        return <><EmptyCart/></>
+        return <><EmptyCart text="Your Cart is currently empty."/></>
     }
 };
 

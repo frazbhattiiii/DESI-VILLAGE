@@ -33,9 +33,6 @@ export default function LogoutDialogue() {
 
     } , [ loggedOut , error ] )
     const dispatch = useDispatch ()
-    const handleClickOpen = () => {
-        setOpen ( true );
-    };
     const handleClose = () => {
         setOpen ( false );
     }

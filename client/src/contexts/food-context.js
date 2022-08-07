@@ -11,7 +11,6 @@ export const FoodContext = createContext({
 export const FoodProvider = ({children})=>{
     let user = null
     {isAuth() ?  user = localStorage.getItem("user") :user =  null}
-    // console.log(user)
     useEffect(()=>{
         const fetchFoodItems = async()=>{
             const res = await axios.get(`http://localhost:4020/food/get-all-items/`)

@@ -6,8 +6,7 @@ import Card from '@mui/joy/Card';
 import StarIcon from '@mui/icons-material/Star';
 import {useNavigate} from "react-router-dom";
 export default function MenuCard(props) {
-    // console.log(props.item)
-    const {_id,name,price,imageURL,id,timeForDelivery,rating} = props.item;
+    const {_id,name,price,imageURL,timeForDelivery,rating} = props.item;
     const navigate = useNavigate();
     return (
         <Card variant="outlined" sx={{ minWidth: '250px' ,
