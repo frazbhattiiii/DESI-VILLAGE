@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Grid, Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 function NoPage(props) {
     return (

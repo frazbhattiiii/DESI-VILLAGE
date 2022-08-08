@@ -1,16 +1,12 @@
 import React , { useState , useEffect } from "react";
 import { styled } from "@mui/system";
 import { Grid , Box , Button , Stack } from "@mui/material";
-// import { useJwt } from "react-jwt";
 import jwt from "jwt-decode";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
-import { isAuth , authenticate } from "../../utils/auth";
 import ToastBox from "../Toast/ToastContainer";
 import { useNavigate } from "react-router-dom";
 import { useDispatch , useSelector } from 'react-redux';
-import { registerUser } from "../../features/userSlice/userActions";
 import { activateUser } from "../../features/userSlice/userActions";
 
 const StyledButton = styled ( Button )`
@@ -63,7 +59,6 @@ const ActivationPage = ( props ) => {
         }
 
     } , [ active, error ] );
-    const { show } = formData;
 
     const handleSubmit = ( e ) => {
         e.preventDefault ();

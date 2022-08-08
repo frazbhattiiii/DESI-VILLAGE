@@ -1,11 +1,10 @@
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import * as Yup from "yup";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { updateProfile } from "../../features/userSlice/userActions";
 import { useFormik, Form, FormikProvider } from "formik";
-import { useNavigate } from "react-router-dom";
 import ToastBox from '../Toast/ToastContainer';
 import { toast } from 'react-toastify';
 import {
@@ -14,19 +13,15 @@ import {
   TextField,
   IconButton,
   InputAdornment,
-  Checkbox,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import GreenButton from "../Buttons/GreenButton";
-import { Button } from "@mui/material";
-import { styled } from "@mui/system";
 import EditIcon from "@mui/icons-material/Edit";
 import KeyIcon from "@mui/icons-material/Key";
 
 
-const StyledButton = styled(Button);
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -42,11 +37,9 @@ const animate = {
 
 
 export default function ProfileForm() {
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showNPassword, setShowNPassword] = useState(false);
   const dispatch = useDispatch();
-  const { error, register } = useSelector((state) => state.user);
 
   const [noEdit, setNoEdit] = useState(true);
   const [noEditPassword, setNoEditPassword] = useState(true);

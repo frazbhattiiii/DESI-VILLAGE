@@ -2,7 +2,7 @@ import * as React from 'react';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import {Fragment } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CartItem from './Item';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -10,8 +10,7 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useDispatch , useSelector } from "react-redux";
-import { calculateTotal , closeCart } from "../../features/cartSlice/cart";
-import { lengthOfCart } from "../../utils";
+import { closeCart } from "../../features/cartSlice/cart";
 import { getCart } from "../../features/cartSlice/cartActions";
 
 export default function SideBar (props) {
@@ -20,8 +19,6 @@ export default function SideBar (props) {
                                                   } );
     const dispatch = useDispatch();
     const {open,cartTotal} = useSelector(state => state.cart);
-    const {quantity,itemPrice} = useSelector(state=>state.cartItem);
-    const navigate = useNavigate();
     const cartLength = JSON.parse(localStorage.getItem('cart')).length;
     const toggleDrawer = ( anchor ,open ) => ( event ) => {
         dispatch(closeCart())
@@ -33,7 +30,6 @@ export default function SideBar (props) {
             )
 
         ) {
-            console.log("some state"+ open)
             return;
         }
 

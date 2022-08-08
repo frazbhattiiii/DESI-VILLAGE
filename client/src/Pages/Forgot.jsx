@@ -6,7 +6,7 @@ const Forgot = () => {
   return (
     <>
       {!isAuth()?
-    <ForgotPassword />:<Dashboard />}
+        <ForgotPassword />:<Dashboard />}
     </>
   )
 }

@@ -1,12 +1,10 @@
 import React , { useState , useEffect } from "react";
-import { Link as RouterLink , useLocation , useNavigate } from "react-router-dom";
+import { Link as RouterLink , useNavigate } from "react-router-dom";
 import { Form , FormikProvider , useFormik } from "formik";
 import * as Yup from "yup";
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import ToastBox from '../Toast/ToastContainer';
 import { loginUser } from "../../features/userSlice/userActions";
-import { authenticate } from "../../utils/auth";
 import {
     Box ,
     Checkbox ,
@@ -17,7 +15,6 @@ import {
     Stack ,
     TextField ,
 } from "@mui/material";
-import { isAuth } from '../../utils/auth';
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import GreenButton from "../Buttons/GreenButton";
@@ -36,8 +33,6 @@ const animate = {
 
 const LoginForm = () => {
     const navigate = useNavigate ();
-    const location = useLocation ();
-    const from = location.state?.from?.pathname || "/";
     const dispatch = useDispatch ();
     const { error , loggedIn } = useSelector (
         ( state ) => state.user

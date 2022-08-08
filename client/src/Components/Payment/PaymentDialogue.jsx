@@ -1,13 +1,11 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import PaymentForm from "./PaymentForm";
-import { useNavigate } from "react-router-dom";
 import PaymentStep from "./Steps";
 import { useSelector } from "react-redux";
 import CardPaymentForm from "./CardPaymentForm";
@@ -15,16 +13,11 @@ import SuccessPayment from "./SuccessPayment";
 
 export default function PaymentDialogue() {
     const [open, setOpen] = React.useState(true);
-    const navigate = useNavigate();
     const {step} = useSelector(state => state.payment);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const handleClose = (step) => {
         setOpen(false);
-        console.log(step)
         if(step === 2){
             window.location='/';
             localStorage.setItem('cart', JSON.stringify([]));

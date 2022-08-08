@@ -6,25 +6,18 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IncrementButton from "./IncrementButton";
-import { lengthOfCart } from "../../utils";
 import EmptyCart from "../SideBar/emptyCart";
 import { useDispatch , useSelector } from "react-redux";
-import { useState } from "react";
 import { calculateTotal , setCartItems } from "../../features/cartSlice/cart";
 
 const CartItem = () => {
-    // const [cart, setCart] = useState(false);
     const dispatch = useDispatch();
     const {cartItems,cartLength,change}= useSelector(state=>state.cart);
     if(!localStorage.getItem("cart")){
         return <EmptyCart/>
     }
     const handleRemoveItem = (itemId,itemSize) =>{
-        console.log("handle remove");
-        console.log("Itemd Id : "+itemId);
-        console.log("Item Size : "+itemSize);
     const newCart = cartItems.filter(item=>item.itemSize!==itemSize);
-    console.log(newCart)
     dispatch(setCartItems(newCart));
     dispatch(calculateTotal());
 
@@ -48,7 +41,7 @@ const CartItem = () => {
                             mb:2,
                         }}
                     >
-                        <img src={`${process.env.REACT_APP_API_URL}/images/${item.itemImage}`} alt='Product Image' height='150' width='200'/>
+                        <img src={`${process.env.REACT_APP_API_URL}/images/${item.itemImage}`} alt='Product' height='150' width='200'/>
                     </Grid>
 
                     <Grid

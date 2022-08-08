@@ -1,9 +1,6 @@
 import { useState, Fragment } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
-import EmptyCart from './EmptyCart';
-
-
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
@@ -13,25 +10,10 @@ import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import GoBackBtn from '../Buttons/GoBackBtn';
 import Payment from "../Payment/Payment";
 import { Stack , TextField } from "@mui/material";
-import GreenButton from "../Buttons/GreenButton";
-import { styled } from "@mui/system";
-import { useDispatch , useSelector } from "react-redux";
-import { calculateTotal } from "../../features/cartSlice/cart";
+import { useSelector } from "react-redux";
 
-const StyledButton = styled(Button)`
-  background-color: #1AC073;
-  color: #fff;
-  padding: 6px 12px;
-  &:hover {
-    background-color: #1AC078;
-  }
-  &:focus {
-    background-color: green;
-  }
-`;
 
 const Cart = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showPayment, setShowPayment] = useState (false );
     const {cartTotal,cartLength}=  useSelector(state => state.cart);
@@ -55,12 +37,10 @@ const Cart = () => {
                  <GoBackBtn />
 
                     <Container className='animate__animated animate__fadeIn'>
-                        {/*{cart.map((item) => (*/}
                             <Fragment key=''>
                                 <CartItem  />
                                 <Divider variant='middle' sx={{ my: 3 }} />
                             </Fragment>
-                        {/*))}*/}
                     </Container>
 
                 <Box

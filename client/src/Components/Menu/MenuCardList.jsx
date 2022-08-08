@@ -1,4 +1,4 @@
-import React , { useEffect , useState } from 'react';
+import React , { useEffect } from 'react';
 import MenuCard from "./MenuCard";
 import { Grid , Box , Pagination } from '@mui/material';
 import { getAllItems } from "../../features/cartSlice/cartActions";

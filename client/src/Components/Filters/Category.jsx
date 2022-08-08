@@ -7,7 +7,7 @@ import { setFilteredItems } from '../../features/cartSlice/cart'
 
 const Category = () => {
     const dispatch = useDispatch()
-    const { categoriesCount, search } = useSelector(state => state.cart)
+    const { categoriesCount } = useSelector(state => state.cart)
     const FilterTitle = styled(Typography)({
         fontWeight: "bold",
         fontSize: '15px',
@@ -22,7 +22,6 @@ const Category = () => {
         marginTop: '15px'
     })
     const categoryFilterHandler = (category) => {
-        console.log(category)
         dispatch(setFilteredItems({ filter: category, search: '' }))
     }
 

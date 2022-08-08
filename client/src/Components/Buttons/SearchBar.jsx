@@ -1,8 +1,6 @@
 import React from 'react';
 import { InputAdornment , TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
-import AddToCart from "./AddToCart";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilteredItems } from '../../features/cartSlice/cart'

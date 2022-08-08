@@ -1,6 +1,6 @@
-import React , { useEffect } from 'react';
+import React from 'react';
 import orderConfirmation from './orderConfirmed.png';
-import { useDispatch , useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 function SuccessPayment ( props ) {
   const {error}= useSelector(state => state.cart);
     localStorage.setItem('cart', JSON.stringify([]));

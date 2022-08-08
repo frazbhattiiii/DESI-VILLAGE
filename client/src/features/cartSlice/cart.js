@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { current } from '@reduxjs/toolkit';
 import { addToCart , getAllItems , getCart ,addOrder} from "../cartSlice/cartActions";
-// import { cartAction } from './cartActions';
 
 const initialState = {
     open:false,
@@ -136,7 +135,6 @@ const cartSlice = createSlice ( {
                                         setCartItems: ( state , action ) => {
                                             state.cartItems = action.payload
                                             state.cartLength = state.cartLength-1
-                                        console.log(state.cartLength)
                                             if(state.cartLength===0){
                                                 state.cartLength=0
                                                 state.cartTotal=0

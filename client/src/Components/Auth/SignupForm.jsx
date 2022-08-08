@@ -3,7 +3,6 @@ import { useEffect , useState } from "react";
 import { useDispatch , useSelector } from 'react-redux';
 import { registerUser } from "../../features/userSlice/userActions";
 import { useFormik , Form , FormikProvider } from "formik";
-import { useNavigate } from "react-router-dom";
 import {
     Stack ,
     Box ,
@@ -13,11 +12,10 @@ import {
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import ToastBox from "../Toast/ToastContainer";
-import { toast , ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import GreenButton from "../Buttons/GreenButton";
-import axios from "axios";
 
 let easing = [ 0.6 , - 0.05 , 0.01 , 0.99 ];
 const animate = {
@@ -31,15 +29,12 @@ const animate = {
 };
 
 const SignupForm = () => {
-    const navigate = useNavigate ();
     const [ showPassword , setShowPassword ] = useState ( false );
     const dispatch = useDispatch ();
     const {  error , register } = useSelector (
         ( state ) => state.user
     );
-    console.log(register)
     useEffect ( () => {
-        console.log(register)
         // redirect user to login page if registration was successful
         if ( register ) {
             toast ( "Activation link sent to your email",{

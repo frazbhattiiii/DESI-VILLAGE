@@ -35,12 +35,6 @@ export const activateUser = createAsyncThunk(
   // callback function
   async ({ token }, { rejectWithValue }) => {
     try {
-      // configure header's Content-Type as JSON
-      // const config = {
-      //     headers : {
-      //         'Content-Type' : 'application/json' ,
-      //     } ,
-      // }
       // make request to backend
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/activation`,
@@ -65,12 +59,6 @@ export const loginUser = createAsyncThunk(
   // callback function
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      // configure header's Content-Type as JSON
-      // const config = {
-      //     headers : {
-      //         'Content-Type' : 'application/json' ,
-      //     } ,
-      // }
       // make request to backend
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/login`,
@@ -80,12 +68,10 @@ export const loginUser = createAsyncThunk(
         }
       );
       setCookie("token", response.data.token);
-      console.log(response.data.user);
       setLocalStorage("user", response.data.user);
       return response.data;
     } catch (error) {
       // return custom error message from API if any
-      console.log(error);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -100,12 +86,6 @@ export const googleLogin = createAsyncThunk(
   // callback function
   async ({ idToken }, { rejectWithValue }) => {
     try {
-      // configure header's Content-Type as JSON
-      // const config = {
-      //     headers : {
-      //         'Content-Type' : 'application/json' ,
-      //     } ,
-      // }
       // make request to backend
       const response = await axios({
         method: "POST",
@@ -113,12 +93,10 @@ export const googleLogin = createAsyncThunk(
         data: { idToken },
       });
       setCookie("token", response.data.token);
-      console.log(response.data.user);
       setLocalStorage("user", response.data.user);
       return response.data;
     } catch (error) {
       // return custom error message from API if any
-      console.log(error);
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -140,7 +118,6 @@ export const updateProfile = createAsyncThunk(
     try {
       // configure header's Content-Type as JSON
       // make request to backend
-      console.log(userId, name, contact, address, password, newPassword);
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/user/profile`,
         {

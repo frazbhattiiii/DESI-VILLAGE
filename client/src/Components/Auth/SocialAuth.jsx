@@ -1,13 +1,10 @@
 import { Icon } from "@iconify/react";
-import { Stack , Button , IconButton } from "@mui/material";
+import { Stack , IconButton } from "@mui/material";
 import { useEffect } from "react";
 import { GoogleLogin } from 'react-google-login';
-import axios from "axios";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import ToastBox from '../Toast/ToastContainer';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { authenticate , isAuth } from "../../utils/auth";
 import { useDispatch , useSelector } from "react-redux";
 import { googleLogin } from "../../features/userSlice/userActions";
 
@@ -33,7 +30,6 @@ const SocialAuth = () => {
         }
     } , [ googleLoggedIn ,error] );
     const responseGoogle = response => {
-        console.log ( response );
         const idToken = response.tokenId;
         const data = {
             idToken

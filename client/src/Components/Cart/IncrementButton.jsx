@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-
 import InputAdornment from '@mui/material/InputAdornment';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
@@ -14,19 +13,16 @@ import { handleIncrement , handleDecrement , calculateTotal } from "../../featur
 
 const IncrementButton = ({ stock = 0, initial = 1, onAdd ,Quantity,itemId,itemSize}) => {
     const dispatch = useDispatch();
-    const { quantity } = useSelector(state => state.cartItem);
     const [counter, setCounter] = useState (Quantity);
     const increment = () => {
         setCounter(counter + 1);
         dispatch(handleIncrement({itemId,itemSize}));
         dispatch(calculateTotal());
-        // dispatch(handleQuantity(counter + 1));
     }
     const decrement = () => {
         counter<=1?setCounter(1):setCounter(counter - 1);
         dispatch(handleDecrement({itemId,itemSize}));
         dispatch(calculateTotal());
-        // dispatch(handleQuantity(counter - 1));
     }
     const handleAddBtnClick = () => {onAdd(counter)};
 
@@ -67,14 +63,12 @@ const IncrementButton = ({ stock = 0, initial = 1, onAdd ,Quantity,itemId,itemSi
                 <Stack direction={{ xs: 'row-reverse', sm: 'column' }}>
                     <IconButton
                         aria-label='addButton'
-                        // disabled={stock < 1 || (counter === stock && true)}
                         onClick={increment}
                     >
                         <AddIcon />
                     </IconButton>
                     <IconButton
                         aria-label='removeButtom'
-                        // disabled={counter < 1 || (stock < 1 && true)}
                         onClick={decrement}
                     >
                         <RemoveIcon />

@@ -1,11 +1,9 @@
 const { errorHandler } = require("../utils/dbErrorHandling");
 const fetch = require("node-fetch");
 const jwt = require("jsonwebtoken");
-const expressJWT = require("express-jwt");
 const _ = require("lodash");
 const { OAuth2Client } = require("google-auth-library");
 const User = require("../Models/User");
-const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 
@@ -50,7 +48,6 @@ exports.sendMail = sendMail;
 
 exports.registerController = async (req, res) => {
   const { name, email, password } = req.body;
-  console.log(name,email,password);
   const user = await User.findOne({ email });
   if (user) {
     res.status(400).json({
@@ -94,14 +91,11 @@ exports.activationController = (req, res) => {
   if (token) {
     jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, (err, decoded) => {
       if (err) {
-        console.log("Activation error");
         res.status(401).json({
           message: "Expired link. Please try again",
         });
       } else {
         const { name, email, encryptedPassword } = jwt.decode(token);
-
-        console.log(email);
         const user = new User({
           name,
           email,
@@ -109,7 +103,6 @@ exports.activationController = (req, res) => {
         });
         user.save((err, user) => {
           if (err) {
-            console.log("Save error", errorHandler(err));
             return res.status(401).json({
               errors: errorHandler(err),
             });
@@ -184,7 +177,6 @@ exports.forgotPasswordController = async (req, res) => {
 
    user.updateOne({ resetPasswordLink: token }, (err, success) => {
     if (err) {
-      console.log("Error", errorHandler(err));
       return res.status(400).json({
         message: "Error",
       });
@@ -250,7 +242,6 @@ exports.resetPasswordController = async (req, res) => {
       });
     }
   }catch(err){
-    console.log(err)
     return res.status(400).json({
       message: "Technical Error",
     });
@@ -265,7 +256,6 @@ exports.googleLoginController = async(req, res) => {
   client
       .verifyIdToken({ idToken, audience: process.env.GOOGLE_CLIENT })
       .then(response => {
-        // console.log('GOOGLE LOGIN RESPONSE',response)
         const { email_verified, name, email } = response.payload;
         if (email_verified) {
           User.findOne({ email }).exec(async (err, user) => {
@@ -284,7 +274,6 @@ exports.googleLoginController = async(req, res) => {
               user = new User({name, email, password});
               user.save((err, data) => {
                 if (err) {
-                  console.log('ERROR GOOGLE LOGIN ON USER SAVE', err);
                   return res.status(400).json({
                     error: 'User signup failed with google'
                   });
@@ -319,7 +308,6 @@ exports.googleLoginController = async(req, res) => {
 
 };
 exports.facebookLoginController = async(req, res) => {
-  console.log('FACEBOOK LOGIN REQ BODY', req.body);
   const { userID, accessToken } = req.body;
 
   const url = `https://graph.facebook.com/v2.11/${userID}/?fields=id,name,email&access_token=${accessToken}`;
@@ -329,11 +317,8 @@ exports.facebookLoginController = async(req, res) => {
         method: 'GET'
       })
           .then(response => response.json())
-          // .then(response => console.log(response))
           .then(response => {
-            console.log(response)
             const { email, name } = response;
-            console.log(email,name)
             User.findOne({ email }).exec(async (err, user) => {
               if (user) {
                 const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {
@@ -350,7 +335,6 @@ exports.facebookLoginController = async(req, res) => {
                 user = new User({name, email, password});
                 user.save((err, data) => {
                   if (err) {
-                    console.log('ERROR FACEBOOK LOGIN ON USER SAVE', err);
                     return res.status(400).json({
                       error: 'User signup failed with facebook'
                     });

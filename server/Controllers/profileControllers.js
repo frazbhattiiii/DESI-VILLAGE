@@ -1,7 +1,6 @@
 const User = require("../Models/User");
 const Orders = require("../Models/Orders");
 const bcrypt = require("bcryptjs");
-const mongoose = require('mongoose');
 
 exports.updateProfile = async (req, res) => {
   const { userId, newName, newContact, newAddress, password, newPassword } =
@@ -17,7 +16,6 @@ exports.updateProfile = async (req, res) => {
 
       res.status(200).json({ message: "Successfully updated" });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Failed to udpate" });
     }
   } else {
@@ -38,7 +36,6 @@ exports.updateProfile = async (req, res) => {
         });
       }
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Failed to udpate" });
     }
   }
@@ -47,10 +44,9 @@ exports.updateProfile = async (req, res) => {
 exports.orderHistory = async (req, res) => {
   const { userId } = req.body;
   try {
-    const history = await Orders.find({ userId});
+    const history = await Orders.find({ userId });
     res.json(history);
   } catch (error) {
-    console.log(error);
     res.status(500).send({ message: "Failed to pull history" });
   }
 };

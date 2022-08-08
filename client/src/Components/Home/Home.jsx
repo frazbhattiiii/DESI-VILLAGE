@@ -3,7 +3,6 @@ import { Grid , Box , Typography , Stack } from "@mui/material";
 import Typewriter from "typewriter-effect";
 import SearchBar from "../Buttons/SearchBar";
 import chef from './chefImage.png';
-import { getAllItems , getCart } from "../../features/cartSlice/cartActions";
 import { useDispatch } from "react-redux";
 import { calculateTotal } from "../../features/cartSlice/cart";
 function Home ( props ) {
