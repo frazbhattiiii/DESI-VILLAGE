@@ -17,11 +17,12 @@ Advanced packages like:
 # `Login Page`
 Login with Google or Manual login and signup features is added with confirmation mail sent to the email.
 Forgot Password and account activation is also added.
-![[https://i.ibb.co/mDZWgM5/Login-and-Signup.png|width=250px]]
+<img src='https://i.ibb.co/mDZWgM5/Login-and-Signup.png' width='250'/>
+<!-- ![Login Page](https://i.ibb.co/mDZWgM5/Login-and-Signup.png) -->
 # `Item Detail`
 The Detail of every item with 4 images of food from differnt angles uploaded by the vendor with all the details of the product.
 Prices are updated on the basis of size real time.
-![Product Detail](https://i.ibb.co/bQSm1K1/Product-Detail.png | width=250)
+![Product Detail](https://i.ibb.co/bQSm1K1/Product-Detail.png)
 
 
 
