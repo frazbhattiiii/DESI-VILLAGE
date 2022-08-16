@@ -13,6 +13,7 @@ The Technologies which we uses for the project:
 Advanced packages like:
 #### `Yup` `Formik` `Stripe-payment` `node-mailer` `Framer-Motion`
 # `Menu Page`
+Different filters on the basis of price,size,categories are there with pagination.
 ![Menu Page](https://i.ibb.co/vQF4S8v/Menu-Desi-Village.png)
 # `Login Page`
 Login with Google or Manual login and signup features is added with confirmation mail sent to the email.
@@ -23,14 +24,20 @@ The Detail of every item with 4 images of food from differnt angles uploaded by 
 Prices are updated on the basis of size real time.
 ![Product Detail](https://i.ibb.co/bQSm1K1/Product-Detail.png)
 
-# `Side Bar Cart'
+# `Side Bar Cart`
 When pressed on add item to Cart, the item will be added to cart and sidebar cart will be shown up like this:
 ![Side Bar Cart](https://i.ibb.co/749DFBr/Side-Bar-Cart.png)
 
-# `Checkout Cart'
+# `Checkout Cart`
 If you have added all the items in the cart you can go the checkout Cart and then simply delete or increase the quantity.
 Everything will be updated real time on the basis of quantity and size.
 ![Checkout Cart Cart](https://i.ibb.co/09N8ny4/Check-Out-Cart.png)
+
+# `Proceed to Payment`
+Then you can proceed to payment with selecting Mode of Payment and you will receive confirmation on behalf of that:
+<img src='https://i.ibb.co/hy2vbmm/Normal-Payment.png' width='450'>
+<img src='https://i.ibb.co/xqKSymn/Stripe.png' width='450'>
+<img src='https://i.ibb.co/V3MgsMF/Order-Placed.png' width='450'>
 
 
 ### `npm i`
