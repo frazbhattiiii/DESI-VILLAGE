@@ -40,7 +40,7 @@ export default function SideBar (props) {
 
     const list = ( anchor ) => (
         <Box
-            sx={ { width : anchor === 'top' || anchor === 'bottom' ? 'auto' : 450 } }
+            sx={ { width : anchor === 'top' || anchor === 'bottom' ? 'auto' : {xs:350,md:450,sm:400,xl:450,lg:450} } }
             role="presentation"
         >
 

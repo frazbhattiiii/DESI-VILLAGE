@@ -15,11 +15,17 @@ function ImagesList(props) {
           lg: "1rem",
           xl: "1rem",
         },
-        ml: "1.5rem",
+        ml: {
+            xs: "1rem",
+            sm: "1.25rem",
+            md: "1.5rem",
+            lg: "1.5rem",
+            xl: "1.5rem",
+        },
       }}
     >
       <ImageList
-        sx={{ width: 420, height: 230, borderRadius: "2rem" }}
+        sx={{ width: {xl:420,lg:420,md:420,sm:400,xs:350}, height: 230, borderRadius: "2rem" }}
         cols={3}
         rowHeight={164}
       >

@@ -7,24 +7,17 @@ const Grid = require("gridfs-stream");
 const connectDB = require("./Config/connection");
 
 require("dotenv").config();
-
+const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
-if (process.env.NODE_ENV === "development") {
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-    })
-  );
-  //   Morgan will allow us to make request logs in the terminal
-  app.use(morgan("dev"));
-}
+app.use( bodyParser.json());
+app.use( bodyParser.urlencoded( { extended: true }));
+app.use( express.json());
+app.use( cors());
 
-const authRoutes = require("./routes/authRoutes");
-const orderRoutes = require("./routes/orderRoutes");
+
+const authRoutes = require("./Routes/authRoutes");
+const orderRoutes = require("./Routes/orderRoutes");
 const foodItemRoutes = require("./Routes/foodItemRoutes");
 const vendorRoutes = require("./Routes/vendorRoutes");
 const reviewRoutes = require("./Routes/reviewsRoute");
@@ -44,16 +37,16 @@ conn.once("open", () => {
   gfs.collection("photos");
 });
 
-app.use("/auth", authRoutes);
-app.use("/email", emailRoutes);
-app.use("/food", foodItemRoutes);
-app.use("/vendor", vendorRoutes);
-app.use("/review", reviewRoutes);
-app.use("/cart", orderRoutes);
-app.use("/user", profileRoutes);
+app.use( "/auth", authRoutes);
+app.use( "/email", emailRoutes);
+app.use( "/food", foodItemRoutes);
+app.use( "/vendor", vendorRoutes);
+app.use( "/review", reviewRoutes);
+app.use( "/cart", orderRoutes);
+app.use( "/user", profileRoutes);
 // General Route for Getting Images
 // Stored in MonogoDB
-app.get("/images/:filename", async (req, res) => {
+app.get( "/images/:filename", async ( req, res) => {
   try {
     const { filename } = req.params;
     const file = await gfs.files.findOne({ filename });
@@ -65,6 +58,9 @@ app.get("/images/:filename", async (req, res) => {
     });
   }
 });
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
+app.get( '/', ( req, res) => {
+  res.send('Hello World')
+} )
+app.listen( port, () => {
+  console.log(`Server is running on port ${port}`);
 });

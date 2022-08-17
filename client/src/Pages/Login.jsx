@@ -10,13 +10,19 @@ import Dashboard from "./Dashboard";
 import { motion } from "framer-motion";
 import NavBar from "../Components/NavBar/NavBar";
 
-const RootStyle = styled("div")({
-  background: "rgb(249, 250, 251)",
-  height: "100vh",
-  display: "grid",
-  marginTop: "2rem",
-  placeItems: "center",
-});
+const RootStyle = styled.div`
+  background: rgb(249, 250, 251);
+  display: grid;
+  overflow:hidden;
+  margin-top: 1rem;
+  margin-bottom:1rem;
+  place-items: center;
+  @media (max-width: 375px) {
+    width: 22rem;
+    margin-left: -1.5rem;
+    margin-top: 1rem;
+  }
+`;
 
 const HeadingStyle = styled(Box)({
   textAlign: "center",
@@ -24,7 +30,7 @@ const HeadingStyle = styled(Box)({
 
 const ContentStyle = styled(Box)({
   maxWidth: 480,
-  padding: 25,
+  padding: '2rem',
   margin: "auto",
   display: "flex",
   justifyContent: "center",
@@ -52,14 +58,21 @@ const fadeInUp = {
 const Login = ({ setAuth }) => {
   return (
     <>
-      <NavBar />
+        <NavBar />
       {!isAuth() ? (
         <RootStyle>
-          <Container maxWidth="sm">
-            <ContentStyle>
+          <Container>
+            <ContentStyle sx={{
+              padding:{
+                xs:'0 1rem',
+                sm:'2rem',
+                md:'2rem',
+                lg:'2rem',
+                xl:'2rem',
+              }
+            }}>
               <HeadingStyle component={motion.div} {...fadeInUp}>
                 <Logo />
-
                 <Typography sx={{ color: "text.secondary", mb: 5 }}>
                   Enter your details below.
                 </Typography>
@@ -69,7 +82,7 @@ const Login = ({ setAuth }) => {
                 <SocialAuth />
               </Box>
 
-              <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}>
+              <Divider sx={{ my: 2 }} component={motion.div} {...fadeInUp}>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   OR
                 </Typography>
@@ -100,7 +113,7 @@ const Login = ({ setAuth }) => {
                 {...fadeInUp}
                 variant="body2"
                 align="center"
-                sx={{ mt: 3 }}
+                sx={{ mt: 2 }}
               >
                 Don't have an account?{" "}
                 <Link variant="subtitle2" component={RouterLink} to="/signup">
@@ -110,6 +123,7 @@ const Login = ({ setAuth }) => {
             </ContentStyle>
           </Container>
         </RootStyle>
+
       ) : (
         <Dashboard />
       )}

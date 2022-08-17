@@ -44,20 +44,22 @@ function Contact(props) {
         }}
       >
         <Grid container spacing={5}>
-          <Grid item xs={7}>
+          <Grid item xs={7} sx={{
+              display:{
+                  xl:"block",
+                  lg:'block',
+                  xs:"none",
+                  md:"block",
+                  sm:"block",
+              },
+          }}>
             <Box
               component={motion.img}
               initial={{ opacity: 0, y: 60 }}
               animate={animate}
               src="./images/contactUs.jpg"
               sx={{
-                width: {
-                  xl: "100%",
-                  lg: "100%",
-                  md: "100%",
-                  sm: "100%",
-                  xs: "120%",
-                },
+                width: '100%',
                 marginTop: {
                   xl: "-8rem",
                   lg: "-4rem",
@@ -68,7 +70,17 @@ function Contact(props) {
               }}
             />
           </Grid>
-          <Grid item xs={5} sx={{}}>
+          <Grid sx={{
+              marginLeft:"2rem",
+              marginTop:{
+                    xl:"0",
+                    lg:"0",
+                    md:"0",
+                    sm:"1rem",
+                    xs:"-3rem",
+                },
+
+          }}>
             <ContactComponet />
           </Grid>
         </Grid>

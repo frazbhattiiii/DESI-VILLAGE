@@ -13,7 +13,7 @@ export const FoodProvider = ({children})=>{
     {isAuth() ?  user = localStorage.getItem("user") :user =  null}
     useEffect(()=>{
         const fetchFoodItems = async()=>{
-            const res = await axios.get(`http://localhost:4020/food/get-all-items/`)
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/food/get-all-items/`)
             setMeals(res.data.items)
         }
         fetchFoodItems()

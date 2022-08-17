@@ -34,7 +34,7 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
                            src={`${process.env.REACT_APP_API_URL}/images/${item.itemImage}`}/>
                      <Typography variant='h7'  fontWeight='500' sx={{marginLeft:{md:'3.5rem',xl:'3rem',sm:"2rem",xs:"2.5rem"}}}>{item.itemName}</Typography>
                      <Typography variant='subtitle2' fontSize='.55rem' sx={{
-                         marginLeft: { md:'3rem',xl:'3rem',sm:"2rem",xs:"2rem" }
+                         marginLeft: { md:'3rem',xl:'3rem',sm:"2rem",xs:"3rem" }
                      }}>{item.itemSize}</Typography>
                  </Grid>
 
@@ -51,18 +51,18 @@ const CartItem = ({ id, title, removeItemFromCart }) => {
                      <Box>
                          <FormHelperText sx={{
                              fontSize:'.65rem',
-                             ml:{md:8,xs:4}
+                             ml:{md:8,xs:9}
                          }}>Item Price</FormHelperText>
                          <Typography variant='inherit' sx={{
-                             ml:{md:8,xs:4},
+                             ml:{md:8,xs:9},
                          }}>{`$${item.itemPrice}`}</Typography>
                      </Box>
                  </Grid>
 
                  <Grid
                      item
-                     xs={1}
-                     sm={1}
+                     xs={2}
+                     sm={2}
                      md={2}
                      display='grid'
                      textAlign='center'

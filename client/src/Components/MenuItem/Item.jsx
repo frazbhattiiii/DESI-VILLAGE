@@ -10,11 +10,15 @@ function Item(props) {
   return (
     <>
       <NavBar />
+        <Box sx={{
+            overflow:'hidden'
+        }}>
       <Home />
       <Box mt={2}>
         <GoBackBtn />
       </Box>
       <ItemDetail itemId={id} />
+        </Box>
     </>
   );
 }

@@ -107,6 +107,9 @@ const LoginForm = () => {
                                 { ... getFieldProps ( "email" ) }
                                 error={ Boolean ( touched.email && errors.email ) }
                                 helperText={ touched.email && errors.email }
+                                sx={{
+                                    mb:2,
+                                }}
                             />
 
                             <TextField

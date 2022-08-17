@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <Box>
       <Link to="/">
-        <Box component="img" src="./images/logo.jpg" alt="logo" width='400px' />
+        <Box component="img" src="./images/logo.jpg" alt="logo" width='20rem' />
       </Link>
     </Box>
   );

@@ -103,7 +103,7 @@ function ItemDetail(props) {
     return (
       <>
         <>
-          <ToastContainer />
+
           <Grid container spacing={3}>
             <Grid
               item
@@ -116,10 +116,13 @@ function ItemDetail(props) {
               <img
                 src={`${process.env.REACT_APP_API_URL}/images/${imageURL[0]}`}
                 alt="pizza"
-                width="400"
-                height="300"
+                style={{
+                  width:'20rem',
+                }}
+
               />
             </Grid>
+            <ToastContainer />
             <Grid
               item
               sx={{
@@ -255,7 +258,13 @@ function ItemDetail(props) {
                   onClick={addInCart}
                   sx={{
                     backgroundColor: "#1ac073",
-                    width: "14rem",
+                    width: {
+                      xs: "10rem",
+                      sm: "11rem",
+                      md: "12rem",
+                      lg: "14rem",
+                      xl: "14rem",
+                    },
                     height: "3rem",
                     marginTop: "2rem",
                   }}
